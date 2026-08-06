@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YK OFFICIAL - Refer a Friend</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://i.ibb.co/hJCHgThF/logo-yk-crop.png"
+    />
+    
+    <!-- url id code  -->
+  <script>
+    /**
+     * Unique ID Generate aur URL update karne ka function
+     */
+    function updateUrlWithUniqueId() {
+        // 6 characters ki Random Unique ID (YK-XXXXXX)
+        const uniqueId = Math.random().toString(36).substring(2, 8).toUpperCase();
+        
+        // Current Page Name (Pathname se page name nikalna)
+        const pageName = window.location.pathname.split("/").pop().split(".")[0] || 'home';
+        
+        // Naya URL Hash format: #pageName?uid=YKOFFICIAL-${uniqueId}
+        const newHash = `#${pageName}?uid=yKOfFiciAl${uniqueId}`;
+        
+        // Browser ka URL update karna bina reload kiye
+        window.history.replaceState(null, null, newHash);
+    }
+
+    // Jab page pehli baar load ho
+    window.addEventListener('DOMContentLoaded', updateUrlWithUniqueId);
+
+    // Agar aapki site single page hai aur sections change hote hain
+    window.addEventListener('hashchange', updateUrlWithUniqueId);
+</script>
+    
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-size: 400% 400%;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+      }
+
+      .btn-primary:active {
+        transform: scale(0.95);
+      }
+
+      .popup-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(8px);
+        z-index: 50;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .popup-overlay.active {
+        display: flex;
+      }
+
+      .floating {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .toast {
+        visibility: hidden;
+        min-width: 200px;
+        background-color: #1f2937;
+        color: #fff;
+        text-align: center;
+        border-radius: 12px;
+        padding: 12px;
+        position: fixed;
+        z-index: 100;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition:
+          opacity 0.3s,
+          bottom 0.3s;
+      }
+
+      .toast.show {
+        visibility: visible;
+        opacity: 1;
+        bottom: 50px;
+      }
+      .notify-card {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        animation: slideIn 0.5s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes bellShake {
+        0% {
+          transform: rotate(0);
+        }
+        25% {
+          transform: rotate(15deg);
+        }
+        50% {
+          transform: rotate(-15deg);
+        }
+        75% {
+          transform: rotate(10deg);
+        }
+        100% {
+          transform: rotate(0);
+        }
+      }
+
+      .bell-animate {
+        animation: bellShake 0.5s ease;
+      }
+    </style>
+    <style>
+      @keyframes progressLoad {
+        from {
+          width: 0%;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      .loading-bar {
+        animation: progressLoad 3s linear forwards;
+      }
+    </style>
+  </head>
+
+  <body
+    class="min-h-screen bg-gradient-to-br from-purple-100 via-white to-indigo-100 flex items-center justify-center p-6"
+  >
+  <!-- YK OFFICIAL CORPORATE LOADER -->
+    <div
+      id="ykLoader"
+      class="fixed inset-0 flex items-center justify-center bg-[#020617] z-[9998] flex-col gap-6"
+    >
+      <div class="flex flex-col items-center">
+        <!-- RING + BRAND -->
+        <div class="relative flex items-center justify-center mb-6">
+          <!-- OUTER SOFT RING -->
+          <div class="w-24 h-24 rounded-full border border-white/10"></div>
+
+          <!-- SPINNING RING -->
+          <div
+            class="absolute w-24 h-24 rounded-full border-2 border-transparent border-t-purple-500 border-r-purple-400 animate-spin"
+          ></div>
+
+          <!-- CENTER TEXT -->
+          <div class="absolute text-center leading-tight">
+            <h1 class="text-white text-sm tracking-[3px] font-semibold">YK</h1>
+            <p class="text-blue-500 text-[10px] tracking-[2px]">OFFICIAL</p>
+          </div>
+        </div>
+
+        <!-- LOADING TEXT -->
+        <p class="text-gray-500 text-xs tracking-wide mb-5 animated-pulse">
+          Loading Invite Page...
+        </p>
+
+        <!-- PROGRESS BAR -->
+        <div class="w-56 h-[3px] bg-white/10 rounded-full overflow-hidden">
+          <div
+            id="progressBar"
+            class="h-full w-0 bg-white transition-all duration-300"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.addEventListener("load", () => {
+        const loader = document.getElementById("ykLoader");
+        const bar = document.getElementById("progressBar");
+
+        // start progress animation
+        bar.classList.add("loading-bar");
+
+        // hide loader after 3 sec
+        setTimeout(() => {
+          loader.style.opacity = "0";
+          loader.style.transition = "0.5s";
+
+          setTimeout(() => (loader.style.display = "none"), 500);
+        }, 3000);
+      });
+    </script>
+
+    <div class="w-full max-w-md ">
+      <!-- WRAPPER -->
+      <!-- <div class="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50 to-purple-50 pb-10"> -->
+
+      <!-- NAVBAR -->
+      <div class="sticky top-0 z-50 flex justify-center px-4 pt-4">
+        <div
+          class="w-full max-w-md flex items-center justify-between px-4 py-3 rounded-2xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-md"
+        >
+          <!-- LEFT -->
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-xl overflow-hidden shadow">
+              <img
+                src="https://i.ibb.co/RpjD8n0C/Chat-GPT-Image-Jan-20-2026-08-56-30-AM.png"
+                class="w-full h-full object-cover"
+              />
+            </div>
+
+            <div>
+              <h1 class="text-xl font-bold text-gray-800 leading-tight">
+                YK <span class="text-indigo-600">OFFICIAL</span>
+              </h1>
+              <!-- <p class="text-[10px] text-gray-400">Invite & Earn</p> -->
+            </div>
+          </div>
+
+          <button
+            onclick="openNotify(event)"
+            class="w-9 h-9 flex items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition"
+          >
+            <i data-lucide="bell" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- MAIN CARD -->
+      <div class="flex justify-center px-4 mt-6">
+        <div
+          class="w-full max-w-md relative rounded-2xl p-[1px] bg-gradient-to-tr from-indigo-200 via-purple-200 to-pink-200"
+        >
+          <div class="bg-white/80 backdrop-blur-xl rounded-2xl p-8">
+            <!-- TITLE -->
+            <div class="text-center mb-6">
+              <h2 class="text-xl font-bold text-gray-800">Refer a friend</h2>
+              <p class="text-gray-500 text-sm mt-1">
+                Earn rewards for every friend who joins
+              </p>
+            </div>
+
+            <!-- LINK BOX -->
+            <div
+              class="flex items-center bg-gray-100 rounded-2xl p-1 mb-6 border border-gray-200"
+            >
+              <input
+                id="refLink"
+                type="text"
+                value="https://yegneshkamble72.github.io/portfolio2/"
+                readonly
+                class="bg-transparent w-full px-4 py-3 text-sm font-medium text-gray-700 outline-none"
+              />
+
+              <button
+                onclick="copyToClipboard()"
+                class="px-5 py-2.5 rounded-xl text-white text-sm font-semibold bg-gradient-to-r from-indigo-500 to-purple-500 hover:opacity-90 transition"
+              >
+                Copy
+              </button>
+            </div>
+
+            <!-- SHARE BUTTONS -->
+            <div class="grid grid-cols-3 gap-4 mb-8">
+              <!-- WA -->
+              <button
+                onclick="shareWA()"
+                class="group flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/70 backdrop-blur-xl border border-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
+              >
+                <div
+                  class="w-10 h-10 flex items-center justify-center rounded-xl bg-green-100 text-green-600 group-hover:bg-green-500 group-hover:text-white transition"
+                >
+                  <i data-lucide="message-circle" class="w-5 h-5"></i>
+                </div>
+
+                <span
+                  class="text-[11px] font-semibold text-gray-600 group-hover:text-green-600"
+                >
+                  WhatsApp
+                </span>
+              </button>
+
+              <!-- TG -->
+              <button
+                onclick="shareTG()"
+                class="group flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/70 backdrop-blur-xl border border-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
+              >
+                <div
+                  class="w-10 h-10 flex items-center justify-center rounded-xl bg-blue-100 text-blue-600 group-hover:bg-blue-500 group-hover:text-white transition"
+                >
+                  <i data-lucide="send" class="w-5 h-5"></i>
+                </div>
+
+                <span
+                  class="text-[11px] font-semibold text-gray-600 group-hover:text-blue-600"
+                >
+                  Telegram
+                </span>
+              </button>
+
+              <!-- MORE -->
+              <button
+                onclick="nativeShare()"
+                class="group flex flex-col items-center gap-2 p-4 rounded-2xl bg-white/70 backdrop-blur-xl border border-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition"
+              >
+                <div
+                  class="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 group-hover:bg-indigo-500 group-hover:text-white transition"
+                >
+                  <i data-lucide="share-2" class="w-5 h-5"></i>
+                </div>
+
+                <span
+                  class="text-[11px] font-semibold text-gray-600 group-hover:text-indigo-600"
+                >
+                  More
+                </span>
+              </button>
+            </div>
+
+            <!-- ACTION -->
+            <div class="grid grid-cols-2 gap-4">
+              <button
+                onclick="togglePopup('help-modal')"
+                class="flex items-center justify-center gap-2 py-3 rounded-xl border border-gray-200 text-gray-600 text-sm font-semibold hover:bg-gray-50 transition"
+              >
+                <i data-lucide="help-circle" class="w-4 h-4"></i> Help
+              </button>
+
+              <button
+                onclick="togglePopup('contact-modal')"
+                class="flex items-center justify-center gap-2 py-3 rounded-xl border border-gray-200 text-gray-600 text-sm font-semibold hover:bg-gray-50 transition"
+              >
+                <i data-lucide="mail" class="w-4 h-4"></i> Contact
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <p class="text-center text-gray-500 text-xs mt-8 font-medium">
+        © 2026 YK OFFICIAL | All rights reserved.
+      </p>
+    </div>
+
+    <!-- NOTIFICATION POPUP -->
+    <div
+      id="notifyBox"
+      class="fixed top-24 right-4 z-[999] hidden cursor-grab active:cursor-grabbing"
+    >
+      <div class="notify-card flex items-start gap-3 p-4 rounded-2xl shadow-xl">
+        <!-- ICON -->
+        <div
+          class="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-100 text-indigo-600"
+        >
+          <i data-lucide="bell" class="w-5 h-5"></i>
+        </div>
+
+        <!-- TEXT -->
+        <div class="flex-1">
+          <p class="text-sm font-semibold text-gray-800">New Reward 🎉</p>
+          <p class="text-xs text-gray-500">Refer a friend</p>
+        </div>
+
+        <!-- CLOSE -->
+        <button
+          onclick="closeNotify()"
+          class="w-6 h-6 flex items-center justify-center rounded-lg hover:bg-gray-200"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="help-modal"
+      class="popup-overlay"
+      onclick="closeOnOutsideClick(event, 'help-modal')"
+    >
+      <div
+        class="glass-card m-4 p-8 rounded-[2rem] w-full max-w-xs text-center"
+      >
+        <div
+          class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4"
+        >
+          <i data-lucide="info"></i>
+        </div>
+        <h3 class="font-bold text-xl mb-2">How it works?</h3>
+        <ul
+          class="text-sm text-gray-600 space-y-3 text-left list-disc list-inside"
+        >
+          <li>Share your unique link.</li>
+          <li>Friend signs up using link.</li>
+          <!-- <li>₹50 added to your wallet.</li> -->
+          <li>Withdraw to UPI instantly.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      id="contact-modal"
+      class="popup-overlay"
+      onclick="closeOnOutsideClick(event, 'contact-modal')"
+    >
+      <div class="glass-card m-4 p-8 rounded-[2rem] w-full max-w-xs">
+        <h3 class="font-bold text-xl mb-4 text-center">Contact Support</h3>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+            <i data-lucide="mail" class="text-indigo-600 w-5 h-5"></i>
+            <!-- <span class="text-xs font-medium">yegnesh7219@gmail.com</span> -->
+            <a
+              href="mailto:yegnesh7219@gmail.com"
+              class="text-xs font-medium hover:underline"
+              >yegnesh7219@gmail.com</a
+            >
+          </div>
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+            <i data-lucide="phone" class="text-indigo-600 w-5 h-5"></i>
+            <!-- <span class="text-xs font-medium">+91 7219274312</span> -->
+            <a
+              href="tel:+917219274312"
+              class="text-xs font-medium hover:underline"
+              >7219274312</a
+            >
+          </div>
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+            <i data-lucide="clock" class="text-indigo-600 w-5 h-5"></i>
+            <span class="text-xs font-medium">Response Time: 24 hours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast flex items-center gap-2">
+      <i data-lucide="check-circle" class="w-4 h-4"></i>
+      <span id="toast-text">Success!</span>
+    </div>
+
+    <script>
+      lucide.createIcons();
+
+      // ================= NOTIFICATION =================
+      const box = document.getElementById("notifyBox");
+
+      function openNotify(e) {
+        const btn = e.currentTarget;
+
+        box.classList.remove("hidden");
+
+        // reset position if first time
+        if (!box.style.left) {
+          box.style.top = "100px";
+          box.style.left = "auto";
+          box.style.right = "20px";
+        }
+
+        // animation reset
+        box.style.animation = "none";
+        box.offsetHeight;
+        box.style.animation = "slideIn .4s ease";
+
+        // bell animation
+        btn.classList.add("bell-animate");
+        setTimeout(() => btn.classList.remove("bell-animate"), 500);
+      }
+
+      function closeNotify() {
+        box.classList.add("hidden");
+      }
+
+      // ================= DRAG SYSTEM =================
+      let isDragging = false;
+      let offsetX = 0;
+      let offsetY = 0;
+
+      // MOUSE
+      box.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        offsetX = e.clientX - box.offsetLeft;
+        offsetY = e.clientY - box.offsetTop;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          box.style.left = e.clientX - offsetX + "px";
+          box.style.top = e.clientY - offsetY + "px";
+          box.style.right = "auto";
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+
+      // TOUCH
+      box.addEventListener("touchstart", (e) => {
+        isDragging = true;
+        offsetX = e.touches[0].clientX - box.offsetLeft;
+        offsetY = e.touches[0].clientY - box.offsetTop;
+      });
+
+      document.addEventListener("touchmove", (e) => {
+        if (isDragging) {
+          box.style.left = e.touches[0].clientX - offsetX + "px";
+          box.style.top = e.touches[0].clientY - offsetY + "px";
+          box.style.right = "auto";
+        }
+      });
+
+      document.addEventListener("touchend", () => {
+        isDragging = false;
+      });
+
+      // ================= COPY =================
+      function copyToClipboard() {
+        const copyText = document.getElementById("refLink");
+
+        navigator.clipboard
+          .writeText(copyText.value)
+          .then(() => showToast("Link Copied! 🔥"))
+          .catch(() => {
+            copyText.select();
+            document.execCommand("copy");
+            showToast("Copied! 🔥");
+          });
+      }
+
+      // ================= SHARE =================
+      function shareWA() {
+        const url = document.getElementById("refLink").value;
+        window.open(
+          `https://api.whatsapp.com/send?text=Join YK Official 🚀 ${url}`,
+          "_blank",
+        );
+      }
+
+      function shareTG() {
+        const url = document.getElementById("refLink").value;
+        window.open(
+          `https://t.me/share/url?url=${url}&text=Join Now 🚀`,
+          "_blank",
+        );
+      }
+
+      async function nativeShare() {
+        const url = document.getElementById("refLink").value;
+
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: "YK Official",
+              text: "Earn rewards 🚀",
+              url: url,
+            });
+          } catch {}
+        } else {
+          copyToClipboard();
+        }
+      }
+
+      // ================= POPUP =================
+      function togglePopup(id) {
+        document.getElementById(id).classList.add("active");
+      }
+
+      function closeOnOutsideClick(e, id) {
+        if (e.target.id === id) {
+          document.getElementById(id).classList.remove("active");
+        }
+      }
+
+      // ================= TOAST =================
+      function showToast(msg) {
+        const toast = document.getElementById("toast");
+        document.getElementById("toast-text").innerText = msg;
+
+        toast.classList.add("show");
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 3000);
+      }
+    </script>
+
+<!-- security shield -->
+
+<div id="ykShield" class="fixed inset-0 hidden items-center justify-center z-[9999] font-sans">
+  
+  <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-md"></div>
+
+  <div class="relative bg-white/90 border border-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-3xl p-10 w-[380px] text-center animate-premium-in">
+    
+    <div class="relative w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+      <div class="absolute inset-0 border-2 border-slate-100 rounded-full"></div>
+      <div class="absolute inset-0 border-t-2 border-blue-600 rounded-full animate-spin-slow"></div>
+      
+      <img src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" 
+           alt="YK Official" 
+           class="w-14 h-14 object-contain relative rounded-full z-10 drop-shadow-sm">
+    </div>
+
+    <div class="space-y-2">
+      <h2 class="text-xs uppercase tracking-[0.2em] text-blue-600 font-bold">
+        Security Authenticated
+      </h2>
+      <h1 class="text-xl font-semibold text-slate-800">
+        YK Official Protection
+      </h1>
+      <p id="ykMsg" class="text-[13px] text-slate-500 leading-relaxed h-10 px-4">
+        </p>
+    </div>
+
+    <div class="mt-8 space-y-3">
+      <div class="h-[3px] w-full bg-slate-100 rounded-full overflow-hidden">
+        <div id="ykBar" class="h-full bg-slate-800 transition-all duration-1000 ease-linear" style="width: 0%"></div>
+      </div>
+      
+      <div class="flex justify-between items-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+        <span id="ykStatus">Initializing...</span>
+        <span id="ykCount">5s</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+/* Smooth Entrance */
+@keyframes premiumIn {
+  0% { transform: scale(0.9) translateY(30px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+.animate-premium-in {
+  animation: premiumIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Subtle Spin for the Ring */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spinSlow 3s linear infinite;
+}
+
+/* Base Font */
+.font-sans {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+</style>
+
+<script>
+let ykTriggered = false;
+const message = "Access restricted. System integrity check in progress to protect secure assets.";
+let index = 0;
+
+function typeEffect() {
+  const el = document.getElementById("ykMsg");
+  if (index < message.length) {
+    el.innerHTML += message.charAt(index);
+    index++;
+    setTimeout(typeEffect, 30);
+  }
+}
+
+function showYKShield() {
+  if (ykTriggered) return;
+  ykTriggered = true;
+
+  const shield = document.getElementById("ykShield");
+  const bar = document.getElementById("ykBar");
+  const status = document.getElementById("ykStatus");
+  const countEl = document.getElementById("ykCount");
+
+  shield.classList.remove("hidden");
+  shield.classList.add("flex");
+
+  typeEffect();
+
+  let time = 5;
+  bar.style.width = "100%";
+  
+  const timer = setInterval(() => {
+    time--;
+    countEl.innerText = `${time}s`;
+    
+    if(time === 3) status.innerText = "Encrypting...";
+    if(time === 1) status.innerText = "Finalizing...";
+
+    if (time <= 0) {
+      clearInterval(timer);
+      location.reload();
+    }
+  }, 1000);
+}
+
+// Blocks
+document.addEventListener("contextmenu", (e) => { e.preventDefault(); showYKShield(); });
+document.addEventListener("keydown", (e) => {
+  if ((e.ctrlKey && (e.key === 'u' || e.key === 's')) || 
+      (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) || 
+      e.key === 'F12') {
+    e.preventDefault();
+    showYKShield();
+  }
+});
+</script>
+  </body>
+</html>

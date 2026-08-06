@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YK OFFICIAL | Terms & Conditions</title>
+    <link rel="icon" href="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- url id code  -->
+  <script>
+    /**
+     * Unique ID Generate aur URL update karne ka function
+     */
+    function updateUrlWithUniqueId() {
+        // 6 characters ki Random Unique ID (YK-XXXXXX)
+        const uniqueId = Math.random().toString(36).substring(2, 8).toUpperCase();
+        
+        // Current Page Name (Pathname se page name nikalna)
+        const pageName = window.location.pathname.split("/").pop().split(".")[0] || 'home';
+        
+        // Naya URL Hash format: #pageName?uid=YKOFFICIAL-${uniqueId}
+        const newHash = `#${pageName}?uid=yKOfFiciAl${uniqueId}`;
+        
+        // Browser ka URL update karna bina reload kiye
+        window.history.replaceState(null, null, newHash);
+    }
+
+    // Jab page pehli baar load ho
+    window.addEventListener('DOMContentLoaded', updateUrlWithUniqueId);
+
+    // Agar aapki site single page hai aur sections change hote hain
+    window.addEventListener('hashchange', updateUrlWithUniqueId);
+</script>
+    <style>
+      body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+      
+      /* Glassmorphism Effect */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+      }
+
+      .glass-nav {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      /* Animated Corporate Loader */
+      #loader {
+        position: fixed;
+        inset: 0;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+
+      .loader-bar {
+        width: 140px;
+        height: 3px;
+        background: #f3f4f6;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+      }
+
+      .loader-progress {
+        width: 0%;
+        height: 100%;
+        background: #2563eb;
+        animation: loading 1.2s ease-in-out infinite;
+      }
+
+      @keyframes loading {
+        0% { width: 0%; transform: translateX(-100%); }
+        50% { width: 100%; transform: translateX(0); }
+        100% { width: 0%; transform: translateX(100%); }
+      }
+
+      /* Custom Checkbox Style */
+      .custom-check {
+        width: 20px;
+        height: 20px;
+        accent-color: #2563eb;
+        cursor: pointer;
+      }
+
+      .popup-anim {
+        animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      @keyframes scaleUp {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+    </style>
+  </head>
+
+  <body class="bg-[#f8fafc] text-slate-700">
+
+    <div id="loader">
+      <div class="flex items-center gap-2">
+        <img src="https://i.ibb.co/RpjD8n0C/Chat-GPT-Image-Jan-20-2026-08-56-30-AM.png" class="w-12 h-12 rounded-xl" />
+        <p class="text-slate-900 text-2xl font-bold tracking-tight">
+          YK <span class="text-blue-600">OFFICIAL</span>
+        </p>
+      </div>
+      <div class="loader-bar"><div class="loader-progress"></div></div>
+    </div>
+
+    <header class="glass-nav sticky top-0 z-50 transition-all">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+          <img src="https://i.ibb.co/RpjD8n0C/Chat-GPT-Image-Jan-20-2026-08-56-30-AM.png" class="w-10 h-10 rounded-lg shadow-sm" />
+          <h1 class="text-slate-900 text-xl font-extrabold tracking-tight">
+            YK <span class="text-blue-600">OFFICIAL</span>
+          </h1>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <span id="verifiedBadge" class="hidden bg-green-50 text-green-600 border border-green-100 px-4 py-1.5 rounded-full text-xs font-bold">
+            ✔ Verified User
+          </span>
+          <button onclick="openContact()" class="bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-600 transition-all shadow-md">
+            Contact
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section class="text-center pt-24 pb-16 bg-white border-b border-slate-100 px-6">
+      <span class="inline-block px-4 py-1 mb-4 text-[10px] font-bold tracking-widest text-blue-600 uppercase bg-blue-50 rounded-full">Legal Agreement</span>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">Terms & Conditions</h1>
+      <p class="max-w-2xl mx-auto text-slate-500 text-lg leading-relaxed">
+        These Terms govern your use of <strong class="text-slate-900">YK OFFICIAL.</strong> By accessing, you agree to all professional rules and platform policies.
+      </p>
+      <div class="mt-8 flex items-center justify-center gap-2 text-sm font-medium text-slate-400">
+        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+        Last Updated: March 2026
+      </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto px-6 py-20 space-y-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+        <div class="md:col-span-1 text-blue-600 font-bold text-xl">01</div>
+        <div class="md:col-span-11">
+          <h2 class="text-slate-900 text-xl font-bold mb-3">Acceptance of Terms</h2>
+          <p class="text-slate-500 leading-relaxed">By accessing or using <strong class="text-slate-900">YK OFFICIAL</strong>, you agree to be bound by these Terms & Conditions. These terms constitute a legally binding agreement between you and the operating region.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+        <div class="md:col-span-1 text-blue-600 font-bold text-xl">02</div>
+        <div class="md:col-span-11">
+          <h2 class="text-slate-900 text-xl font-bold mb-3">User Eligibility</h2>
+          <p class="text-slate-500 leading-relaxed">You must be at least 18 years old or legally capable of entering into a binding agreement. You confirm that all information provided by you is accurate and complete.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+        <div class="md:col-span-1 text-blue-600 font-bold text-xl">03</div>
+        <div class="md:col-span-11">
+          <h2 class="text-slate-900 text-xl font-bold mb-3">Intellectual Property Rights</h2>
+          <p class="text-slate-500 leading-relaxed">All content, including text, graphics, logos, and software, is the property of <strong class="text-slate-900">YK OFFICIAL</strong>. Unauthorized copying or distribution is strictly prohibited.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-t border-slate-100 pt-10">
+        <div class="md:col-span-1 text-blue-600 font-bold text-xl">04</div>
+        <div class="md:col-span-11">
+          <h2 class="text-slate-900 text-xl font-bold mb-3">Privacy & Governing Law</h2>
+          <p class="text-slate-500 leading-relaxed">Data collected may be used to improve services. These Terms shall be governed by and interpreted in accordance with the laws of India.</p>
+        </div>
+      </div>
+    </section>
+
+    <div id="acceptSection" class="max-w-4xl mx-auto px-6 pb-24">
+      <div class="glass-card p-10 rounded-[2.5rem] text-center">
+        <h3 class="text-slate-900 text-2xl font-bold mb-6">Review & Finalize</h3>
+
+        <div class="flex justify-center items-center gap-3 mb-8">
+          <input type="checkbox" id="acceptCheck" class="custom-check" />
+          <label for="acceptCheck" class="text-slate-600 font-medium">I have read and agree to these Terms</label>
+        </div>
+
+        <button id="acceptBtn" disabled class="bg-slate-200 text-slate-400 px-10 py-4 rounded-full font-bold transition-all cursor-not-allowed w-full md:w-auto shadow-sm">
+          Accept & Continue
+        </button>
+
+        <p id="acceptedStatus" class="hidden text-green-500 font-bold mt-6 flex items-center justify-center gap-2">
+          <span class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-[10px]">✔</span> Terms Accepted Successfully
+        </p>
+      </div>
+    </div>
+
+    <footer class="bg-white border-t border-slate-100 py-12 px-6">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="flex flex-col items-center md:items-start">
+          <p class="text-slate-900 font-bold">YK OFFICIAL</p>
+          <p class="text-slate-400 text-xs mt-1">© 2026 Yegnesh Kamble. All rights reserved.</p>
+        </div>
+
+        <div class="flex gap-10 text-sm font-semibold text-slate-500">
+          <a href="privacy.html" class="hover:text-blue-600 transition-colors">Privacy Policy</a>
+          <a href="#" class="text-blue-600">Terms</a>
+          <button onclick="openContact()" class="hover:text-blue-600 transition-colors">Contact</button>
+        </div>
+      </div>
+    </footer>
+
+    <div id="helpPopup" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-md flex items-center justify-center z-[60] px-4">
+      <div class="glass-card bg-white p-8 rounded-[2rem] w-full max-w-md popup-anim relative">
+        <button onclick="closeHelp()" class="absolute right-6 top-6 text-slate-400 hover:text-slate-900 text-xl">✕</button>
+        <h2 class="text-2xl font-extrabold text-slate-900 mb-6">Support Center</h2>
+        <div class="space-y-4">
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+            <p class="text-sm font-bold text-slate-800">Q: Terms accept karna zaroori hai?</p>
+            <p class="text-sm text-slate-500 mt-1">Yes, to access our verified services, accepting the agreement is mandatory.</p>
+          </div>
+          <div class="flex flex-col gap-2 pt-4">
+            <a href="mailto:YEGNESH7219@EMAIL.COM" class="text-blue-600 font-semibold flex items-center gap-2">📧 Email Support</a>
+            <a href="tel:+917219274312" class="text-slate-900 font-semibold flex items-center gap-2">📱 Direct Line</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="contactPopup" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-md flex items-center justify-center z-[60] px-4">
+      <div class="glass-card bg-white p-10 rounded-[2rem] text-center popup-anim relative max-w-sm w-full">
+        <button onclick="closeContact()" class="absolute right-6 top-6 text-slate-400 hover:text-slate-900">✕</button>
+        <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">📧</div>
+        <h2 class="text-2xl font-bold text-slate-900 mb-2">Contact Us</h2>
+        <p class="text-slate-500 text-sm mb-6">Feel free to reach out to our team.</p>
+        <div class="space-y-3 font-semibold text-slate-800">
+          <p class="p-3 bg-slate-50 rounded-xl">YEGNESH7219@EMAIL.COM</p>
+          <p class="p-3 bg-slate-50 rounded-xl">+91 7219274312</p>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="openHelp()" class="fixed bottom-8 right-8 bg-blue-600 text-white w-14 h-14 rounded-2xl shadow-xl flex items-center justify-center text-xl hover:scale-110 transition-transform z-40">
+      ?
+    </button>
+
+    <script>
+      // Page Logic
+      window.onload = () => {
+        setTimeout(() => {
+          document.getElementById("loader").style.opacity = "0";
+          setTimeout(() => document.getElementById("loader").style.display = "none", 400);
+        }, 800);
+
+        const accepted = localStorage.getItem("termsAccepted");
+        if (accepted === "yes") {
+          document.getElementById("acceptSection").style.display = "none";
+          document.getElementById("verifiedBadge").classList.remove("hidden");
+        }
+      };
+
+      // Accept logic
+      const check = document.getElementById("acceptCheck");
+      const btn = document.getElementById("acceptBtn");
+
+      check.addEventListener("change", () => {
+        if (check.checked) {
+          btn.disabled = false;
+          btn.classList.remove("bg-slate-200", "text-slate-400", "cursor-not-allowed");
+          btn.classList.add("bg-blue-600", "text-white", "hover:bg-blue-700", "shadow-lg", "shadow-blue-200");
+        } else {
+          btn.disabled = true;
+          btn.classList.add("bg-slate-200", "text-slate-400", "cursor-not-allowed");
+          btn.classList.remove("bg-blue-600", "text-white");
+        }
+      });
+
+      btn.addEventListener("click", () => {
+        document.getElementById("loader").style.display = "flex";
+        document.getElementById("loader").style.opacity = "1";
+        setTimeout(() => {
+          localStorage.setItem("termsAccepted", "yes");
+          location.reload();
+        }, 600);
+      });
+
+      // UI Helpers
+      function openHelp() { document.getElementById("helpPopup").classList.remove("hidden"); }
+      function closeHelp() { document.getElementById("helpPopup").classList.add("hidden"); }
+      function openContact() { document.getElementById("contactPopup").classList.remove("hidden"); }
+      function closeContact() { document.getElementById("contactPopup").classList.add("hidden"); }
+    </script>
+
+    <script>
+  /**
+   * YK OFFICIAL - PREMIUM SECURITY SYSTEM 2026
+   * Features: Right-click block, DevTools detection, Glassy UI, Auto-refresh
+   */
+
+  // 1. AUTO-REFRESH LOGIC (5 SECONDS)
+  function startSecurityRefresh() {
+    // Top Progress Bar Creating
+    const progressBar = document.createElement('div');
+    progressBar.style.cssText = `
+      position: fixed; top: 0; left: 0; height: 4px; 
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      z-index: 10001; width: 0%; transition: width 5s linear;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+    `;
+    document.body.appendChild(progressBar);
+
+    // Start Animation
+    setTimeout(() => { progressBar.style.width = "100%"; }, 100);
+
+    // Refresh execution
+    setTimeout(() => {
+      window.location.reload();
+    }, 5000);
+  }
+
+  // 2. SHOW UNIQUE ACCESS DENIED CARD
+  function showWarning() {
+    // Agar pehle se warning hai toh dobara mat banao
+    if(document.getElementById('yk-security-overlay')) return;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'yk-security-overlay';
+    overlay.style.cssText = `
+      position: fixed; inset: 0; z-index: 10000;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Inter', sans-serif; padding: 20px;
+    `;
+
+    overlay.innerHTML = `
+      <div style="
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 40px; border-radius: 40px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        max-width: 450px; width: 100%; text-align: center;
+        animation: scaleIn 0.3s ease-out;
+      ">
+        <style>
+          @keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        </style>
+
+        
+
+        <div style="color: #ef4444; font-size: 40px; margin-bottom: 15px;">⚠</div>
+        
+        <h3 style="font-size: 22px; font-weight: 700; color: #0f172a; margin-bottom: 10px;">ACCESS DENIED</h3>
+        
+        <p style="font-size: 14px; color: #64748b; line-height: 1.6; margin-bottom: 25px;">
+          Source code protection is active. Unauthorized inspection or copying is strictly prohibited by <b>YK OFFICIAL</b> security protocols.
+        </p>
+
+        <div style="background: #f8fafc; padding: 15px; border-radius: 20px; border: 1px solid #f1f5f9; text-align: left;">
+          <p style="font-size: 12px; color: #1e293b; margin: 3px 0;"><b>Founder:</b> Yegnesh Kamble</p>
+          <p style="font-size: 12px; color: #1e293b; margin: 3px 0;"><b>WhatsApp:</b> +91 7219274312</p>
+        </div>
+
+        <p style="margin-top: 25px; font-size: 11px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">
+          Page auto-refreshing in 5 seconds...
+        </p>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+    startSecurityRefresh();
+  }
+
+  // 3. TRIGGERS
+  // Right Click Disable
+  document.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    showWarning();
+  });
+
+  // Keyboard Shortcuts (F12, Ctrl+U, Ctrl+Shift+I, etc.)
+  document.onkeydown = function (e) {
+    if (
+      e.keyCode == 123 || 
+      (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || 
+      (e.ctrlKey && e.keyCode == 85) || 
+      (e.ctrlKey && e.keyCode == 67)
+    ) {
+      showWarning();
+      return false;
+    }
+  };
+
+  // DevTools detection via Window Resize
+  setInterval(() => {
+    const threshold = 160;
+    if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+      showWarning();
+    }
+  }, 1000);
+
+</script>
+  </body>
+</html>

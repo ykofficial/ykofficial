@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YK OFFICIAL | Notification Admin</title>
+    <link rel="icon" href="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- url id code  -->
+  <script>
+    /**
+     * Unique ID Generate aur URL update karne ka function
+     */
+    function updateUrlWithUniqueId() {
+        // 6 characters ki Random Unique ID (YK-XXXXXX)
+        const uniqueId = Math.random().toString(36).substring(2, 8).toUpperCase();
+        
+        // Current Page Name (Pathname se page name nikalna)
+        const pageName = window.location.pathname.split("/").pop().split(".")[0] || 'home';
+        
+        // Naya URL Hash format: #pageName?uid=YKOFFICIAL-${uniqueId}
+        const newHash = `#${pageName}?uid=yKOfFiciAl${uniqueId}`;
+        
+        // Browser ka URL update karna bina reload kiye
+        window.history.replaceState(null, null, newHash);
+    }
+
+    // Jab page pehli baar load ho
+    window.addEventListener('DOMContentLoaded', updateUrlWithUniqueId);
+
+    // Agar aapki site single page hai aur sections change hote hain
+    window.addEventListener('hashchange', updateUrlWithUniqueId);
+</script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at top right, #fdf2f8, #f5f3ff, #eff6ff);
+            background-attachment: fixed;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+        }
+
+        .cyber-input {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1.5px solid #e2e8f0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cyber-input:focus {
+            border-color: #6366f1;
+            background: white;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.1);
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+        }
+
+        /* Page Loader Custom */
+        #pageLoader {
+            position: fixed; inset: 0; background: #000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999;
+        }
+
+        .loader-ring {
+            width: 50px; height: 50px;
+            border: 3px solid rgba(99, 102, 241, 0.1);
+            border-top: 3px solid #6366f1;
+            border-radius: 50%;
+            animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .animate-pop { animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes pop { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    </style>
+</head>
+
+<body class="min-h-screen text-slate-800">
+
+    <div id="pageLoader">
+        <div class="loader-ring"></div>
+        <div class="mt-4 text-white font-bold tracking-tighter text-xl">YK <span class="text-indigo-500">OFFICIAL</span></div>
+    </div>
+
+    <header class="sticky top-0 z-50 glass-panel border-b border-slate-200/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" class="w-10 h-10 rounded-full shadow-lg border-2 border-indigo-500/20" />
+                <h1 class="font-extrabold text-xl tracking-tight hidden sm:block">YK <span class="text-indigo-600 font-black">OFFICIAL</span></h1>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <button onclick="openHelp()" class="p-2.5 rounded-xl bg-white border shadow-sm hover:text-indigo-600 transition-all text-slate-500">
+                    <i class="fa-solid fa-circle-question"></i> <span class="text-xs font-bold ml-1 hidden md:inline">Help</span>
+                </button>
+                <button onclick="openContact()" class="p-2.5 rounded-xl bg-white border shadow-sm hover:text-indigo-600 transition-all text-slate-500">
+                    <i class="fa-solid fa-headset"></i> <span class="text-xs font-bold ml-1 hidden md:inline">Contact</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 md:py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <div class="lg:col-span-5 space-y-6">
+                <div class="glass-panel p-8 rounded-[2rem] border-indigo-100/50">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-black text-slate-900 mb-1">Broadcast</h2>
+                        <p class="text-sm text-slate-500">Push real-time updates to all users</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="relative">
+                            <label class="text-[10px] uppercase font-bold text-slate-400 ml-3 mb-1 block">Notice Headline</label>
+                            <input id="title" type="text" placeholder="e.g. Server Maintenance" 
+                                   class="cyber-input w-full px-5 py-3.5 rounded-2xl outline-none text-sm font-semibold">
+                        </div>
+
+                        <div class="relative">
+                            <label class="text-[10px] uppercase font-bold text-slate-400 ml-3 mb-1 block">Full Message Body</label>
+                            <textarea id="message" rows="4" placeholder="Describe the notification details..." 
+                                      class="cyber-input w-full px-5 py-3.5 rounded-2xl outline-none text-sm font-medium resize-none"></textarea>
+                        </div>
+
+                        <button onclick="addNotification()" class="btn-gradient w-full py-4 rounded-2xl text-white font-bold text-sm uppercase tracking-widest flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane text-xs"></i> Send Blast
+                        </button>
+                        
+                        <div id="loader" class="hidden flex justify-center pt-2">
+                            <div class="loader-ring w-6 h-6 border-2 border-indigo-500 border-t-transparent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7">
+                <div class="flex items-center justify-between mb-6 px-2">
+                    <div>
+                        <h2 class="text-xl font-black text-slate-900">Broadcast History</h2>
+                        <p class="text-xs text-slate-500">Manage previously sent messages</p>
+                    </div>
+                    <button onclick="refreshData(this)" class="p-3 bg-white border rounded-2xl shadow-sm text-indigo-600 hover:bg-indigo-50 transition-all">
+                        <i class="fa-solid fa-rotate"></i>
+                    </button>
+                </div>
+
+                <div class="glass-panel rounded-[2rem] overflow-hidden border-slate-200/50">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-indigo-50/50 text-[10px] uppercase font-black text-indigo-400 tracking-tighter">
+                                <tr>
+                                    <th class="px-6 py-4">Status & Title</th>
+                                    <th class="px-6 py-4">Content Brief</th>
+                                    <th class="px-6 py-4 text-center">Manage</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTable" class="divide-y divide-slate-100 text-sm">
+                                <tr><td colspan="3" class="p-10 text-center text-slate-400 font-medium">Initializing secure connection...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 mt-20">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center text-center md:text-left">
+                <div>
+                    <h3 class="font-black text-lg mb-2">YK <span class="text-indigo-600">OFFICIAL</span></h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Centralized notification management system for premium digital properties.</p>
+                </div>
+                <div class="flex justify-center gap-6">
+                    <a href="#" class="text-slate-400 hover:text-indigo-600 text-xl transition-colors"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="text-slate-400 hover:text-green-500 text-xl transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" class="text-slate-400 hover:text-indigo-400 text-xl transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" class="text-slate-400 hover:text-pink-400 text-xl transition-colors"><i class="fa-brands fa-instagram"></i></a>
+
+                </div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                    © 2026 YK OFFICIAL | All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="successPopup" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-sm">
+        <div class="glass-panel p-8 rounded-3xl max-w-xs w-full text-center animate-pop border-emerald-500/20">
+            <div class="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-500 text-2xl">
+                <i class="fa-solid fa-check-double"></i>
+            </div>
+            <h3 class="text-lg font-black mb-2">Live Broadcasted!</h3>
+            <p class="text-xs text-slate-500 mb-6 font-medium leading-relaxed">The message was successfully delivered to the main website.</p>
+            <button onclick="closePopup()" class="w-full py-3 bg-emerald-500 text-white rounded-xl font-bold text-xs uppercase tracking-widest">Dismiss</button>
+        </div>
+    </div>
+
+    <div id="helpPopup" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-sm">
+        <div class="glass-panel p-8 rounded-[2.5rem] max-w-md w-full animate-pop relative">
+            <button onclick="closeHelp()" class="absolute top-6 right-6 text-slate-400"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h2 class="text-xl font-black mb-4 text-indigo-600">Quick Guide</h2>
+            <div class="space-y-4 text-sm text-slate-600 font-medium leading-relaxed">
+                <p>1. <b>Draft:</b> Enter a concise headline and the detailed content.</p>
+                <p>2. <b>Blast:</b> Hit "Send Blast" to push the update instantly.</p>
+                <p>3. <b>Monitor:</b> Use the refresh icon to see historical logs.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="contactPopup" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-sm">
+        <div class="glass-panel p-8 rounded-[2.5rem] max-w-md w-full animate-pop text-center relative">
+            <button onclick="closeContact()" class="absolute top-6 right-6 text-slate-400"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <div class="w-16 h-16 bg-indigo-600/10 rounded-full flex items-center justify-center mx-auto mb-4 text-indigo-600 text-2xl">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <h2 class="text-xl font-black mb-1">Owner Contact</h2>
+            <p class="text-xs text-slate-400 mb-6">Technical Admin Support</p>
+            <div class="space-y-2 text-sm font-bold text-slate-700">
+                <p class="flex items-center justify-center gap-2"><i class="fa-solid fa-envelope text-indigo-500"></i> yegnesh7219@gmail.com</p>
+                <p class="flex items-center justify-center gap-2"><i class="fa-solid fa-phone text-indigo-500"></i> +91 7219274312</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbyUXELsEUDhfZHs4yVXNuKPfoEGmniwLeKy-HcHvJz-yYFp2Wm-H1wyeoRlB6m1sldL5w/exec";
+
+        window.addEventListener("load", () => {
+            const loader = document.getElementById("pageLoader");
+            setTimeout(() => {
+                loader.style.opacity = "0";
+                setTimeout(() => loader.style.display = "none", 500);
+            }, 800);
+        });
+
+        function safeText(text) { return text.replace(/'/g, "\\'").replace(/"/g, "&quot;"); }
+
+        function refreshData(btn) {
+            let icon = btn.querySelector('i');
+            if (icon) icon.classList.add('fa-spin');
+            btn.disabled = true;
+
+            fetch(API_URL)
+                .then(res => res.json())
+                .then(data => {
+                    let html = "";
+                    data.reverse().forEach(item => {
+                        html += `
+                        <tr class="hover:bg-slate-50/50 transition-colors group">
+                            <td class="px-6 py-5">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500"></span>
+                                    <div>
+                                        <div class="font-black text-slate-900">${item.title}</div>
+                                        <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">${item.date}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-5 text-slate-500 text-xs font-medium max-w-[200px] truncate">${item.message}</td>
+                            <td class="px-6 py-5 text-center">
+                                <div class="flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button onclick="editData('${item.id}','${safeText(item.title)}','${safeText(item.message)}')" 
+                                            class="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg"><i class="fa-solid fa-pen"></i></button>
+                                    <button onclick="deleteData('${item.id}')" 
+                                            class="p-2 text-red-500 hover:bg-red-50 rounded-lg"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>`;
+                    });
+                    document.getElementById("dataTable").innerHTML = html || '<tr><td colspan="3" class="p-10 text-center text-slate-400">Archive empty.</td></tr>';
+                    if (icon) icon.classList.remove('fa-spin');
+                    btn.disabled = false;
+                }).catch(() => { if (icon) icon.classList.remove('fa-spin'); btn.disabled = false; alert("Sync Failed"); });
+        }
+
+        function addNotification() {
+            let title = document.getElementById("title").value.trim();
+            let message = document.getElementById("message").value.trim();
+            if (!title || !message) return alert("⚠ Incomplete broadcast details");
+            
+            document.getElementById("loader").classList.remove("hidden");
+            fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "add", title, message })
+            }).then(() => {
+                document.getElementById("loader").classList.add("hidden");
+                document.getElementById("title").value = "";
+                document.getElementById("message").value = "";
+                document.getElementById("successPopup").classList.remove("hidden");
+                refreshData(document.querySelector('button[onclick*="refreshData"]'));
+            }).catch(() => { document.getElementById("loader").classList.add("hidden"); alert("Broadcast Error"); });
+        }
+
+        function deleteData(id) {
+            if (!confirm("Delete broadcast record?")) return;
+            document.getElementById("loader").classList.remove("hidden");
+            fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "delete", id })
+            }).then(() => {
+                document.getElementById("loader").classList.add("hidden");
+                refreshData(document.querySelector('button[onclick*="refreshData"]'));
+            });
+        }
+
+        function editData(id, title, message) {
+            let newTitle = prompt("New Headline:", title);
+            let newMsg = prompt("New Content Body:", message);
+            if (!newTitle || !newMsg) return;
+            document.getElementById("loader").classList.remove("hidden");
+            fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "edit", id, title: newTitle, message: newMsg })
+            }).then(() => {
+                document.getElementById("loader").classList.add("hidden");
+                refreshData(document.querySelector('button[onclick*="refreshData"]'));
+            });
+        }
+
+        function openHelp() { document.getElementById("helpPopup").classList.remove("hidden"); }
+        function closeHelp() { document.getElementById("helpPopup").classList.add("hidden"); }
+        function openContact() { document.getElementById("contactPopup").classList.remove("hidden"); }
+        function closeContact() { document.getElementById("contactPopup").classList.add("hidden"); }
+        function closePopup() { document.getElementById("successPopup").classList.add("hidden"); }
+
+        window.onload = () => refreshData(document.querySelector('button[onclick*="refreshData"]'));
+    </script>
+
+    <script>
+        document.addEventListener("contextmenu", e => { e.preventDefault(); triggerSecurity(); });
+        document.addEventListener("keydown", e => {
+            if (e.key === "F12" || (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) || (e.ctrlKey && e.key === "U")) triggerSecurity();
+        });
+        setInterval(() => {
+            if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) triggerSecurity();
+        }, 1000);
+
+        function triggerSecurity() {
+            document.body.innerHTML = `
+                <div style="height:100vh;display:flex;align-items:center;justify-content:center;background:#020617;color:white;font-family:sans-serif;text-align:center;padding:20px;">
+                    <div style="background:rgba(255,255,255,0.05);padding:50px;border-radius:30px;border:1px solid rgba(255,255,255,0.1);">
+                        <h1 style="font-size:32px;color:#ef4444;margin-bottom:10px;">⚠ SECURITY BREACH</h1>
+                        <p style="color:#94a3b8;font-size:14px;max-width:400px;line-height:1.6;">Developer tools are prohibited. Session terminated to protect YK OFFICIAL broadcast data.</p>
+                        <div style="margin-top:30px;font-size:12px;color:#475569;">© 2026 YK OFFICIAL ADMIN PORTAL</div>
+                    </div>
+                </div>`;
+            setTimeout(() => location.reload(), 5000);
+        }
+    </script>
+
+</body>
+</html>

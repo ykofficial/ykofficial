@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YK OFFICIAL - Client Registration</title>
+    <link rel="icon" href="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- url id code  -->
+    <script>
+      /**
+       * Unique ID Generate aur URL update karne ka function
+       */
+      function updateUrlWithUniqueId() {
+        // 6 characters ki Random Unique ID (YK-XXXXXX)
+        const uniqueId = Math.random()
+          .toString(36)
+          .substring(2, 8)
+          .toUpperCase();
+
+        // Current Page Name (Pathname se page name nikalna)
+        const pageName =
+          window.location.pathname.split("/").pop().split(".")[0] || "home";
+
+        // Naya URL Hash format: #pageName?uid=YKOFFICIAL-${uniqueId}
+        const newHash = `#${pageName}?uid=yKOfFiciAl${uniqueId}`;
+
+        // Browser ka URL update karna bina reload kiye
+        window.history.replaceState(null, null, newHash);
+      }
+
+      // Jab page pehli baar load ho
+      window.addEventListener("DOMContentLoaded", updateUrlWithUniqueId);
+
+      // Agar aapki site single page hai aur sections change hote hain
+      window.addEventListener("hashchange", updateUrlWithUniqueId);
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap");
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: radial-gradient(
+          circle at top right,
+          #1e1b4b,
+          #0f172a,
+          #000000
+        );
+        background-attachment: fixed;
+      }
+
+      .glass-card {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      }
+
+      .input-field {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        color: white;
+      }
+
+      .input-field:focus {
+        border-color: #6366f1;
+        background: rgba(255, 255, 255, 0.1);
+        outline: none;
+        box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+      }
+
+      /* Animated background pulse */
+      .bg-glow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle at 50% 50%,
+          rgba(79, 70, 229, 0.05),
+          transparent 50%
+        );
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      #pageLoader {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(99, 102, 241, 0.1);
+        border-top: 3px solid #6366f1;
+        border-radius: 50%;
+        animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+      }
+
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen text-slate-200 flex flex-col">
+    <div class="bg-glow"></div>
+
+    <div id="pageLoader">
+      <div class="spinner"></div>
+      <div
+        class="mt-4 text-sm tracking-widest uppercase font-semibold text-indigo-400"
+      >
+        YK OFFICIAL
+      </div>
+    </div>
+
+    <nav
+      class="sticky top-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-xl px-6 py-4"
+    >
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center gap-3">
+          <img
+            src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png"
+            class="w-10 h-10 rounded-full border border-indigo-500/30 shadow-lg shadow-indigo-500/20"
+            alt="Logo"
+          />
+          <h1 class="font-bold text-2xl tracking-tight">
+            YK <span class="text-indigo-400">OFFICIAL</span>
+          </h1>
+        </div>
+        <div class="flex gap-3">
+          <button
+            onclick="showHelp()"
+            class="text-sm font-medium hover:text-indigo-400 transition-colors"
+          >
+            Help
+          </button>
+          <button
+            onclick="showContact()"
+            class="bg-white text-black px-5 py-2 rounded-full text-sm font-bold hover:bg-slate-200 transition-all"
+          >
+            Contact
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-8">
+      <div class="glass-card rounded-3xl p-8 sm:p-12 w-full max-w-2xl">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-white mb-2">Project Request</h2>
+          <p class="text-slate-400 text-sm">
+            Secure corporate portal for professional service inquiries.
+          </p>
+        </div>
+
+        <div class="flex justify-between mb-10 px-4 relative">
+          <div
+            class="absolute top-1/2 left-0 w-full h-[1px] bg-white/10 -z-10"
+          ></div>
+
+          <div
+            id="step1-icon"
+            class="step-icon bg-indigo-600 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ring-4 ring-indigo-600/20 text-white transition-all duration-500"
+          >
+            1
+          </div>
+
+          <div
+            id="step2-icon"
+            class="step-icon bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white transition-all duration-500"
+          >
+            2
+          </div>
+
+          <div
+            id="step3-icon"
+            class="step-icon bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white transition-all duration-500"
+          >
+            3
+          </div>
+        </div>
+
+        <div id="verification-area" class="space-y-4">
+          <div class="relative">
+            <input
+              id="email"
+              type="email"
+              placeholder="Email Address"
+              class="input-field w-full p-4 rounded-xl"
+            />
+          </div>
+          <button
+            onclick="sendOTP()"
+            class="btn-primary w-full py-4 rounded-xl font-bold text-white uppercase tracking-wide"
+          >
+            Request Access Code
+          </button>
+
+          <div class="pt-4 flex gap-2">
+            <input
+              id="otp"
+              placeholder="6-Digit OTP"
+              class="input-field w-1/2 p-4 rounded-xl text-center tracking-[0.5em]"
+            />
+            <button
+              onclick="verifyOTP()"
+              class="bg-emerald-600 hover:bg-emerald-500 w-1/2 rounded-xl font-bold transition-all uppercase text-sm text-white"
+            >
+              Verify Identity
+            </button>
+          </div>
+          <div class="mt-4 text-center">
+            <button
+              id="resendBtn"
+              onclick="sendOTP()"
+              disabled
+              class="text-sm text-slate-500 font-medium hover:text-indigo-400 transition-colors disabled:cursor-not-allowed disabled:hover:text-slate-500"
+            >
+              Resend OTP <span id="timer">(30s)</span>
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="form"
+          class="hidden space-y-4 mt-8 animate-[fadeIn_0.5s_ease-out]"
+        >
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              id="name"
+              placeholder="Your Full Name"
+              class="input-field p-4 rounded-xl"
+            />
+            <input
+              id="phone"
+              placeholder="Contact Number"
+              class="input-field p-4 rounded-xl"
+            />
+          </div>
+          <select
+            id="service"
+            class="input-field w-full p-4 rounded-xl appearance-none"
+          >
+            <option class="text-black">Website Development</option>
+            <option class="text-black">UI Design & Branding</option>
+            <option class="text-black">Portfolio Website</option>
+            <option class="text-black">Custom IT Solution</option>
+          </select>
+          <textarea
+            id="message"
+            rows="4"
+            placeholder="Briefly describe your project goals..."
+            class="input-field w-full p-4 rounded-xl resize-none"
+          ></textarea>
+          <button
+            onclick="submitForm()"
+            id="submitBtn"
+            class="btn-primary w-full py-4 rounded-xl font-bold text-white uppercase shadow-lg"
+          >
+            Submit Request
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="p-8 text-center border-t border-white/5">
+      <p class="text-slate-500 text-xs font-medium tracking-widest">
+        © 2026 YK OFFICIAL &bull; All Rights Reserved
+      </p>
+    </footer>
+
+    <div
+      id="loader"
+      class="hidden fixed inset-0 z-[100] backdrop-blur-sm bg-black/60 flex items-center justify-center"
+    >
+      <div class="spinner"></div>
+    </div>
+
+    <div
+      id="popup"
+      class="hidden fixed inset-0 z-[110] bg-black/80 backdrop-blur-md flex items-center justify-center p-6"
+    >
+      <div
+        class="bg-slate-900 border border-white/10 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl"
+      >
+        <h2 id="popupTitle" class="text-xl font-bold text-white mb-2"></h2>
+        <p
+          id="popupMsg"
+          class="text-slate-400 mb-6 text-sm leading-relaxed"
+        ></p>
+        <button
+          onclick="closePopup()"
+          class="bg-indigo-600 w-full py-3 rounded-xl font-bold text-white hover:bg-indigo-500 transition-all"
+        >
+          Understood
+        </button>
+      </div>
+    </div>
+    <!-- Help Popup -->
+    <div
+      id="help-popup"
+      class="hidden fixed inset-0 z-[120] bg-black/80 backdrop-blur-sm flex items-center justify-center p-6"
+    >
+      <div
+        class="bg-slate-900 border border-white/10 p-8 rounded-3xl max-w-sm w-full"
+      >
+        <div
+          class="w-12 h-12 bg-indigo-600/20 rounded-full flex items-center justify-center mb-6 text-indigo-400"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-white mb-4">Portal Guide</h2>
+        <ul class="text-slate-400 text-sm space-y-3 mb-8 text-left">
+          <li class="flex gap-3">
+            <span class="text-indigo-500 font-bold">1.</span>
+            <span>Provide a valid corporate email address.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-indigo-500 font-bold">2.</span>
+            <span>Enter the 6-digit OTP sent to your inbox.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-indigo-500 font-bold">3.</span>
+            <span>Complete the project brief and submit.</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-indigo-500 font-bold">4.</span>
+            <span>Save your Ticket ID for future tracking.</span>
+          </li>
+        </ul>
+        <button
+          onclick="closeHelp()"
+          class="bg-indigo-600 w-full py-3 rounded-xl font-bold text-white hover:bg-indigo-500 transition-all"
+        >
+          Got it
+        </button>
+      </div>
+    </div>
+    <!-- Contact Modal -->
+    <div
+      id="contact"
+      class="hidden fixed inset-0 z-[110] bg-black/80 backdrop-blur-md flex items-center justify-center p-6"
+    >
+      <div
+        class="bg-slate-900 border border-white/10 p-8 rounded-3xl max-w-sm w-full text-center"
+      >
+        <div
+          class="w-16 h-16 bg-indigo-600/20 rounded-full flex items-center justify-center mx-auto mb-4 text-indigo-400"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            />
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-white mb-1">Direct Support</h2>
+        <p class="text-indigo-400 font-semibold mb-4 text-sm">
+          yegnesh7219@gmail.com
+        </p>
+        <p class="text-slate-400 text-xs mb-6 uppercase tracking-widest">
+          Tekadi, Nagpur, India | YK Official Team
+        </p>
+        <button
+          onclick="closeContact()"
+          class="border border-white/10 w-full py-3 rounded-xl font-bold text-white hover:bg-white/5 transition-all"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+
+    <script>
+      emailjs.init("IjcMdGc7hhe75v6JE");
+      let otpCode;
+      const API =
+        "https://script.google.com/macros/s/AKfycbwnBjAJdDDIwefyafJ1_1jAh84Vsgr9oslrvaPTYC5BN5Bpra-PkfgcDQ4dlWGw7q6T/exec";
+
+      // --- Core Stepper UI Update Logic ---
+      function updateStepUI(stepNumber) {
+        for (let i = 1; i <= 3; i++) {
+          const stepIcon = document.getElementById(`step${i}-icon`);
+          if (i <= stepNumber) {
+            stepIcon.classList.remove("bg-slate-800");
+            stepIcon.classList.add(
+              "bg-indigo-600",
+              "ring-4",
+              "ring-indigo-600/20",
+            );
+          } else {
+            stepIcon.classList.add("bg-slate-800");
+            stepIcon.classList.remove(
+              "bg-indigo-600",
+              "ring-4",
+              "ring-indigo-600/20",
+            );
+          }
+        }
+      }
+
+      window.addEventListener("load", () => {
+        const loader = document.getElementById("pageLoader");
+        setTimeout(() => {
+          loader.style.opacity = "0";
+          setTimeout(() => (loader.style.display = "none"), 500);
+        }, 800);
+      });
+
+      function showLoader() {
+        document.getElementById("loader").classList.remove("hidden");
+      }
+      function hideLoader() {
+        document.getElementById("loader").classList.add("hidden");
+      }
+      function showPopup(title, msg) {
+        document.getElementById("popupTitle").innerText = title;
+        document.getElementById("popupMsg").innerText = msg;
+        document.getElementById("popup").classList.remove("hidden");
+      }
+      function closePopup() {
+        document.getElementById("popup").classList.add("hidden");
+      }
+
+      let timerInterval;
+
+      function startTimer() {
+        const resendBtn = document.getElementById("resendBtn");
+        const timerText = document.getElementById("timer");
+        let timeLeft = 30;
+
+        resendBtn.disabled = true;
+
+        // Clear any existing timer
+        clearInterval(timerInterval);
+
+        timerInterval = setInterval(() => {
+          timeLeft--;
+          if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            resendBtn.disabled = false;
+            timerText.innerText = ""; // Hide timer when ready
+          } else {
+            timerText.innerText = `(${timeLeft}s)`;
+          }
+        }, 1000);
+      }
+
+      // Modify your existing sendOTP function
+      async function sendOTP() {
+        let email = document.getElementById("email").value;
+        if (!email || !email.includes("@"))
+          return showPopup("Required", "Please provide a valid email address.");
+
+        otpCode = Math.floor(100000 + Math.random() * 900000);
+        showLoader();
+        try {
+          await emailjs.send("service_9uwcu9x", "template_51t8llg", {
+            email,
+            otp: otpCode,
+          });
+          hideLoader();
+          showPopup("Success", "Security code dispatched to your inbox.");
+
+          // --- NEW LOGIC START ---
+          updateStepUI(2);
+          startTimer(); // Start the 30s countdown
+          // --- NEW LOGIC END ---
+        } catch (e) {
+          hideLoader();
+          showPopup("Error", "Failed to send verification code.");
+        }
+      }
+
+      function verifyOTP() {
+        let user = document.getElementById("otp").value;
+        if (user == otpCode && otpCode != null) {
+          document.getElementById("verification-area").classList.add("hidden");
+          document.getElementById("form").classList.remove("hidden");
+          updateStepUI(3); // Move to Step 3
+          showPopup(
+            "Identity Verified",
+            "You may now complete the project details.",
+          );
+        } else {
+          showPopup("Security Alert", "Invalid verification code entered.");
+        }
+      }
+
+      function generateCustomerID(name) {
+        let parts = name.trim().split(" ");
+        let initials = (
+          parts[0][0] + (parts[parts.length - 1][0] || "X")
+        ).toUpperCase();
+        let randomNum = Math.floor(1000 + Math.random() * 9000);
+        return initials + randomNum;
+      }
+
+      async function submitForm() {
+        let btn = document.getElementById("submitBtn");
+        let name = document.getElementById("name").value;
+        if (!name) return showPopup("Incomplete", "Please enter your name.");
+
+        btn.disabled = true;
+        let customerID = generateCustomerID(name);
+        let data = {
+          id: customerID,
+          name: name,
+          email: document.getElementById("email").value,
+          phone: document.getElementById("phone").value,
+          service: document.getElementById("service").value,
+          message: document.getElementById("message").value,
+        };
+
+        showLoader();
+        try {
+          await fetch(API, { method: "POST", body: JSON.stringify(data) });
+          await emailjs.send("service_9uwcu9x", "template_94xq6yl", {
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            service: data.service,
+            customer_id: customerID,
+          });
+          hideLoader();
+          showPopup(
+            "Inquiry Logged",
+            "Ticket #" + customerID + " generated. Refreshing...",
+          );
+          setTimeout(() => location.reload(), 3000);
+        } catch (err) {
+          hideLoader();
+          btn.disabled = false;
+          showPopup("System Error", "Communication failed. Please try again.");
+        }
+      }
+
+      // Contact Modal ko open karne ke liye
+      function showContact() {
+        const contactModal = document.getElementById("contact");
+        contactModal.classList.remove("hidden");
+        // Animation add karne ke liye (Optional)
+        contactModal.classList.add("animate-[fadeIn_0.3s_ease-out]");
+      }
+
+      // Contact Modal ko close karne ke liye
+      function closeContact() {
+        const contactModal = document.getElementById("contact");
+        contactModal.classList.add("hidden");
+      }
+
+      function showHelp() {
+        const helpModal = document.getElementById("help-popup");
+        helpModal.classList.remove("hidden");
+        helpModal.classList.add("animate-[fadeIn_0.3s_ease-out]");
+      }
+
+      function closeHelp() {
+        const helpModal = document.getElementById("help-popup");
+        helpModal.classList.add("hidden");
+      }
+
+      // Security Warning
+      function showWarning() {
+        document.body.innerHTML = `
+                <div style="height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;background:#000;color:#fff;font-family:sans-serif;text-align:center;padding:20px;">
+                    <h1 style="font-size:32px;margin-bottom:20px;color:#ef4444;">⚠ SECURITY BREACH DETECTED</h1>
+                    <p style="font-size:16px;max-width:500px;color:#94a3b8;line-height:1.6;">Developer tools are prohibited on this portal.</p>
+                </div>`;
+      }
+      document.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        showWarning();
+      });
+    </script>
+  </body>
+</html>

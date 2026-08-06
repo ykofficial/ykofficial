@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YK OFFICIAL | Documentation v3.0</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://i.ibb.co/hJCHgThF/logo-yk-crop.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ["Plus Jakarta Sans", "sans-serif"] },
+            colors: { brand: "#2563eb" },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        background: #fdfdfd;
+      }
+      .glass-sidebar {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(15px);
+        border-right: 1px solid #f1f5f9;
+      }
+      .glass-card {
+        background: #ffffff;
+        border: 1px solid #f1f5f9;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      }
+      .active-link {
+        background: #eff6ff;
+        color: #2563eb;
+        border-right: 3px solid #2563eb;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #e2e8f0;
+        border-radius: 10px;
+      }
+
+      .section-fade {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="h-full font-sans text-slate-900 antialiased overflow-hidden">
+    <div
+      id="loader"
+      class="fixed inset-0 z-[100] bg-white flex items-center justify-center"
+    >
+      <div class="flex flex-col items-center">
+        <div
+          class="w-12 h-12 border-4 border-blue-100 border-t-blue-600 rounded-full animate-spin mb-4"
+        ></div>
+        <p class="text-[13px] font-bold tracking-[0.4em] text-black uppercase">
+          YK <span class="text-brand">OFFICIAL</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="h-full flex flex-col">
+      <header
+        class="h-16 border-b border-slate-100 bg-white/80 backdrop-blur-md flex items-center justify-between px-6 shrink-0 z-40"
+      >
+        <div class="flex items-center gap-3">
+          <img
+            src="https://i.ibb.co/RpjD8n0C/Chat-GPT-Image-Jan-20-2026-08-56-30-AM.png"
+            alt="Logo"
+            class="w-8 h-8 rounded-lg shadow-sm"
+          />
+          <span class="font-extrabold text-sm tracking-tight"
+            >YK <span class="text-brand">OFFICIAL</span></span
+          >
+        </div>
+        <div class="flex items-center gap-3">
+          <button
+            onclick="openModal('help-modal')"
+            class="p-2 text-slate-400 hover:text-brand transition-colors"
+          >
+            <i data-lucide="help-circle" class="w-5 h-5"></i>
+          </button>
+          <button
+            onclick="openModal('feedback-modal')"
+            class="px-4 py-2 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-brand transition-all shadow-lg shadow-slate-200"
+          >
+            Feedback
+          </button>
+        </div>
+      </header>
+
+      <!-- Mobile Menu hamburger -->
+
+      <button
+        onclick="toggleMobileMenu(true)"
+        class="md:hidden p-2 text-slate-600 hover:bg-slate-50 rounded-xl transition-all"
+      >
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+
+      <div id="mobile-menu" class="fixed inset-0 z-[100] hidden">
+        <div
+          onclick="toggleMobileMenu(false)"
+          class="absolute inset-0 bg-slate-900/20 backdrop-blur-md opacity-0 transition-opacity duration-300"
+          id="menu-backdrop"
+        ></div>
+
+        <aside
+          class="absolute top-0 right-0 h-full w-72 bg-white/90 backdrop-blur-2xl shadow-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col"
+          id="menu-panel"
+        >
+          <div
+            class="p-6 flex items-center justify-between border-b border-slate-100"
+          >
+            <span
+              class="font-bold text-xs tracking-widest text-slate-400 uppercase"
+              >Navigation</span
+            >
+            <button
+              onclick="toggleMobileMenu(false)"
+              class="p-2 text-slate-400 hover:text-red-500 transition-colors"
+            >
+              <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+          </div>
+
+          <nav class="flex-1 py-4 overflow-y-auto">
+            <button
+              onclick="mobileNav('intro')"
+              class="w-full flex items-center gap-4 px-8 py-4 text-sm font-bold text-slate-600 hover:text-brand hover:bg-blue-50 transition-all"
+            >
+              <i data-lucide="home" class="w-5 h-5"></i> Overview
+            </button>
+            <button
+              onclick="mobileNav('uses')"
+              class="w-full flex items-center gap-4 px-8 py-4 text-sm font-bold text-slate-600 hover:text-brand hover:bg-blue-50 transition-all"
+            >
+              <i data-lucide="layout" class="w-5 h-5"></i> Website Uses
+            </button>
+            <button
+              onclick="mobileNav('features')"
+              class="w-full flex items-center gap-4 px-8 py-4 text-sm font-bold text-slate-600 hover:text-brand hover:bg-blue-50 transition-all"
+            >
+              <i data-lucide="zap" class="w-5 h-5"></i> Key Features
+            </button>
+            <button
+              onclick="mobileNav('security')"
+              class="w-full flex items-center gap-4 px-8 py-4 text-sm font-bold text-slate-600 hover:text-brand hover:bg-blue-50 transition-all"
+            >
+              <i data-lucide="shield-check" class="w-5 h-5"></i> Security
+            </button>
+            <button
+              onclick="mobileNav('legal')"
+              class="w-full flex items-center gap-4 px-8 py-4 text-sm font-bold text-slate-600 hover:text-brand hover:bg-blue-50 transition-all"
+            >
+              <i data-lucide="file-text" class="w-5 h-5"></i> Legal Details
+            </button>
+          </nav>
+
+          <div class="p-6 border-t border-slate-100 space-y-3">
+            <button
+              onclick="
+                toggleMobileMenu(false);
+                openModal('contact-modal');
+              "
+              class="w-full py-4 bg-brand text-white font-bold rounded-2xl shadow-lg shadow-brand/20 text-xs"
+            >
+              CONTACT SUPPORT
+            </button>
+            <p
+              class="text-center text-[10px] text-slate-400 font-bold uppercase tracking-widest"
+            >
+              © 2026 YK OFFICIAL
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Mobile Menu Scripts -->
+      <script>
+        function toggleMobileMenu(isOpen) {
+          const menu = document.getElementById("mobile-menu");
+          const backdrop = document.getElementById("menu-backdrop");
+          const panel = document.getElementById("menu-panel");
+
+          if (isOpen) {
+            menu.classList.remove("hidden");
+            // Small timeout for animations to kick in
+            setTimeout(() => {
+              backdrop.classList.add("opacity-100");
+              panel.classList.remove("translate-x-full");
+            }, 10);
+          } else {
+            backdrop.classList.remove("opacity-100");
+            panel.classList.add("translate-x-full");
+            // Wait for animation then hide
+            setTimeout(() => {
+              menu.classList.add("hidden");
+            }, 300);
+          }
+          lucide.createIcons();
+        }
+
+        // Navigation wrapper for mobile
+        function mobileNav(sectionId) {
+          showSection(sectionId); // existing function use karega
+          toggleMobileMenu(false); // menu close karega
+        }
+      </script>
+
+      <div class="flex-1 flex overflow-hidden">
+        <aside class="w-64 glass-sidebar shrink-0 hidden md:flex flex-col py-6">
+          <nav class="flex-1 space-y-1">
+            <button
+              onclick="showSection('intro')"
+              class="nav-btn w-full flex items-center gap-3 px-6 py-3 text-sm font-semibold active-link"
+            >
+              <i data-lucide="home" class="w-4 h-4"></i> Overview
+            </button>
+            <button
+              onclick="showSection('uses')"
+              class="nav-btn w-full flex items-center gap-3 px-6 py-3 text-sm font-semibold text-slate-500 hover:text-brand transition-all"
+            >
+              <i data-lucide="layout" class="w-4 h-4"></i> Website Uses
+            </button>
+            <button
+              onclick="showSection('features')"
+              class="nav-btn w-full flex items-center gap-3 px-6 py-3 text-sm font-semibold text-slate-500 hover:text-brand transition-all"
+            >
+              <i data-lucide="zap" class="w-4 h-4"></i> Key Features
+            </button>
+            <button
+              onclick="showSection('security')"
+              class="nav-btn w-full flex items-center gap-3 px-6 py-3 text-sm font-semibold text-slate-500 hover:text-brand transition-all"
+            >
+              <i data-lucide="shield-check" class="w-4 h-4"></i> Security
+            </button>
+            <button
+              onclick="showSection('legal')"
+              class="nav-btn w-full flex items-center gap-3 px-6 py-3 text-sm font-semibold text-slate-500 hover:text-brand transition-all"
+            >
+              <i data-lucide="file-text" class="w-4 h-4"></i> Legal & Terms
+            </button>
+          </nav>
+          <div class="px-6">
+            <button
+              onclick="openModal('contact-modal')"
+              class="w-full flex items-center justify-center gap-2 py-3 bg-brand/10 text-brand rounded-xl text-xs font-bold hover:bg-brand hover:text-white transition-all"
+            >
+              <i data-lucide="mail" class="w-4 h-4"></i> Contact Support
+            </button>
+          </div>
+        </aside>
+
+        <main
+          id="content-well"
+          class="flex-1 overflow-y-auto bg-[#fafafa] p-6 md:p-12"
+        ></main>
+      </div>
+    </div>
+
+    <div
+      id="modal-container"
+      class="fixed inset-0 z-50 hidden flex items-center justify-center p-6 bg-slate-900/10 backdrop-blur-sm"
+    >
+      <div
+        id="modal-content"
+        class="bg-white w-full max-w-md rounded-[2rem] p-8 shadow-2xl relative section-fade"
+      >
+        <button
+          onclick="closeModal()"
+          class="absolute top-6 right-6 text-slate-300 hover:text-slate-600"
+        >
+          <i data-lucide="x"></i>
+        </button>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+
+    <script>
+      const sections = {
+        intro: `
+                <div class="section-fade">
+                    <span class="text-brand font-bold text-[10px] tracking-widest uppercase mb-4 block">Welcome to v3.0</span>
+                    <h1 class="text-4xl font-extrabold mb-6 tracking-tight">The Professional Digital <br/>Foundation.</h1>
+                    <p class="text-slate-500 leading-relaxed max-w-2xl mb-10">YK OFFICIAL documentation provides a high-level overview of our architecture, designed for premium performance, unmatched security, and seamless user experiences.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="glass-card p-6 rounded-3xl">
+                            <h3 class="font-bold mb-2">Build Fast</h3>
+                            <p class="text-xs text-slate-400">Optimized source code for high-speed loading and responsiveness.</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-3xl">
+                            <h3 class="font-bold mb-2">Deploy Secure</h3>
+                            <p class="text-xs text-slate-400">Advanced protection systems integrated into every layer.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+        uses: `
+                <div class="section-fade">
+                    <h2 class="text-3xl font-extrabold mb-8">Website Uses</h2>
+                    <div class="space-y-4">
+                        ${[
+                          "Digital Corporate Presence",
+                          "E-commerce & Marketplace",
+                          "Referral & Earnings Systems",
+                          "Documentation Portals",
+                          "Service Dashboards",
+                        ]
+                          .map(
+                            (i) => `
+                            <div class="flex items-center gap-4 p-5 glass-card rounded-2xl group hover:border-brand transition-all">
+                                <div class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-brand group-hover:bg-brand group-hover:text-white transition-all"><i data-lucide="check" class="w-5 h-5"></i></div>
+                                <span class="font-bold text-sm text-slate-700">${i}</span>
+                            </div>
+                        `,
+                          )
+                          .join("")}
+                    </div>
+                </div>
+            `,
+        features: `
+                <div class="section-fade">
+                    <h2 class="text-3xl font-extrabold mb-8">Key Features</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-8 rounded-[2rem] bg-slate-900 text-white space-y-4">
+                            <i data-lucide="smartphone" class="text-brand w-8 h-8"></i>
+                            <h4 class="text-xl font-bold">Ultra-Responsive</h4>
+                            <p class="text-sm text-slate-400">Seamless adaptability across Mobile, Tablets, and Ultra-wide monitors.</p>
+                        </div>
+                        <div class="p-8 rounded-[2rem] bg-brand text-white space-y-4 shadow-xl shadow-brand/20">
+                            <i data-lucide="database" class="text-white w-8 h-8"></i>
+                            <h4 class="text-xl font-bold">Cloud Database</h4>
+                            <p class="text-sm text-blue-100">Live integration with Google Sheets and secure backend APIs for data management.</p>
+                        </div>
+                        <div class="p-8 rounded-[2rem] glass-card space-y-4">
+                            <i data-lucide="lock" class="text-brand w-8 h-8"></i>
+                            <h4 class="text-xl font-bold">Encryption</h4>
+                            <p class="text-sm text-slate-500">End-to-end encryption for all user forms and sensitive communication.</p>
+                        </div>
+                        <div class="p-8 rounded-[2rem] glass-card space-y-4">
+                            <i data-lucide="bell" class="text-brand w-8 h-8"></i>
+                            <h4 class="text-xl font-bold">Smart Notify</h4>
+                            <p class="text-sm text-slate-500">Instant WhatsApp and Email confirmations for all user actions.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+        security: `
+                <div class="section-fade">
+                    <h2 class="text-3xl font-extrabold mb-4">Security Protocol</h2>
+                    <p class="text-slate-500 mb-8">Our core security engine is built to protect intellectual property.</p>
+                    <div class="space-y-4">
+                        <div class="p-6 border-l-4 border-brand bg-brand/5 rounded-r-2xl">
+                            <h4 class="font-bold text-sm mb-1">Source Protection</h4>
+                            <p class="text-xs text-slate-500">Advanced JS obfuscation prevents unauthorized code inspection (Inspect Element block).</p>
+                        </div>
+                        <div class="p-6 border-l-4 border-slate-900 bg-slate-50 rounded-r-2xl">
+                            <h4 class="font-bold text-sm mb-1">Anti-DDoS Layer</h4>
+                            <p class="text-xs text-slate-500">Traffic filtering to ensure 99.9% uptime during high load.</p>
+                        </div>
+                        <div class="p-6 border-l-4 border-slate-900 bg-slate-50 rounded-r-2xl">
+                            <h4 class="font-bold text-sm mb-1">Data Isolation</h4>
+                            <p class="text-xs text-slate-500">Customer data is stored in isolated sheets to prevent cross-site leaks.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+        legal: `
+                <div class="section-fade">
+                    <h2 class="text-3xl font-extrabold mb-8">Legal & Privacy</h2>
+                    <div class="glass-card p-8 rounded-[2rem] space-y-6">
+                        <div>
+                            <h4 class="font-bold text-slate-800 mb-2 underline decoration-brand">Copyright Notice</h4>
+                            <p class="text-xs text-slate-500 leading-relaxed">All designs, code architecture, and visual assets are proprietary to YK OFFICIAL. Unauthorized cloning or redistribution is strictly prohibited.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 mb-2 underline decoration-brand">Founder Details</h4>
+                            <p class="text-xs text-slate-500">Founder: Yegnesh Kamble<br/>Contact: 7219274312<br/>Email: Yegnesh7219@gmail.com</p>
+                        </div>
+                        <div class="pt-6 border-t border-slate-100">
+                            <p class="text-[10px] text-slate-400">© 2026 YK OFFICIAL. All Rights Reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+      };
+
+      function showSection(id) {
+        const well = document.getElementById("content-well");
+        well.innerHTML = sections[id];
+
+        // --- UNIQUE ID LOGIC ---
+        // Ek unique 6-digit alphanumeric ID generate ho rahi hai
+        const uniqueId = Math.random()
+          .toString(36)
+          .substring(2, 8)
+          .toUpperCase();
+
+        // URL ko update karna bina page reload kiye
+        // Format: #sectionName?id=UNIQUE_ID
+        window.history.pushState(
+          null,
+          null,
+          `#${id}?uid=YKOFFICIAL-${uniqueId}`,
+        );
+
+        // Update sidebar buttons styling
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          btn.classList.remove("active-link");
+          btn.classList.add("text-slate-500");
+        });
+
+        // Mobile navigation support ke liye currentTarget check
+        if (
+          event &&
+          event.currentTarget &&
+          event.currentTarget.classList.contains("nav-btn")
+        ) {
+          event.currentTarget.classList.add("active-link");
+          event.currentTarget.classList.remove("text-slate-500");
+        }
+
+        lucide.createIcons();
+      }
+      function openModal(type) {
+        const modal = document.getElementById("modal-container");
+        const body = document.getElementById("modal-body");
+        modal.classList.remove("hidden");
+
+        if (type === "contact-modal") {
+          body.innerHTML = `
+                    <h3 class="text-xl font-extrabold mb-6">Support Center</h3>
+                    <form class="space-y-4">
+                        <input type="text" placeholder="Your Name" class="w-full p-4 bg-slate-50 rounded-2xl outline-none border border-transparent focus:border-brand text-sm"/>
+                        <input type="email" placeholder="Email Address" class="w-full p-4 bg-slate-50 rounded-2xl outline-none border border-transparent focus:border-brand text-sm"/>
+                        <textarea rows="3" placeholder="Message" class="w-full p-4 bg-slate-50 rounded-2xl outline-none border border-transparent focus:border-brand text-sm resize-none"></textarea>
+                        <button class="w-full py-4 bg-brand text-white font-bold rounded-2xl shadow-xl shadow-brand/20">Send Inquiry</button>
+                    </form>
+                `;
+        } else if (type === "help-modal") {
+          body.innerHTML = `
+                    <h3 class="text-xl font-extrabold mb-4">Quick Help</h3>
+                    <div class="space-y-4 text-sm text-slate-500">
+                        <p>1. Use the <b>Sidebar</b> to jump between sections.</p>
+                        <p>2. Desktop view offers a full navigation experience.</p>
+                        <p>3. Click <b>Feedback</b> to help us improve.</p>
+                    </div>
+                `;
+        } else if (type === "feedback-modal") {
+          body.innerHTML = `
+                    <h3 class="text-xl font-extrabold mb-2">Feedback</h3>
+                    <p class="text-xs text-slate-400 mb-6">Your opinion matters for YK Official evolution.</p>
+                    <select class="w-full p-4 bg-slate-50 rounded-2xl outline-none border border-transparent focus:border-brand text-sm mb-4">
+                        <option>⭐⭐⭐⭐⭐ Excellent</option>
+                        <option>⭐⭐⭐⭐ Good</option>
+                        <option>⭐⭐ Average</option>
+                    </select>
+                    <textarea rows="2" placeholder="Tell us more..." class="w-full p-4 bg-slate-50 rounded-2xl outline-none border border-transparent focus:border-brand text-sm resize-none mb-4"></textarea>
+                    <button onclick="closeModal()" class="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl">Submit Rating</button>
+                `;
+        }
+        lucide.createIcons();
+      }
+
+      function closeModal() {
+        document.getElementById("modal-container").classList.add("hidden");
+      }
+
+      window.onload = () => {
+        setTimeout(() => {
+          document.getElementById("loader").style.display = "none";
+          showSection("intro");
+        }, 1000);
+      };
+
+      window.onload = () => {
+        setTimeout(() => {
+          document.getElementById("loader").style.display = "none";
+
+          // Initial load par unique ID ke saath intro section dikhana
+          showSection("intro");
+
+          // App ko visible karna
+          if (document.getElementById("app")) {
+            document.getElementById("app").style.opacity = "1";
+          }
+        }, 1000);
+      };
+    </script>
+
+    <script>
+      document.addEventListener("contextmenu", (e) => e.preventDefault());
+      document.addEventListener("keydown", (e) => {
+        if (
+          e.ctrlKey &&
+          (e.key === "u" || e.key === "i" || e.key === "j" || e.key === "s")
+        ) {
+          e.preventDefault();
+        }
+      });
+    </script>
+  </body>
+</html>

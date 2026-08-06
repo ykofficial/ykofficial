@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YK OFFICIAL - Feedback</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+     <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://i.ibb.co/hJCHgThF/logo-yk-crop.png"
+    />
+    
+    <!-- url id code  -->
+  <script>
+    /**
+     * Unique ID Generate aur URL update karne ka function
+     */
+    function updateUrlWithUniqueId() {
+        // 6 characters ki Random Unique ID (YK-XXXXXX)
+        const uniqueId = Math.random().toString(36).substring(2, 8).toUpperCase();
+        
+        // Current Page Name (Pathname se page name nikalna)
+        const pageName = window.location.pathname.split("/").pop().split(".")[0] || 'home';
+        
+        // Naya URL Hash format: #pageName?uid=YKOFFICIAL-${uniqueId}
+        const newHash = `#${pageName}?uid=yKOfFiciAl${uniqueId}`;
+        
+        // Browser ka URL update karna bina reload kiye
+        window.history.replaceState(null, null, newHash);
+    }
+
+    // Jab page pehli baar load ho
+    window.addEventListener('DOMContentLoaded', updateUrlWithUniqueId);
+
+    // Agar aapki site single page hai aur sections change hote hain
+    window.addEventListener('hashchange', updateUrlWithUniqueId);
+</script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap");
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+      }
+
+      /* Unique Floating Animation */
+      .float-blob {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        filter: blur(80px);
+        border-radius: 50%;
+        z-index: -1;
+        opacity: 0.15;
+        animation: float 10s infinite alternate;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(100px, 50px);
+        }
+      }
+
+      /* Custom Input Logic */
+      .input-premium {
+        background: rgba(255, 255, 255, 0.5);
+        border: 1.5px solid rgba(226, 232, 240, 0.8);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .input-premium:focus {
+        border-color: #6366f1;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        transform: translateY(-2px);
+      }
+
+      /* Rating Buttons Style */
+      .rating-box {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 1.5px solid rgba(226, 232, 240, 0.8);
+      }
+
+      .peer:checked + .rating-box {
+        background: #0f172a;
+        color: white;
+        border-color: #0f172a;
+        transform: scale(1.05) translateY(-5px);
+        box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.3);
+      }
+
+      .loader-ring {
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid white;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    <!-- ✅ CUSTOM ANIMATIONS -->
+    <style>
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn 1s ease-out forwards;
+      }
+
+      @keyframes sweep {
+        0% {
+          transform: translateX(-200px);
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateX(200px);
+          opacity: 0;
+        }
+      }
+
+      .animate-sweep {
+        animation: sweep 2s linear infinite;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[#f8fafc] min-h-screen flex items-center justify-center p-6 overflow-x-hidden"
+  >
+    <!-- LOADER -->
+    <div
+      id="loader"
+      class="fixed inset-0 bg-[#0b0f1a] flex flex-col items-center justify-center z-[9999]"
+    >
+      <!-- Glow Background -->
+      <div
+        class="absolute w-[400px] h-[400px] bg-blue-500/20 blur-[120px] rounded-full"
+      ></div>
+
+      <!-- Ring Loader -->
+      <div class="relative w-32 h-32 flex items-center justify-center">
+        <!-- Outer Ring -->
+        <div
+          class="absolute w-full h-full border-4 border-blue-500/20 rounded-full"
+        ></div>
+
+        <!-- Animated Ring -->
+        <div
+          class="absolute w-full h-full border-4 border-t-blue-500 border-r-blue-400 border-b-transparent border-l-transparent rounded-full animate-spin"
+        ></div>
+
+        <!-- Inner Pulse Dot -->
+        <div class="w-4 h-4 bg-blue-400 rounded-full animate-ping"></div>
+      </div>
+
+      <!-- Loading % Text -->
+      <p id="loadingText" class="mt-6 text-gray-300 text-sm tracking-[0.3em]">
+        Feedback Loading 0%
+      </p>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+      let percent = 0;
+      const text = document.getElementById("loadingText");
+
+      const interval = setInterval(() => {
+        percent++;
+        text.innerText = " " + percent + "%";
+
+        if (percent >= 100) {
+          clearInterval(interval);
+
+          // Fade out
+          const loader = document.getElementById("loader");
+          loader.style.opacity = "0";
+          loader.style.transition = "0.6s";
+
+          setTimeout(() => {
+            loader.style.display = "none";
+          }, 600);
+        }
+      }, 20); // speed control
+    </script>
+
+    <div class="float-blob top-0 left-0"></div>
+    <div
+      class="float-blob bottom-0 right-0"
+      style="animation-delay: -5s; background: #3b82f6"
+    ></div>
+
+    <div
+      id="formContainer"
+      class="w-full max-w-2xl glass-card rounded-[2.5rem] overflow-hidden relative"
+    >
+      <div class="p-10 pb-6 text-center">
+        <div
+          class="inline-block px-4 py-1.5 mb-4 rounded-full bg-slate-900 text-[10px] font-extrabold text-white tracking-[0.2em] uppercase"
+        >
+          YK OFFICIAL
+        </div>
+        <h1 class="text-3xl font-black text-slate-900 tracking-tight">
+          Feedback
+        </h1>
+        <p class="text-slate-500 mt-2 font-medium">
+          Your feedback shapes our future excellence.
+        </p>
+      </div>
+
+      <form id="feedbackForm" class="p-10 pt-4 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="space-y-2">
+            <label
+              class="text-[11px] font-black uppercase tracking-widest text-slate-400 ml-1"
+              >Full Name</label
+            >
+            <input
+              type="text"
+              name="name"
+              required
+              placeholder="Ex: John Doe"
+              class="input-premium w-full px-5 py-4 rounded-2xl outline-none text-slate-700 font-semibold"
+            />
+          </div>
+          <div class="space-y-2">
+            <label
+              class="text-[11px] font-black uppercase tracking-widest text-slate-400 ml-1"
+              >Email Address</label
+            >
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="john@company.com"
+              class="input-premium w-full px-5 py-4 rounded-2xl outline-none text-slate-700 font-semibold"
+            />
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label
+            class="text-[11px] font-black uppercase tracking-widest text-slate-400 ml-1"
+            >How was your experience?</label
+          >
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <label class="relative">
+              <input
+                type="radio"
+                name="rating"
+                value="Excellent"
+                class="peer hidden"
+                required
+              />
+              <div
+                class="rating-box p-4 rounded-2xl text-center flex flex-col items-center gap-2"
+              >
+                <span class="text-2xl">💎</span>
+                <span class="text-[10px] font-black uppercase tracking-tighter"
+                  >Excellent</span
+                >
+              </div>
+            </label>
+            <label class="relative">
+              <input
+                type="radio"
+                name="rating"
+                value="Good"
+                class="peer hidden"
+              />
+              <div
+                class="rating-box p-4 rounded-2xl text-center flex flex-col items-center gap-2"
+              >
+                <span class="text-2xl">✨</span>
+                <span class="text-[10px] font-black uppercase tracking-tighter"
+                  >Good</span
+                >
+              </div>
+            </label>
+            <label class="relative">
+              <input
+                type="radio"
+                name="rating"
+                value="Average"
+                class="peer hidden"
+              />
+              <div
+                class="rating-box p-4 rounded-2xl text-center flex flex-col items-center gap-2"
+              >
+                <span class="text-2xl">⚖️</span>
+                <span class="text-[10px] font-black uppercase tracking-tighter"
+                  >Average</span
+                >
+              </div>
+            </label>
+            <label class="relative">
+              <input
+                type="radio"
+                name="rating"
+                value="Poor"
+                class="peer hidden"
+              />
+              <div
+                class="rating-box p-4 rounded-2xl text-center flex flex-col items-center gap-2"
+              >
+                <span class="text-2xl">⚠️</span>
+                <span class="text-[10px] font-black uppercase tracking-tighter"
+                  >Poor</span
+                >
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label
+            class="text-[11px] font-black uppercase tracking-widest text-slate-400 ml-1"
+            >Message</label
+          >
+          <textarea
+            name="message"
+            rows="4"
+            required
+            placeholder="Tell us more about your experience..."
+            class="input-premium w-full px-5 py-4 rounded-2xl outline-none text-slate-700 font-semibold resize-none"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          id="submitBtn"
+          class="w-full bg-slate-900 text-white font-black py-5 rounded-2xl transition-all duration-300 hover:bg-black hover:shadow-2xl flex items-center justify-center gap-3 group"
+        >
+          <span class="tracking-widest">TRANSMIT FEEDBACK</span>
+          <i
+            class="fas fa-paper-plane group-hover:translate-x-2 transition-transform"
+          ></i>
+        </button>
+      </form>
+    </div>
+
+    <div
+      id="loaderOverlay"
+      class="fixed inset-0 bg-slate-900/40 backdrop-blur-xl hidden z-50 flex items-center justify-center"
+    >
+      <div class="text-center">
+        <div class="loader-ring mx-auto mb-4"></div>
+        <p class="text-white font-black tracking-[0.3em] text-xs uppercase">
+          Encrypting Data
+        </p>
+      </div>
+    </div>
+
+    <div
+      id="successModal"
+      class="fixed inset-0 flex items-center justify-center z-[60] hidden px-4"
+    >
+      <div class="absolute inset-0 bg-slate-900/20 backdrop-blur-md"></div>
+      <div
+        class="modal-box bg-white/90 backdrop-blur-2xl rounded-[2.5rem] p-10 max-w-sm w-full text-center shadow-2xl scale-95 opacity-0 transition-all duration-500"
+      >
+        <div
+          class="w-20 h-20 bg-slate-900 text-white rounded-full flex items-center justify-center mx-auto mb-6"
+        >
+          <i class="fas fa-check text-3xl"></i>
+        </div>
+        <h2 class="text-3xl font-black text-slate-900 mb-2">SUCCESS!</h2>
+        <p class="text-slate-500 mb-8 font-medium">
+          Your response is safely recorded in YK OFFICIAL cloud database.
+        </p>
+        <button
+          onclick="closeModal()"
+          class="w-full bg-slate-900 text-white font-bold py-4 rounded-2xl hover:bg-black transition-all"
+        >
+          CONTINUE
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbyvocv2fdiSc4opkuR0upzigWpAjm83_kzK7w_a1WfxSOsbzVbA94fspiW8S34nMlcz/exec"; // Replace with your URL
+      const form = document.getElementById("feedbackForm");
+      const loader = document.getElementById("loaderOverlay");
+      const modal = document.getElementById("successModal");
+      const modalBox = modal.querySelector(".modal-box");
+      const submitBtn = document.getElementById("submitBtn");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Processing Data...";
+        loader.classList.remove("hidden");
+
+        try {
+          const response = await fetch(scriptURL, {
+            method: "POST",
+            body: new FormData(form),
+          });
+          if (!response.ok) throw new Error("Error");
+
+          loader.classList.add("hidden");
+          showModal();
+          form.reset();
+        } catch (err) {
+          loader.classList.add("hidden");
+          alert("Something went wrong. Please try again.");
+        }
+        submitBtn.disabled = false;
+        submitBtn.innerHTML =
+          '<span class="tracking-widest">TRANSMIT FEEDBACK</span><i class="fas fa-paper-plane"></i>';
+      });
+
+      function showModal() {
+        modal.classList.remove("hidden");
+        setTimeout(() => {
+          modalBox.classList.remove("scale-95", "opacity-0");
+          modalBox.classList.add("scale-100", "opacity-100");
+        }, 50);
+      }
+
+      function closeModal() {
+        modalBox.classList.add("scale-95", "opacity-0");
+        setTimeout(() => {
+          modal.classList.add("hidden");
+        }, 300);
+      }
+    </script>
+    <script>
+        // 1. Right Click Block karein aur Popup dikhayein
+document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    showWarningPopup("Right-click is disabled for security reasons.");
+});
+
+// 2. Keyboard Shortcuts Block (Ctrl+U, Ctrl+C, F12)
+document.addEventListener('keydown', (e) => {
+    if (
+        e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c' || e.key === 'i' || e.key === 'j') ||
+        e.key === 'F12'
+    ) {
+        e.preventDefault();
+        showWarningPopup("Keyboard shortcuts are disabled on YK OFFICIAL.");
+    }
+});
+
+// 3. Custom Warning Popup Function
+function showWarningPopup(message) {
+    const warning = document.createElement('div');
+    warning.className = `
+        fixed top-10 left-1/2 -translate-x-1/2 
+        bg-slate-900 text-white px-8 py-4 rounded-2xl shadow-2xl 
+        text-xs font-black tracking-widest uppercase z-[200]
+        border border-indigo-500 animate-bounce
+    `;
+    warning.innerHTML = `<i class="fas fa-shield-alt mr-2 text-indigo-400"></i> ${message}`;
+    document.body.appendChild(warning);
+
+    setTimeout(() => {
+        warning.remove();
+    }, 2500);
+}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YK OFFICIAL | Invitation Portal</title>
+    <link rel="icon" type="image/svg+xml" href="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- url id code  -->
+  <script>
+    /**
+     * Unique ID Generate aur URL update karne ka function
+     */
+    function updateUrlWithUniqueId() {
+        // 6 characters ki Random Unique ID (YK-XXXXXX)
+        const uniqueId = Math.random().toString(36).substring(2, 8).toUpperCase();
+        
+        // Current Page Name (Pathname se page name nikalna)
+        const pageName = window.location.pathname.split("/").pop().split(".")[0] || 'home';
+        
+        // Naya URL Hash format: #pageName?uid=YKOFFICIAL-${uniqueId}
+        const newHash = `#${pageName}?uid=yKOfFiciAl${uniqueId}`;
+        
+        // Browser ka URL update karna bina reload kiye
+        window.history.replaceState(null, null, newHash);
+    }
+
+    // Jab page pehli baar load ho
+    window.addEventListener('DOMContentLoaded', updateUrlWithUniqueId);
+
+    // Agar aapki site single page hai aur sections change hote hain
+    window.addEventListener('hashchange', updateUrlWithUniqueId);
+</script>
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            transition: 0.5s;
+        }
+        .shimmer-btn:hover::after {
+            left: 100%;
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slideIn { animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    </style>
+</head>
+
+<body class="bg-[#f8fafc] text-slate-900 overflow-x-hidden">
+
+    <div id="ykLoader" class="fixed inset-0 flex items-center justify-center bg-[#020617] z-[100] transition-opacity duration-700">
+        <div class="text-center">
+            <div class="relative w-24 h-24 mx-auto mb-8">
+                <div class="absolute inset-0 border-4 border-white/5 rounded-full"></div>
+                <div class="absolute inset-0 border-4 border-indigo-500 rounded-full border-t-transparent animate-spin"></div>
+                <!-- <img src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" class="absolute inset-4 w-16 h-16 object-contain brightness-0 invert opacity-80" alt="Logo"> -->
+            </div>
+            <div class="space-y-3">
+                <h2 class="text-white text-xl font-light tracking-[0.4em] uppercase">YK <span class="text-indigo-500">OFFICIAL</span></h2>
+                <div class="w-48 h-[2px] bg-white/10 mx-auto rounded-full overflow-hidden">
+                    <div id="loaderProgress" class="h-full bg-indigo-500 w-0 transition-all duration-[3000ms] ease-out"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="min-h-screen flex flex-col items-center justify-center p-6 bg-[radial-gradient(circle_at_top_right,_#e0e7ff_0%,_#f8fafc_40%)]">
+        
+        <header class="text-center mb-10 animate-slideIn">
+            <div class="inline-block px-4 py-1.5 mb-4 border border-indigo-100 bg-indigo-50/50 rounded-full">
+                <span class="text-[10px] font-bold tracking-widest text-indigo-600 uppercase">Executive Concierge</span>
+            </div>
+            <h1 class="text-5xl font-bold tracking-tight text-slate-900 mb-2">
+                YK<span class="text-indigo-600 font-light">OFFICIAL</span>
+            </h1>
+            <p class="text-slate-500 font-light text-lg">Invitation Request Management</p>
+        </header>
+
+        <div class="w-full max-w-3xl glass p-8 md:p-12 rounded-[2.5rem] shadow-2xl shadow-indigo-100/50 animate-slideIn">
+            <div class="grid md:grid-cols-2 gap-12">
+                
+                <div class="space-y-6">
+                    <h2 class="text-2xl font-semibold text-slate-800">Submit Inquiry</h2>
+                    <p class="text-slate-500 leading-relaxed">Please provide detailed information regarding your event. Our team validates all requests for security and logistical feasibility.</p>
+                    
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-center gap-4 text-sm text-slate-600">
+                            <span class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center">✓</span>
+                            24-hour Review
+                        </div>
+                        <div class="flex items-center gap-4 text-sm text-slate-600">
+                            <span class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center">✓</span>
+                            Secure Data Encryption
+                        </div>
+                    </div>
+                </div>
+
+                <form id="inviteForm" class="space-y-4">
+                    <div class="space-y-4">
+                        <input type="text" name="name" placeholder="Full Name" required 
+                            class="w-full bg-white/50 border border-slate-200 p-3.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                        
+                        <input type="email" name="email" placeholder="Corporate Email" required 
+                            class="w-full bg-white/50 border border-slate-200 p-3.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" name="phone" placeholder="Phone" required 
+                                class="w-full bg-white/50 border border-slate-200 p-3.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                            <input type="date" name="date" required 
+                                class="w-full bg-white/50 border border-slate-200 p-3.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-slate-500">
+                        </div>
+
+                        <input type="text" name="event" placeholder="Event Type (e.g. Gala, Wedding)" required 
+                            class="w-full bg-white/50 border border-slate-200 p-3.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                        
+                        <textarea name="purpose" placeholder="Detailed Purpose" 
+                            class="w-full bg-white/50 border border-slate-200 p-3.5 rounded-xl h-24 focus:ring-2 focus:ring-indigo-500 outline-none transition-all resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="shimmer-btn w-full bg-slate-900 text-white font-semibold py-4 rounded-xl hover:bg-indigo-700 transition-colors shadow-lg shadow-slate-200">
+                        Send Official Request
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <footer class="mt-12 text-slate-400 text-[11px] uppercase tracking-widest">
+            © 2026 YK Official. All rights reserved.
+        </footer>
+    </main>
+
+    <div id="formLoader" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-3xl text-center shadow-2xl">
+            <div class="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="font-medium text-slate-800">Processing Secure Request...</p>
+        </div>
+    </div>
+
+    <div id="successPopup" class="fixed inset-0 flex items-center justify-center hidden z-50 p-6">
+        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-md"></div>
+        <div class="relative bg-white p-10 rounded-[2rem] max-w-sm text-center shadow-2xl animate-slideIn">
+            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">✓</div>
+            <h3 class="text-2xl font-bold text-slate-800 mb-2">Request Received</h3>
+            <p class="text-slate-500 mb-8">Your invitation inquiry has been successfully transmitted to our team.</p>
+            <button onclick="closePopups()" class="w-full py-3 bg-slate-900 text-white rounded-xl font-bold">Acknowledge</button>
+        </div>
+    </div>
+
+    <div id="ykShield" class="fixed inset-0 hidden items-center justify-center z-[9999]">
+        <div class="absolute inset-0 bg-slate-950/90 backdrop-blur-2xl"></div>
+        <div class="relative glass border-white/10 p-12 w-[420px] rounded-[3rem] text-center">
+            <div class="mb-8">
+                <img src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" alt="YK" class="w-16 h-16 mx-auto rounded-full mb-4 ">
+                <h2 class="text-indigo-400 text-xs font-bold tracking-[0.3em] uppercase mb-2">System Lockdown</h2>
+                <h1 class="text-black text-2xl font-bold">Unauthorized Access</h1>
+            </div>
+            <p id="ykMsg" class="text-black-400 text-sm leading-relaxed mb-8 h-12"></p>
+            <div class="space-y-4">
+                <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div id="ykBar" class="h-full bg-indigo-500 w-0 transition-all duration-1000"></div>
+                </div>
+                <div class="flex justify-between text-[10px] font-bold text-black-300 tracking-tighter uppercase">
+                    <span id="ykStatus">Validating Integrity...</span>
+                    <span id="ykCount">5s</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // INIT EMAILJS
+        emailjs.init("9P9_Nz0_Es2Y6Ffvm");
+
+        // PAGE LOADER
+        window.addEventListener("load", () => {
+            const bar = document.getElementById("loaderProgress");
+            const loader = document.getElementById("ykLoader");
+            bar.style.width = "100%";
+            setTimeout(() => {
+                loader.style.opacity = "0";
+                setTimeout(() => loader.style.display = "none", 700);
+            }, 3200);
+        });
+
+        // FORM LOGIC
+        const inviteForm = document.getElementById("inviteForm");
+        inviteForm.addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const loader = document.getElementById("formLoader");
+            loader.classList.replace("hidden", "flex");
+
+            const data = Object.fromEntries(new FormData(this));
+
+            try {
+                // GOOGLE SHEET
+                await fetch("https://script.google.com/macros/s/AKfycbxqQWXt8JMQlyPZFqjJfSLwynDqi9GmzjyflVYujRmUu3HR2vV0S-CrT33CGKV1FMNj/exec", {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                });
+
+                // EMAILJS
+                await emailjs.send("service_dgrc179", "template_qxhyh7i", data);
+
+                loader.classList.replace("flex", "hidden");
+                document.getElementById("successPopup").classList.remove("hidden");
+                this.reset();
+            } catch (err) {
+                loader.classList.replace("flex", "hidden");
+                alert("Submission error. Please verify network connection.");
+            }
+        });
+
+        function closePopups() {
+            document.getElementById("successPopup").classList.add("hidden");
+        }
+
+        // SECURITY LOGIC
+        let ykTriggered = false;
+        const msgText = "The system has detected a potential security breach attempt. Initiating protocol YK-99 to secure environment variables.";
+
+        function showYKShield() {
+            if (ykTriggered) return;
+            ykTriggered = true;
+            
+            const shield = document.getElementById("ykShield");
+            shield.classList.remove("hidden");
+            shield.classList.add("flex");
+
+            let i = 0;
+            const type = () => {
+                if (i < msgText.length) {
+                    document.getElementById("ykMsg").innerHTML += msgText.charAt(i);
+                    i++;
+                    setTimeout(type, 25);
+                }
+            };
+            type();
+
+            let time = 5;
+            document.getElementById("ykBar").style.width = "100%";
+            const countdown = setInterval(() => {
+                time--;
+                document.getElementById("ykCount").innerText = `${time}s`;
+                if(time === 3) document.getElementById("ykStatus").innerText = "Flushing Cache...";
+                if(time <= 0) {
+                    clearInterval(countdown);
+                    location.reload();
+                }
+            }, 1000);
+        }
+
+        // BLOCKS
+        document.addEventListener("contextmenu", e => { e.preventDefault(); showYKShield(); });
+        document.addEventListener("keydown", e => {
+            if ((e.ctrlKey && ['u','s','i','j','c'].includes(e.key.toLowerCase())) || e.key === 'F12') {
+                e.preventDefault();
+                showYKShield();
+            }
+        });
+    </script>
+</body>
+</html>
