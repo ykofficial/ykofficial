@@ -271,7 +271,7 @@
     </div>
 
     <div class="flex-1 w-full h-full bg-slate-50/50">
-      <iframe src="Certification.html" class="w-full h-full border-none" title="Certificates"></iframe>
+      <iframe src="certification.html" class="w-full h-full border-none" title="Certificates"></iframe>
     </div>
     
   </div>
@@ -313,112 +313,451 @@ function closeCertificates() {
       </div>
     </section>
 
-    <section id="gallery" class="px-6 pb-20 max-w-7xl mx-auto w-full">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- <div
-          class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group"
-        >
-          <img
-            src="imgyk/yk1.png"
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          <div
-            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white"
-          >
-            <h3 class="font-bold"></h3>
-          </div>
+    <!-- ==================== PREMIUM GALLERY ==================== -->
+<section id="gallery" class="px-4 sm:px-6 lg:px-8 pb-20 max-w-7xl mx-auto w-full">
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+
+    <!-- Image 1 -->
+    <div
+      class="gallery-item group relative overflow-hidden rounded-3xl bg-white/80 border border-gray-200 shadow-sm cursor-pointer
+             aspect-[4/3] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
+      onclick="openGallery(0)"
+    >
+      <img
+        src="img/pos1.png"
+        alt="Gallery Image 1"
+        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+      />
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+          <span class="text-white text-sm font-semibold tracking-wide">View Image</span>
+          <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg">
+            ↗
+          </span>
         </div>
-        <div
-          class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group"
-        >
-          <img
-            src="imgyk/yk2.png"
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          <div
-            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white"
-          >
-            <h3 class="font-bold"></h3>
-          </div>
-        </div>
-        <div
-          class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group"
-        >
-          <img
-            src="imgyk/yk3.png"
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          <div
-            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white"
-          >
-            <h3 class="font-bold"></h3>
-          </div>
-        </div> -->
-        <!-- <div class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group">
-           <img src="imgyk/yk4.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white">
-             <h3 class="font-bold"></h3>
-           </div>
-        </div>
-        <div class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group">
-           <img src="imgyk/yk5.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white">
-             <h3 class="font-bold"></h3>
-           </div>
-        </div>
-        <div class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group">
-           <img src="imgyk/yk6.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white">
-             <h3 class="font-bold"></h3>
-           </div>
-        </div>
-        <div class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group">
-           <img src="imgyk/yk7.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white">
-             <h3 class="font-bold"></h3>
-           </div>
-        </div>
-        <div class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group">
-           <img src="imgyk/yk8.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white">
-             <h3 class="font-bold"></h3>
-           </div>
-        </div>
-        <div class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group">
-           <img src="imgyk/yk9.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white">
-             <h3 class="font-bold"></h3>
-           </div>
-        </div>
-        <div class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group">
-           <img src="imgyk/yk10.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white">
-             <h3 class="font-bold"></h3>
-           </div>
-        </div>
-        <div class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group">
-           <img src="imgyk/yk11.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white">
-             <h3 class="font-bold"></h3>
-           </div>
-        </div>
-        <div class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group">
-           <img src="imgyk/yk12.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white">
-             <h3 class="font-bold"></h3>
-           </div>
-        </div>
-        <div class="stagger-item rounded-3xl overflow-hidden bg-white border h-72 shadow-sm relative group">
-           <img src="imgyk/yk13.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end text-white">
-             <h3 class="font-bold"></h3>
-           </div>
-        </div> -->
       </div>
-    </section>
+    </div>
+
+    <!-- Image 2 -->
+    <div
+      class="gallery-item group relative overflow-hidden rounded-3xl bg-white/80 border border-gray-200 shadow-sm cursor-pointer
+             aspect-[4/3] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
+      onclick="openGallery(1)"
+    >
+      <img
+        src="img/pos2.png"
+        alt="Gallery Image 2"
+        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+      />
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+          <span class="text-white text-sm font-semibold tracking-wide">View Image</span>
+          <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg">
+            ↗
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image 3 -->
+    <div
+      class="gallery-item group relative overflow-hidden rounded-3xl bg-white/80 border border-gray-200 shadow-sm cursor-pointer
+             aspect-[4/3] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
+      onclick="openGallery(2)"
+    >
+      <img
+        src="img/pos3.png"
+        alt="Gallery Image 3"
+        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+      />
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+          <span class="text-white text-sm font-semibold tracking-wide">View Image</span>
+          <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg">
+            ↗
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image 4 -->
+    <div
+      class="gallery-item group relative overflow-hidden rounded-3xl bg-white/80 border border-gray-200 shadow-sm cursor-pointer
+             aspect-[4/3] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
+      onclick="openGallery(3)"
+    >
+      <img
+        src="img/pos4.png"
+        alt="Gallery Image 4"
+        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+      />
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+          <span class="text-white text-sm font-semibold tracking-wide">View Image</span>
+          <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg">
+            ↗
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image 5 -->
+    <div
+      class="gallery-item group relative overflow-hidden rounded-3xl bg-white/80 border border-gray-200 shadow-sm cursor-pointer
+             aspect-[4/3] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
+      onclick="openGallery(4)"
+    >
+      <img
+        src="img/pos5.png"
+        alt="Gallery Image 5"
+        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+      />
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+          <span class="text-white text-sm font-semibold tracking-wide">View Image</span>
+          <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg">
+            ↗
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image 6 -->
+    <div
+      class="gallery-item group relative overflow-hidden rounded-3xl bg-white/80 border border-gray-200 shadow-sm cursor-pointer
+             aspect-[4/3] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
+      onclick="openGallery(5)"
+    >
+      <img
+        src="img/pos6.png"
+        alt="Gallery Image 6"
+        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+      />
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+          <span class="text-white text-sm font-semibold tracking-wide">View Image</span>
+          <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg">
+            ↗
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image 7 -->
+    <div
+      class="gallery-item group relative overflow-hidden rounded-3xl bg-white/80 border border-gray-200 shadow-sm cursor-pointer
+             aspect-[4/3] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
+      onclick="openGallery(6)"
+    >
+      <img
+        src="img/pos7.png"
+        alt="Gallery Image 7"
+        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+      />
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+          <span class="text-white text-sm font-semibold tracking-wide">View Image</span>
+          <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg">
+            ↗
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image 8 -->
+    <div
+      class="gallery-item group relative overflow-hidden rounded-3xl bg-white/80 border border-gray-200 shadow-sm cursor-pointer
+             aspect-[4/3] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
+      onclick="openGallery(7)"
+    >
+      <img
+        src="img/pos8.png"
+        alt="Gallery Image 8"
+        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+      />
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+          <span class="text-white text-sm font-semibold tracking-wide">View Image</span>
+          <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg">
+            ↗
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image 9 -->
+    <!-- <div
+      class="gallery-item group relative overflow-hidden rounded-3xl bg-white/80 border border-gray-200 shadow-sm cursor-pointer
+             aspect-[4/3] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
+      onclick="openGallery(8)"
+    >
+      <img
+        src="img/pos9.png"
+        alt="Gallery Image 9"
+        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+      />
+
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between">
+          <span class="text-white text-sm font-semibold tracking-wide">View Image</span>
+          <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-lg">
+            ↗
+          </span>
+        </div>
+      </div>
+    </div> -->
+
+  </div>
+</section>
+
+
+<!-- ==================== IMAGE POPUP / LIGHTBOX ==================== -->
+<div
+  id="galleryModal"
+  class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/90 backdrop-blur-md p-4"
+>
+
+  <!-- Close -->
+  <button
+    onclick="closeGallery()"
+    class="absolute top-5 right-5 z-20 w-11 h-11 rounded-full
+           bg-white/10 hover:bg-white/20 border border-white/20
+           text-white text-2xl flex items-center justify-center
+           transition-all duration-300"
+    aria-label="Close"
+  >
+    &times;
+  </button>
+
+  <!-- Previous -->
+  <button
+    onclick="prevGallery()"
+    class="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20
+           w-11 h-11 md:w-14 md:h-14 rounded-full
+           bg-white/10 hover:bg-white/20 border border-white/20
+           text-white text-2xl md:text-3xl
+           flex items-center justify-center transition-all duration-300"
+    aria-label="Previous"
+  >
+    &#10094;
+  </button>
+
+  <!-- Image Container -->
+  <div
+    class="relative max-w-6xl w-full h-[85vh] flex items-center justify-center"
+    onclick="event.stopPropagation()"
+  >
+    <img
+      id="galleryModalImage"
+      src=""
+      alt="Gallery Preview"
+      class="max-w-full max-h-full object-contain rounded-2xl shadow-2xl
+             select-none transition-all duration-300"
+    />
+
+    <!-- Counter -->
+    <div
+      id="galleryCounter"
+      class="absolute bottom-3 left-1/2 -translate-x-1/2
+             px-4 py-2 rounded-full bg-black/50 backdrop-blur-md
+             border border-white/10 text-white text-sm"
+    >
+      1 / 9
+    </div>
+  </div>
+
+  <!-- Next -->
+  <button
+    onclick="nextGallery()"
+    class="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20
+           w-11 h-11 md:w-14 md:h-14 rounded-full
+           bg-white/10 hover:bg-white/20 border border-white/20
+           text-white text-2xl md:text-3xl
+           flex items-center justify-center transition-all duration-300"
+    aria-label="Next"
+  >
+    &#10095;
+  </button>
+
+</div>
+
+
+<!-- ==================== GALLERY JAVASCRIPT ==================== -->
+<script>
+
+  const galleryImages = [
+    "img/pos1.png",
+    "img/pos2.png",
+    "img/pos3.png",
+    "img/pos4.png",
+    "img/pos5.png",
+    "img/pos6.png",
+    "img/pos7.png",
+    "img/pos8.png",
+    // "img/pos9.png"
+  ];
+
+  let currentGalleryIndex = 0;
+
+  const galleryModal = document.getElementById("galleryModal");
+  const galleryModalImage = document.getElementById("galleryModalImage");
+  const galleryCounter = document.getElementById("galleryCounter");
+
+
+  function openGallery(index) {
+
+    currentGalleryIndex = index;
+
+    galleryModalImage.src = galleryImages[currentGalleryIndex];
+
+    galleryCounter.textContent =
+      `${currentGalleryIndex + 1} / ${galleryImages.length}`;
+
+    galleryModal.classList.remove("hidden");
+    galleryModal.classList.add("flex");
+
+    document.body.style.overflow = "hidden";
+
+    requestAnimationFrame(() => {
+      galleryModalImage.classList.remove("scale-95");
+      galleryModalImage.classList.add("scale-100");
+    });
+  }
+
+
+  function closeGallery() {
+
+    galleryModal.classList.add("hidden");
+    galleryModal.classList.remove("flex");
+
+    document.body.style.overflow = "";
+  }
+
+
+  function nextGallery() {
+
+    currentGalleryIndex =
+      (currentGalleryIndex + 1) % galleryImages.length;
+
+    updateGalleryImage();
+  }
+
+
+  function prevGallery() {
+
+    currentGalleryIndex =
+      (currentGalleryIndex - 1 + galleryImages.length)
+      % galleryImages.length;
+
+    updateGalleryImage();
+  }
+
+
+  function updateGalleryImage() {
+
+    galleryModalImage.classList.remove("opacity-100", "scale-100");
+    galleryModalImage.classList.add("opacity-0", "scale-95");
+
+    setTimeout(() => {
+
+      galleryModalImage.src =
+        galleryImages[currentGalleryIndex];
+
+      galleryCounter.textContent =
+        `${currentGalleryIndex + 1} / ${galleryImages.length}`;
+
+      galleryModalImage.onload = () => {
+
+        galleryModalImage.classList.remove("opacity-0", "scale-95");
+        galleryModalImage.classList.add("opacity-100", "scale-100");
+
+      };
+
+    }, 150);
+  }
+
+
+  // Close when clicking outside image
+  galleryModal.addEventListener("click", function (e) {
+
+    if (e.target === galleryModal) {
+      closeGallery();
+    }
+
+  });
+
+
+  // Keyboard controls
+  document.addEventListener("keydown", function (e) {
+
+    if (galleryModal.classList.contains("hidden")) return;
+
+    if (e.key === "Escape") {
+      closeGallery();
+    }
+
+    if (e.key === "ArrowRight") {
+      nextGallery();
+    }
+
+    if (e.key === "ArrowLeft") {
+      prevGallery();
+    }
+
+  });
+
+
+  // Touch / Swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  galleryModal.addEventListener("touchstart", function (e) {
+
+    touchStartX = e.changedTouches[0].screenX;
+
+  }, { passive: true });
+
+
+  galleryModal.addEventListener("touchend", function (e) {
+
+    touchEndX = e.changedTouches[0].screenX;
+
+    const swipeDistance = touchEndX - touchStartX;
+
+    if (Math.abs(swipeDistance) > 50) {
+
+      if (swipeDistance < 0) {
+        nextGallery();
+      } else {
+        prevGallery();
+      }
+
+    }
+
+  }, { passive: true });
+
+</script>
 
     <!-- coming soon -->
-    <section class="px-6 py-20 max-w-7xl mx-auto w-full">
+    <!-- <section class="px-6 py-20 max-w-7xl mx-auto w-full">
       <div
         class="stagger-item relative overflow-hidden glass rounded-[3.5rem] p-12 md:p-20 shadow-2xl border-white/50 group"
       >
@@ -473,7 +812,7 @@ function closeCertificates() {
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <script>
       function updateCountdown() {
