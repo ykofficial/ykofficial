@@ -3211,7 +3211,7 @@
 
                     <!-- QR Image -->
                     <img
-                      src="Map.png"
+                      src="map.png"
                       alt="QR Code"
                       class="w-44 h-44 mx-auto rounded-2xl border p-2 shadow-lg bg-white hover:scale-110 transition duration-500"
                     />
@@ -3705,33 +3705,258 @@
               >
                 © 2026 YK OFFICIAL. all rights reserved.
               </p>
-              <div
-                class="flex items-center gap-2 text-[10px] font-bold tracking-widest bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800"
-              >
-                <span class="text-slate-500">Versions:</span>
-                <a
-                  href="https://ykofficial.github.io/v2023/"
-                  class="text-slate-400 hover:text-indigo-400 transition-colors "
-                  >2023</a
+              <!-- Version Selector -->
+              <div class="relative" id="versionSelector">
+                <!-- Trigger -->
+                <button
+                  type="button"
+                  onclick="toggleVersions()"
+                  class="group flex items-center gap-3 text-[10px] font-bold tracking-widest bg-slate-900/80 px-4 py-2.5 rounded-xl border border-slate-800 hover:border-indigo-500/40 hover:bg-slate-900 transition-all duration-300"
                 >
-                <span class="text-slate-700">/</span>
-                <a
-                  href=" https://ykofficial.github.io/v2024/"
-                  class="text-slate-400 hover:text-indigo-400 transition-colors"
-                  >2024</a
+                  <span class="text-slate-500">VERSION</span>
+
+                  <span class="text-indigo-400"> 2026 </span>
+
+                  <span
+                    id="versionArrow"
+                    class="text-slate-500 transition-transform duration-300"
+                  >
+                    ▾
+                  </span>
+                </button>
+
+                <!-- Dropdown -->
+                <div
+                  id="versionDropdown"
+                  class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 opacity-0 invisible translate-y-3 transition-all duration-300 ease-out z-50"
                 >
-                <span class="text-slate-700">/</span>
-                 <a
-                  href=" https://ykofficial.github.io/v2025/"
-                  class="text-slate-400 hover:text-indigo-400 transition-colors"
-                  >2025</a
-                >
-                <span class="text-slate-700">/</span>
-                <span
-                  class="text-indigo-400 bg-indigo-500/10 px-1.5 py-0.5 rounded border border-indigo-500/20"
-                  >2026 (Live)</span
-                >
+                  <div
+                    class="relative overflow-hidden rounded-2xl bg-slate-950/95 backdrop-blur-xl border border-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
+                  >
+                    <!-- Header -->
+                    <div class="px-5 py-4 border-b border-slate-800/80">
+                      <div class="flex items-center justify-between">
+                        <div>
+                          <p
+                            class="text-[9px] uppercase tracking-[0.25em] text-slate-500"
+                          >
+                            YK OFFICIAL
+                          </p>
+
+                          <p class="text-sm font-bold text-white mt-1">
+                            Website Versions
+                          </p>
+                        </div>
+
+                        <div
+                          class="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_12px_rgba(74,222,128,0.8)]"
+                        ></div>
+                      </div>
+                    </div>
+
+                    <!-- Versions -->
+                    <div class="p-3 space-y-2">
+                      <!-- 2026 -->
+                      <a
+                        href="#"
+                        class="group flex items-center gap-4 p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20 hover:bg-indigo-500/15 hover:border-indigo-500/40 transition-all duration-300"
+                      >
+                        <div
+                          class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center"
+                        >
+                          <span class="text-indigo-400 font-black text-xs"
+                            >26</span
+                          >
+                        </div>
+
+                        <div class="flex-1">
+                          <div class="flex items-center gap-2">
+                            <span class="text-sm font-bold text-white">
+                              2026
+                            </span>
+
+                            <span
+                              class="text-[8px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-400 border border-indigo-500/20"
+                            >
+                              Live
+                            </span>
+                          </div>
+
+                          <p class="text-[10px] text-slate-500 mt-1">
+                            Current experience
+                          </p>
+                        </div>
+
+                        <span
+                          class="text-slate-600 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all"
+                        >
+                          →
+                        </span>
+                      </a>
+
+                      <!-- 2025 -->
+                      <a
+                        href="https://ykofficial.github.io/v2025/"
+                        class="group flex items-center gap-4 p-3 rounded-xl hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all duration-300"
+                      >
+                        <div
+                          class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center"
+                        >
+                          <span
+                            class="text-slate-400 group-hover:text-indigo-400 font-black text-xs transition-colors"
+                          >
+                            25
+                          </span>
+                        </div>
+
+                        <div class="flex-1">
+                          <span class="text-sm font-bold text-slate-300">
+                            2025
+                          </span>
+
+                          <p class="text-[10px] text-slate-600 mt-1">
+                            Previous generation
+                          </p>
+                        </div>
+
+                        <span
+                          class="text-slate-700 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all"
+                        >
+                          →
+                        </span>
+                      </a>
+
+                      <!-- 2024 -->
+                      <a
+                        href="https://ykofficial.github.io/v2024/"
+                        class="group flex items-center gap-4 p-3 rounded-xl hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all duration-300"
+                      >
+                        <div
+                          class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center"
+                        >
+                          <span
+                            class="text-slate-400 group-hover:text-indigo-400 font-black text-xs transition-colors"
+                          >
+                            24
+                          </span>
+                        </div>
+
+                        <div class="flex-1">
+                          <span class="text-sm font-bold text-slate-300">
+                            2024
+                          </span>
+
+                          <p class="text-[10px] text-slate-600 mt-1">
+                            Previous generation
+                          </p>
+                        </div>
+
+                        <span
+                          class="text-slate-700 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all"
+                        >
+                          →
+                        </span>
+                      </a>
+
+                      <!-- 2023 -->
+                      <a
+                        href="https://ykofficial.github.io/v2023/"
+                        class="group flex items-center gap-4 p-3 rounded-xl hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all duration-300"
+                      >
+                        <div
+                          class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center"
+                        >
+                          <span
+                            class="text-slate-400 group-hover:text-indigo-400 font-black text-xs transition-colors"
+                          >
+                            23
+                          </span>
+                        </div>
+
+                        <div class="flex-1">
+                          <span class="text-sm font-bold text-slate-300">
+                            2023
+                          </span>
+
+                          <p class="text-[10px] text-slate-600 mt-1">
+                            Original edition
+                          </p>
+                        </div>
+
+                        <span
+                          class="text-slate-700 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all"
+                        >
+                          →
+                        </span>
+                      </a>
+                    </div>
+
+                    <!-- Bottom -->
+                    <div class="px-5 py-3 border-t border-slate-800/80">
+                      <p
+                        class="text-[8px] uppercase tracking-[0.2em] text-slate-600"
+                      >
+                        Select an edition to explore
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              <script>
+                function toggleVersions() {
+                  const dropdown = document.getElementById("versionDropdown");
+                  const arrow = document.getElementById("versionArrow");
+
+                  const isOpen = !dropdown.classList.contains("invisible");
+
+                  if (isOpen) {
+                    closeVersions();
+                  } else {
+                    dropdown.classList.remove(
+                      "opacity-0",
+                      "invisible",
+                      "translate-y-3",
+                    );
+
+                    dropdown.classList.add(
+                      "opacity-100",
+                      "visible",
+                      "translate-y-0",
+                    );
+
+                    arrow.classList.add("rotate-180");
+                  }
+                }
+
+                function closeVersions() {
+                  const dropdown = document.getElementById("versionDropdown");
+                  const arrow = document.getElementById("versionArrow");
+
+                  dropdown.classList.add(
+                    "opacity-0",
+                    "invisible",
+                    "translate-y-3",
+                  );
+
+                  dropdown.classList.remove(
+                    "opacity-100",
+                    "visible",
+                    "translate-y-0",
+                  );
+
+                  arrow.classList.remove("rotate-180");
+                }
+
+                // Close when clicking outside
+                document.addEventListener("click", function (event) {
+                  const selector = document.getElementById("versionSelector");
+
+                  if (!selector.contains(event.target)) {
+                    closeVersions();
+                  }
+                });
+              </script>
             </div>
 
             <div
