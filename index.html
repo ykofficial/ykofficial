@@ -3314,30 +3314,20 @@
                 <!-- Premium Image Area -->
                 <div class="relative mb-8 group">
                   <!-- Glow -->
-                  <div
-                    class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-400 opacity-20 blur-xl group-hover:opacity-40 transition duration-700"
-                  ></div>
+                  <div class="absolute -inset-1 rounded-2xl"></div>
 
                   <!-- Image Frame -->
-                  <div
-                    class="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-950 shadow-[0_15px_40px_rgba(15,23,42,0.15)]"
+
+                  <video
+                    id="video"
+                    class="w-full h-full object-cover"
+                    playsinline
+                    muted
+                    autoplay
+                    loop
                   >
-                    <img
-                      src="get.png"
-                      alt="Get in Touch"
-                      class="block w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-[1.025]"
-                    />
-
-                    <!-- Subtle Overlay -->
-                    <div
-                      class="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none"
-                    ></div>
-
-                    <!-- Top Corner Accent -->
-                    <div
-                      class="absolute top-4 right-4 w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.9)] animate-pulse"
-                    ></div>
-                  </div>
+                    <source src="get.mp4" type="video/mp4" />
+                  </video>
                 </div>
 
                 <!-- Heading -->
@@ -3991,6 +3981,67 @@
                 });
               </script>
             </div>
+
+            <!-- Visitor Counter -->
+            <div
+              class="flex items-center gap-3 bg-slate-900/70 border border-slate-800 rounded-xl px-4 py-2.5 hover:border-indigo-500/40 transition-all duration-300"
+            >
+              <div
+                class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center"
+              >
+                <i class="fa-solid fa-eye text-indigo-400 text-xs"></i>
+              </div>
+
+              <div class="text-left">
+                <p
+                  class="text-[8px] uppercase tracking-[0.2em] text-slate-600 font-bold"
+                >
+                  Website Visitors
+                </p>
+
+                <div class="flex items-center gap-2 mt-0.5">
+                  <span
+                    id="visitorCount"
+                    class="text-sm font-black text-white tracking-wider"
+                  >
+                    —
+                  </span>
+
+                  <span
+                    class="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.8)]"
+                  ></span>
+
+                  <span
+                    class="text-[9px] text-slate-500 uppercase tracking-wider"
+                  >
+                    Live
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              async function updateVisitorCounter() {
+                const counter = document.getElementById("visitorCount");
+
+                try {
+                  const response = await fetch(
+                    "https://api.counterapi.dev/v2/yegnesh-kambles-team-5420/first-counter-5420/up",
+                  );
+
+                  const result = await response.json();
+
+                  const count = result.data.up_count;
+
+                  counter.textContent = Number(count).toLocaleString("en-IN");
+                } catch (error) {
+                  console.error("Visitor Counter Error:", error);
+                  counter.textContent = "—";
+                }
+              }
+
+              updateVisitorCounter();
+            </script>
 
             <div
               class="flex items-center gap-8 text-[10px] font-bold tracking-widest"
