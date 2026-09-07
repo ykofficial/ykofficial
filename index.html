@@ -3983,6 +3983,7 @@
             </div>
 
             <!-- Visitor Counter -->
+            <!-- ================= VISITOR COUNTER ================= -->
             <div
               class="flex items-center gap-3 bg-slate-900/70 border border-slate-800 rounded-xl px-4 py-2.5 hover:border-indigo-500/40 transition-all duration-300"
             >
@@ -4020,43 +4021,99 @@
             </div>
 
             <script>
-              async function updateVisitorCounter() {
-                const counters = document.querySelectorAll(".visitor-count");
+              (function () {
+                const API_URL =
+                  "https://api.counterapi.dev/v2/yegnesh-kambles-team-5420/first-counter-5420";
 
-                if (!counters.length) return;
+                const INCREMENT_URL = API_URL + "/up";
 
-                try {
-                  const response = await fetch(
-                    "https://api.counterapi.dev/v2/yegnesh-kambles-team-5420/first-counter-5420/up",
-                  );
-
-                  if (!response.ok) {
-                    throw new Error("API Error: " + response.status);
-                  }
-
-                  const result = await response.json();
-
-                  console.log("Visitor API:", result);
-
-                  const count = result?.data?.up_count;
-
-                  if (count !== undefined) {
-                    counters.forEach((counter) => {
-                      counter.textContent =
+                /* --------------------------------
+     Show count on all counter elements
+  -------------------------------- */
+                function showCount(count) {
+                  document
+                    .querySelectorAll(".visitor-count")
+                    .forEach(function (element) {
+                      element.textContent =
                         Number(count).toLocaleString("en-IN");
                     });
-                  }
-                } catch (error) {
-                  console.error("Visitor Counter Error:", error);
-
-                  counters.forEach((counter) => {
-                    counter.textContent = "—";
-                  });
                 }
-              }
 
-              updateVisitorCounter();
+                /* --------------------------------
+     First visit = increase counter
+  -------------------------------- */
+                async function registerVisitor() {
+                  try {
+                    const response = await fetch(INCREMENT_URL, {
+                      method: "GET",
+                      cache: "no-store",
+                    });
+
+                    if (!response.ok) {
+                      throw new Error("Counter API Error: " + response.status);
+                    }
+
+                    const result = await response.json();
+
+                    console.log("Visitor Counter:", result);
+
+                    if (
+                      result &&
+                      result.data &&
+                      result.data.up_count !== undefined
+                    ) {
+                      showCount(result.data.up_count);
+                    }
+                  } catch (error) {
+                    console.error("Visitor Counter Error:", error);
+                    loadCurrentCount();
+                  }
+                }
+
+                /* --------------------------------
+     Get latest global count
+  -------------------------------- */
+                async function loadCurrentCount() {
+                  try {
+                    const response = await fetch(API_URL, {
+                      method: "GET",
+                      cache: "no-store",
+                    });
+
+                    if (!response.ok) {
+                      throw new Error("Counter API Error: " + response.status);
+                    }
+
+                    const result = await response.json();
+
+                    if (
+                      result &&
+                      result.data &&
+                      result.data.up_count !== undefined
+                    ) {
+                      showCount(result.data.up_count);
+                    }
+                  } catch (error) {
+                    console.error("Live Counter Error:", error);
+                  }
+                }
+
+                /* --------------------------------
+     Register this page visit
+  -------------------------------- */
+                registerVisitor();
+
+                /* --------------------------------
+     LIVE UPDATE
+     Every 5 seconds latest number
+     sabhi visitors ko show hoga
+  -------------------------------- */
+                setInterval(function () {
+                  loadCurrentCount();
+                }, 5000);
+              })();
             </script>
+            <!-- ================= END VISITOR COUNTER ================= -->
             <div
               class="flex items-center gap-8 text-[10px] font-bold tracking-widest"
             >
