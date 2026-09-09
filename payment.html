@@ -225,78 +225,61 @@
             </div>
     </main>
 
-    <div id="buyModal" class="fixed inset-0 z-[150] hidden items-center justify-center p-2 sm:p-4">
+    <div id="buyModal" class="fixed inset-0 z-[150] hidden items-center justify-center p-3 sm:p-6">
     <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
     
-    <div class="relative w-full max-w-4xl bg-white rounded-[2rem] sm:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-2xl max-h-[95vh] md:max-h-none overflow-y-auto md:overflow-visible animate-modalIn">
+    <div class="relative w-full max-w-4xl bg-white rounded-[2rem] sm:rounded-[3rem] overflow-hidden flex flex-col md:flex-row shadow-2xl max-h-[90vh] md:max-h-[85vh] animate-modalIn">
         
-        <div class="w-full md:w-5/12 bg-slate-50 p-6 sm:p-10 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-100 shrink-0">
-            <div class="flex md:flex-col justify-between items-start md:items-start">
-                <div class="hidden md:block">
-                    <div class="w-12 h-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-indigo-100">
-                        <i class="fa-solid fa-bolt-lightning text-xl"></i>
-                    </div>
-                    <h2 class="text-2xl font-black text-slate-900 leading-tight">Secure<br>Checkout</h2>
+        <!-- Left Banner / Summary Panel -->
+        <div class="w-full md:w-5/12 bg-slate-50 p-6 sm:p-8 flex flex-row md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-slate-100 shrink-0">
+            <div>
+                <div class="hidden md:flex w-12 h-12 bg-indigo-600 text-white rounded-2xl items-center justify-center mb-6 shadow-lg shadow-indigo-100">
+                    <i class="fa-solid fa-bolt-lightning text-xl"></i>
                 </div>
-                
-                <div class="md:mt-10">
-                    <span class="text-[9px] uppercase font-black text-slate-400 tracking-[0.2em] block">Project Selected</span>
-                    <p id="modalProjectTitle" class="text-sm font-bold text-slate-700 truncate max-w-[150px] md:max-w-none">Project Title</p>
-                </div>
+                <h2 class="text-xl md:text-2xl font-black text-slate-900 leading-tight">Secure<br class="hidden md:block">Checkout</h2>
+            </div>
+            
+            <div class="my-auto md:my-0 md:mt-8">
+                <span class="text-[9px] uppercase font-black text-slate-400 tracking-[0.2em] block">Project Selected</span>
+                <p id="modalProjectTitle" class="text-xs md:text-sm font-bold text-slate-700 truncate max-w-[140px] md:max-w-none">Project Title</p>
             </div>
 
-            <div class="mt-6 md:mt-12 space-y-4 md:space-y-8">
-                <div class="flex justify-between items-end md:block">
-                    <div>
-                        <span class="text-[9px] uppercase font-black text-slate-400 tracking-[0.2em]">Net Payable</span>
-                        <p id="finalPrice" class="text-3xl md:text-5xl font-black text-indigo-600 leading-none mt-1">₹0</p>
-                    </div>
-                    <div class="md:hidden">
-                         <span class="text-[8px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full uppercase tracking-widest">Safe Payment</span>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
-                    <span class="text-[8px] uppercase font-black text-slate-300 tracking-widest block mb-1">Official UPI ID</span>
-                    <p class="text-[10px] sm:text-xs font-mono text-slate-500 font-bold break-all">7219274312@ybl</p>
-                </div>
+            <div class="text-right md:text-left md:mt-8">
+                <span class="text-[9px] uppercase font-black text-slate-400 tracking-[0.2em] block">Net Payable</span>
+                <p id="finalPrice" class="text-2xl md:text-4xl font-black text-indigo-600 leading-none mt-1">₹0</p>
             </div>
         </div>
 
-        <div class="flex-1 p-6 sm:p-10 md:p-14 bg-white relative flex flex-col justify-center min-h-[400px]">
-            <button onclick="closeModal()" class="absolute top-4 right-4 sm:top-8 sm:right-8 text-slate-300 hover:text-slate-900 text-2xl sm:text-3xl z-50 transition-colors">&times;</button>
+        <!-- Right Interactive Form / Step Container -->
+        <div class="flex-1 p-6 sm:p-10 bg-white relative flex flex-col justify-center overflow-y-auto">
+            <button onclick="closeModal()" class="absolute top-4 right-4 sm:top-6 sm:right-6 text-slate-300 hover:text-slate-900 text-2xl z-50 transition-colors">&times;</button>
 
-            <div id="step1" class="step active flex-col w-full">
-                <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-2">Customer Details</h3>
-                <p class="text-xs sm:text-sm text-slate-400 mb-8 font-medium">Please provide your WhatsApp number for source code delivery.</p>
+            <!-- Step 1 -->
+            <div id="step1" class="step flex-col w-full">
+                <h3 class="text-lg font-black text-slate-900 mb-1">Customer Details</h3>
+                <p class="text-xs text-slate-400 mb-6 font-medium">Please provide your WhatsApp number for source code delivery.</p>
                 
-                <div class="space-y-3 sm:space-y-4">
-                    <div class="group">
-                        <input id="userName" type="text" placeholder="Full Name" class="w-full px-5 py-4 sm:py-5 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-indigo-100 focus:bg-white transition-all outline-none font-bold text-slate-700 text-sm" />
-                    </div>
-                    <div class="group">
-                        <input id="userPhone" type="tel" placeholder="WhatsApp Number" class="w-full px-5 py-4 sm:py-5 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-indigo-100 focus:bg-white transition-all outline-none font-bold text-slate-700 text-sm" />
-                    </div>
-                    <button onclick="validateStep1()" class="w-full bg-slate-900 text-white py-4 sm:py-5 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] mt-4 hover:bg-indigo-600 shadow-lg shadow-indigo-100 transition-all active:scale-95">
+                <div class="space-y-3">
+                    <input id="userName" type="text" placeholder="Full Name" class="w-full px-4 py-3.5 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-indigo-100 focus:bg-white transition-all outline-none font-bold text-slate-700 text-sm" />
+                    <input id="userPhone" type="tel" placeholder="WhatsApp Number" class="w-full px-4 py-3.5 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-indigo-100 focus:bg-white transition-all outline-none font-bold text-slate-700 text-sm" />
+                    <button onclick="validateStep1()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] mt-2 hover:bg-indigo-600 shadow-lg shadow-indigo-100 transition-all active:scale-95">
                         Continue to QR
                     </button>
                 </div>
             </div>
 
+            <!-- Step 2 -->
             <div id="step2" class="step flex-col items-center text-center w-full">
-                <div class="mb-6">
-                    <h3 class="text-xl sm:text-2xl font-black text-slate-900">Scan & Pay</h3>
-                    <div class="flex items-center justify-center gap-2 mt-1">
-                        <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                        <span class="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em]">UPI Gateway Active</span>
-                    </div>
+                <h3 class="text-lg font-black text-slate-900 mb-1">Scan & Pay</h3>
+                <div class="flex items-center justify-center gap-2 mb-4">
+                    <span class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em]">UPI Gateway Active</span>
                 </div>
 
-                <div class="w-full max-w-[260px] sm:max-w-[280px] mx-auto mb-8 relative">
-                    <div class="p-6 bg-white rounded-[2.5rem] border-2 border-slate-50 shadow-xl overflow-hidden animate-bounce-slow">
-                        <div class="bg-slate-50 rounded-[1.5rem] p-4 flex items-center justify-center relative overflow-hidden">
-                             <div class="absolute inset-x-0 top-0 h-1 bg-indigo-500 shadow-[0_0_15px_#6366f1] z-20 animate-scan-line"></div>
-                            
+                <div class="w-full max-w-[200px] sm:max-w-[220px] mx-auto mb-6 relative">
+                    <div class="p-4 bg-white rounded-3xl border-2 border-slate-50 shadow-lg">
+                        <div class="bg-slate-50 rounded-2xl p-3 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-x-0 top-0 h-1 bg-indigo-500 shadow-[0_0_15px_#6366f1] z-20 animate-scan-line"></div>
                             <div class="relative bg-white p-2 rounded-xl z-10 shadow-sm">
                                 <canvas id="qrCanvas" class="w-full h-auto block"></canvas>
                             </div>
@@ -304,20 +287,21 @@
                     </div>
                 </div>
 
-                <button onclick="goStep(3)" class="w-full bg-slate-900 text-white py-4 sm:py-5 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] shadow-xl hover:bg-indigo-600 transition-all active:scale-95">
+                <button onclick="goStep(3)" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] shadow-xl hover:bg-indigo-600 transition-all active:scale-95">
                     I Have Paid Successfully
                 </button>
             </div>
 
+            <!-- Step 3 -->
             <div id="step3" class="step flex-col items-center text-center w-full">
-                <div class="w-20 h-20 bg-green-50 text-green-500 rounded-3xl flex items-center justify-center text-3xl mb-6 rotate-3">
+                <div class="w-16 h-16 bg-green-50 text-green-500 rounded-2xl flex items-center justify-center text-2xl mb-4 rotate-3">
                     <i class="fa-solid fa-paper-plane"></i>
                 </div>
-                <h3 class="text-xl font-black text-slate-900 mb-2">Final Step!</h3>
-                <p class="text-xs sm:text-sm text-slate-400 mb-10 px-2 font-medium">Verify your payment by sending the screenshot. Code will be sent <b>immediately</b>.</p>
+                <h3 class="text-lg font-black text-slate-900 mb-1">Final Step!</h3>
+                <p class="text-xs text-slate-400 mb-6 px-2 font-medium">Verify your payment by sending the screenshot on WhatsApp.</p>
                 
-                <button onclick="completeOrder()" class="w-full bg-[#25D366] text-white py-4 sm:py-5 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] flex items-center justify-center gap-3 shadow-lg shadow-green-100 hover:scale-[1.02] transition-all">
-                    <i class="fa-brands fa-whatsapp text-xl"></i> Verify on WhatsApp
+                <button onclick="completeOrder()" class="w-full bg-[#25D366] text-white py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] flex items-center justify-center gap-3 shadow-lg shadow-green-100 hover:scale-[1.02] transition-all">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Verify on WhatsApp
                 </button>
             </div>
         </div>
