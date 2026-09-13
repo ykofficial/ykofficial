@@ -199,6 +199,7 @@
         -webkit-text-fill-color: transparent;
       }
     </style>
+    
 
     <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   </head>
@@ -1339,7 +1340,8 @@
       </div>
 
       <!-- Toast Container (Kept Outside for Flow safety) -->
-      <div
+       <!-- Network connected ka popup hai -->
+      <!-- <div
         id="networkToast"
         class="fixed bottom-4 right-6 z-[100] opacity-100 scale-100 transition-all duration-500 hidden md:block"
       >
@@ -1380,7 +1382,7 @@
             ></div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Notification Popup -->
 
@@ -3404,13 +3406,11 @@
 
       <!-- Feedback Section  -->
 
-      <section class="max-w-7xl mx-auto px-6 py-16">
+    <section class="max-w-7xl mx-auto px-6 py-16">
         <!-- HEADER -->
-        <!-- PREMIUM HEADER -->
         <div class="mb-20 relative">
           <div class="flex items-center gap-4 mb-2">
             <span class="h-px w-12 bg-black"></span>
-
             <span class="text-black font-semibold tracking-widest text-xl">
               Live <span class="text-indigo-600">Feedback</span> from Our Valued
               Clients<span class="dots"></span>
@@ -3431,82 +3431,51 @@
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         ></div>
       </section>
+
       <script>
-        const SCRIPT_URL =
-          "https://script.google.com/macros/s/AKfycbyvocv2fdiSc4opkuR0upzigWpAjm83_kzK7w_a1WfxSOsbzVbA94fspiW8S34nMlcz/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyvocv2fdiSc4opkuR0upzigWpAjm83_kzK7w_a1WfxSOsbzVbA94fspiW8S34nMlcz/exec";
 
-        async function fetchFeedback() {
-          try {
-            const response = await fetch(SCRIPT_URL);
-            const data = await response.json();
+  async function fetchFeedback() {
+    try {
+      const response = await fetch(SCRIPT_URL);
+      const data = await response.json();
+      const grid = document.getElementById("testimonialGrid");
+      const loader = document.getElementById("loading");
 
-            const grid = document.getElementById("testimonialGrid");
-            const loader = document.getElementById("loading");
+      loader.classList.add("hidden");
 
-            loader.classList.add("hidden");
+      if (!data || data.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center text-slate-400 font-bold">No feedback available.</div>`;
+        return;
+      }
 
-            const latestData = data.reverse().slice(0, 6);
+      const latestData = data.reverse().slice(0, 6);
 
-            grid.innerHTML = latestData
-              .map(
-                (item) => `
-            <div class="testimonial-card p-8 rounded-3xl border border-slate-100 relative overflow-hidden">
-                
-                <!-- Quote Icon -->
-                <div class="quote-icon">❝</div>
-
-                <!-- Stars -->
-                <div class="flex gap-1 text-yellow-400 mb-4">
-                    ${Array(5)
-                      .fill(
-                        `
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-yellow-400" viewBox="0 0 24 24">
-                            <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.824 1.548 8.27L12 18.896l-7.484 4.504 1.548-8.27L0 9.306l8.332-1.151z"/>
-                        </svg>
-                    `,
-                      )
-                      .join("")}
+      grid.innerHTML = latestData.map(item => `
+        <div class="testimonial-card p-8 rounded-3xl border border-slate-100 bg-white shadow-sm relative overflow-hidden flex flex-col justify-between">
+            <div class="flex gap-1 text-yellow-400 mb-4">⭐⭐⭐⭐⭐</div>
+            <p class="text-slate-600 mb-6 text-sm leading-relaxed italic">"${item.message || ''}"</p>
+            <div class="flex items-center gap-3 mt-auto pt-4 border-t border-slate-50">
+                <div class="w-11 h-11 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold">
+                    ${(item.name || "A").charAt(0).toUpperCase()}
                 </div>
-
-                <!-- MESSAGE -->
-                <p class="text-slate-600 mb-6 text-sm leading-relaxed italic">
-                    "${item.message}"
-                </p>
-
-                <!-- USER -->
-                <div class="flex items-center gap-3 mt-auto">
-                    
-                    <!-- Avatar -->
-                    <div class="w-11 h-11 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white flex items-center justify-center font-bold shadow-md">
-                        ${item.name.charAt(0).toUpperCase()}
-                    </div>
-
-                    <!-- Info -->
-                    <div>
-                        <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wide">
-                            ${item.name}
-                        </h4>
-                        <p class="text-[10px] text-indigo-500 font-semibold uppercase tracking-widest">
-                            Verified Client
-                        </p>
-                    </div>
-
+                <div>
+                    <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wide">
+                        ${item.name || "Anonymous"}
+                    </h4>
+                    <p class="text-[10px] text-slate-400 font-semibold uppercase tracking-widest">
+                        ${item.email || "Verified Client"}
+                    </p>
                 </div>
             </div>
-        `,
-              )
-              .join("");
-          } catch (error) {
-            console.error("Error fetching data:", error);
-            document.getElementById("loading").innerHTML = `
-            <p class="text-red-500 text-sm font-semibold">
-                Failed to load live feedback.
-            </p>`;
-          }
-        }
-
-        fetchFeedback();
-      </script>
+        </div>
+      `).join('');
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+  fetchFeedback();
+</script>
 
       <!-- Footer -->
 
