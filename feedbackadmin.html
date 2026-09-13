@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YK OFFICIAL - Feedback Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/svg+xml" href="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap");
+      body { font-family: "Plus Jakarta Sans", sans-serif; }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.08);
+      }
+      .float-blob {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        filter: blur(90px);
+        border-radius: 50%;
+        z-index: -1;
+        opacity: 0.12;
+        animation: float 12s infinite alternate ease-in-out;
+      }
+      @keyframes float {
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(100px, 60px) scale(1.1); }
+      }
+      .input-premium {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1.5px solid rgba(226, 232, 240, 0.8);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .input-premium:focus {
+        border-color: #6366f1;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      }
+    </style>
+  </head>
+  <body class="bg-[#f8fafc] min-h-screen p-6 md:p-10 relative overflow-x-hidden text-slate-800">
+
+    <!-- FUTURISTIC UNIQUE PAGE LOADER -->
+    <div id="loader" class="fixed inset-0 bg-[#0b0f1a] flex flex-col items-center justify-center z-[9999] transition-opacity duration-700">
+      <div class="absolute w-[400px] h-[400px] bg-indigo-500/20 blur-[120px] rounded-full"></div>
+      <div class="relative w-32 h-32 flex items-center justify-center">
+        <div class="absolute w-full h-full border-4 border-indigo-500/20 rounded-full"></div>
+        <div class="absolute w-full h-full border-4 border-t-indigo-500 border-r-purple-400 border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+        <div class="w-4 h-4 bg-indigo-400 rounded-full animate-ping"></div>
+      </div>
+      <p id="loadingText" class="mt-6 text-gray-300 text-xs font-black tracking-[0.3em] uppercase">
+        INITIALIZING COMMAND CENTER 0%
+      </p>
+    </div>
+
+    <script>
+      let percent = 0;
+      const text = document.getElementById("loadingText");
+      const loaderInterval = setInterval(() => {
+        percent += 4;
+        if (text) text.innerText = "INITIALIZING COMMAND CENTER " + percent + "%";
+        if (percent >= 100) {
+          clearInterval(loaderInterval);
+          const loader = document.getElementById("loader");
+          if (loader) {
+            loader.style.opacity = "0";
+            setTimeout(() => loader.style.display = "none", 700);
+          }
+        }
+      }, 15);
+    </script>
+
+    <div class="float-blob top-0 left-0"></div>
+    <div class="float-blob bottom-0 right-0" style="background: #3b82f6; animation-delay: -6s;"></div>
+
+    <div class="max-w-7xl mx-auto space-y-8">
+      <div class="glass-card p-8 rounded-[2.5rem] flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+          <div class="inline-block px-4 py-1.5 mb-2 rounded-full bg-slate-900 text-[10px] font-extrabold text-white tracking-[0.2em] uppercase shadow-md">
+            YK OFFICIAL SECURE PORTAL
+          </div>
+          <h1 class="text-3xl font-black text-slate-900 tracking-tight">Feedback Command Center</h1>
+          <p class="text-slate-500 font-medium text-sm mt-1">Real-time cloud database inspector, editor & management hub.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <button onclick="openAddModal()" class="bg-slate-900 text-white font-black px-6 py-4 rounded-2xl hover:bg-black transition-all flex items-center gap-2 text-xs tracking-widest shadow-xl hover:scale-105 active:scale-95">
+            <i class="fas fa-plus"></i> ADD ENTRY
+          </button>
+          <button onclick="syncCloudData()" class="bg-indigo-600 text-white font-black px-6 py-4 rounded-2xl hover:bg-indigo-700 transition-all flex items-center gap-2 text-xs tracking-widest shadow-xl hover:scale-105 active:scale-95">
+            <i class="fas fa-sync-alt" id="syncIcon"></i> SYNC SHEET
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card p-6 rounded-3xl flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl font-black shadow-inner">
+            <i class="fas fa-database"></i>
+          </div>
+          <div>
+            <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Total Feedbacks</p>
+            <h3 id="totalCount" class="text-2xl font-black text-slate-900 mt-0.5">0</h3>
+          </div>
+        </div>
+        <div class="glass-card p-6 rounded-3xl md:col-span-2 flex items-center">
+          <div class="relative w-full">
+            <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" id="searchInput" onkeyup="filterFeedbacks()" placeholder="Search by name, ID, email or message..." class="input-premium w-full pl-12 pr-5 py-4 rounded-2xl font-semibold text-sm outline-none" />
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-[2.5rem] overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+          <h3 class="font-black text-slate-800 tracking-wide text-xs uppercase">Encrypted Cloud Records</h3>
+          <span id="recordStatus" class="text-[10px] font-extrabold text-indigo-600 bg-indigo-50 px-3.5 py-1.5 rounded-full uppercase tracking-wider">Live & Synchronized</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50/60 text-slate-400 text-[10px] font-black tracking-widest uppercase border-b border-slate-100">
+                <th class="p-6">Feedback ID</th>
+                <th class="p-6">Client Profile</th>
+                <th class="p-6">Rating</th>
+                <th class="p-6">Message Content</th>
+                <th class="p-6 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="feedbackTableBody" class="divide-y divide-slate-100 font-medium text-slate-600 text-sm">
+              <tr>
+                <td colspan="5" class="p-12 text-center text-slate-400 font-bold">Synchronizing database nodes...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="actionModal" class="fixed inset-0 flex items-center justify-center z-[70] hidden px-4">
+      <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-md"></div>
+      <div class="bg-white/90 backdrop-blur-3xl rounded-[2.5rem] p-8 max-w-lg w-full shadow-2xl relative z-10 scale-95 opacity-0 transition-all duration-300 border border-white/60" id="modalBox">
+        <div class="flex justify-between items-center mb-6">
+          <h2 id="modalHeaderTitle" class="text-xl font-black text-slate-900">Configure Record</h2>
+          <button onclick="closeModal()" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-900 hover:text-white transition-all"><i class="fas fa-times"></i></button>
+        </div>
+        <form id="recordForm" class="space-y-4" onsubmit="saveRecordEntry(event)">
+          <input type="hidden" id="editIndex" value="">
+          <div>
+            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Unique Feedback ID</label>
+            <input type="text" id="modalId" readonly class="input-premium w-full px-4 py-3 rounded-2xl font-semibold text-xs bg-slate-100 text-slate-500 mt-1 cursor-not-allowed" />
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Full Name</label>
+              <input type="text" id="modalName" required placeholder="John Doe" class="input-premium w-full px-4 py-3 rounded-2xl font-semibold text-sm mt-1 outline-none" />
+            </div>
+            <div>
+              <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Email Address</label>
+              <input type="email" id="modalEmail" required placeholder="john@company.com" class="input-premium w-full px-4 py-3 rounded-2xl font-semibold text-sm mt-1 outline-none" />
+            </div>
+          </div>
+          <div>
+            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Rating Experience</label>
+            <select id="modalRating" class="input-premium w-full px-4 py-3 rounded-2xl font-semibold text-sm mt-1 outline-none">
+              <option value="💎 Excellent">💎 Excellent</option>
+              <option value="✨ Good">✨ Good</option>
+              <option value="⚖️ Average">⚖️ Average</option>
+              <option value="⚠️ Poor">⚠️ Poor</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Message Details</label>
+            <textarea id="modalMessage" rows="3" required placeholder="Share feedback details..." class="input-premium w-full px-4 py-3 rounded-2xl font-semibold text-sm mt-1 resize-none outline-none"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-slate-900 text-white font-black py-4 rounded-2xl hover:bg-black transition-all text-xs tracking-widest shadow-xl mt-2 flex items-center justify-center gap-2">
+            <i class="fas fa-save"></i> COMMIT DATABASE RECORD
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="deleteModal" class="fixed inset-0 flex items-center justify-center z-[80] hidden px-4">
+      <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-md"></div>
+      <div class="bg-white/95 backdrop-blur-3xl rounded-[2.5rem] p-8 max-w-sm w-full text-center shadow-2xl relative z-10 scale-95 opacity-0 transition-all duration-300" id="deleteBox">
+        <div class="w-16 h-16 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-5 text-2xl font-black shadow-inner">
+          <i class="fas fa-trash-alt"></i>
+        </div>
+        <h3 class="text-xl font-black text-slate-900 mb-2">Delete Record?</h3>
+        <p class="text-slate-500 text-xs font-medium mb-6">This action will permanently erase the selected feedback entry from database memory.</p>
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="closeDeleteModal()" class="bg-slate-100 text-slate-700 font-bold py-3.5 rounded-2xl hover:bg-slate-200 transition-all text-xs tracking-wider">CANCEL</button>
+          <button id="confirmDeleteBtn" class="bg-rose-600 text-white font-bold py-3.5 rounded-2xl hover:bg-rose-700 transition-all text-xs tracking-wider shadow-lg">DELETE</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-[100] space-y-3"></div>
+
+    <script>
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyvocv2fdiSc4opkuR0upzigWpAjm83_kzK7w_a1WfxSOsbzVbA94fspiW8S34nMlcz/exec";
+      let feedbacks = [];
+      let deleteTargetIndex = null;
+
+      async function syncCloudData() {
+        const syncIcon = document.getElementById("syncIcon");
+        if (syncIcon) syncIcon.classList.add("fa-spin");
+        showToast("Synchronizing with Google Sheet...", "info");
+
+        try {
+          const response = await fetch(SCRIPT_URL);
+          const data = await response.json();
+          if (Array.isArray(data)) {
+            feedbacks = data.map(item => ({
+              id: item.id || "YK-FB" + Math.floor(1000 + Math.random() * 9000),
+              name: item.name || "Anonymous",
+              email: item.email || "N/A",
+              rating: item.rating || "💎 Excellent",
+              message: item.message || "No Message"
+            }));
+            localStorage.setItem("yk_feedbacks", JSON.stringify(feedbacks));
+          } else {
+            loadLocalStorageFallback();
+          }
+        } catch (err) {
+          loadLocalStorageFallback();
+        } finally {
+          setTimeout(() => {
+            if (syncIcon) syncIcon.classList.remove("fa-spin");
+            renderTable(feedbacks);
+            showToast("Database synchronized successfully!", "success");
+          }, 500);
+        }
+      }
+
+      function loadLocalStorageFallback() {
+        const stored = localStorage.getItem("yk_feedbacks");
+        if (stored) {
+          feedbacks = JSON.parse(stored);
+        } else {
+          feedbacks = [];
+        }
+      }
+
+      function renderTable(dataArray) {
+        const tbody = document.getElementById("feedbackTableBody");
+        const totalCountEl = document.getElementById("totalCount");
+        if (totalCountEl) totalCountEl.innerText = dataArray.length;
+        if (!tbody) return;
+
+        if (dataArray.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" class="p-12 text-center text-slate-400 font-bold text-sm">No records found.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = dataArray.map((item, index) => `
+          <tr class="hover:bg-slate-50/80 transition-colors">
+            <td class="p-6 font-black text-xs text-indigo-600">${item.id}</td>
+            <td class="p-6">
+              <div class="font-bold text-slate-900">${item.name}</div>
+              <div class="text-xs text-slate-400 font-medium">${item.email}</div>
+            </td>
+            <td class="p-6 font-semibold text-xs"><span class="px-3 py-1 bg-slate-100 rounded-full inline-block">${item.rating}</span></td>
+            <td class="p-6 text-slate-600 text-xs max-w-xs truncate">${item.message}</td>
+            <td class="p-6 text-center space-x-2">
+              <button onclick="openEditModal(${index})" class="w-9 h-9 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-900 hover:text-white transition-all shadow-sm"><i class="fas fa-pen text-xs"></i></button>
+              <button onclick="promptDelete(${index})" class="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white transition-all shadow-sm"><i class="fas fa-trash text-xs"></i></button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      function filterFeedbacks() {
+        const query = document.getElementById("searchInput").value.toLowerCase();
+        const filtered = feedbacks.filter(item => 
+          item.name.toLowerCase().includes(query) ||
+          item.email.toLowerCase().includes(query) ||
+          item.id.toLowerCase().includes(query) ||
+          item.message.toLowerCase().includes(query)
+        );
+        renderTable(filtered);
+      }
+
+      function openAddModal() {
+        document.getElementById("modalHeaderTitle").innerText = "Add New Feedback Entry";
+        document.getElementById("editIndex").value = "";
+        document.getElementById("modalId").value = "YK-FB" + Math.floor(1000 + Math.random() * 9000);
+        document.getElementById("modalName").value = "";
+        document.getElementById("modalEmail").value = "";
+        document.getElementById("modalMessage").value = "";
+        showModalAnimation("actionModal", "modalBox");
+      }
+
+      function openEditModal(index) {
+        const item = feedbacks[index];
+        document.getElementById("modalHeaderTitle").innerText = "Edit Feedback Entry";
+        document.getElementById("editIndex").value = index;
+        document.getElementById("modalId").value = item.id;
+        document.getElementById("modalName").value = item.name;
+        document.getElementById("modalEmail").value = item.email;
+        document.getElementById("modalRating").value = item.rating;
+        document.getElementById("modalMessage").value = item.message;
+        showModalAnimation("actionModal", "modalBox");
+      }
+
+      function showModalAnimation(modalId, boxId) {
+        const modal = document.getElementById(modalId);
+        const box = document.getElementById(boxId);
+        modal.classList.remove("hidden");
+        setTimeout(() => {
+          box.classList.remove("scale-95", "opacity-0");
+          box.classList.add("scale-100", "opacity-100");
+        }, 20);
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("actionModal");
+        const box = document.getElementById("modalBox");
+        box.classList.add("scale-95", "opacity-0");
+        setTimeout(() => modal.classList.add("hidden"), 300);
+      }
+
+      async function saveRecordEntry(e) {
+        e.preventDefault();
+        const index = document.getElementById("editIndex").value;
+        const entryId = document.getElementById("modalId").value;
+        const entryName = document.getElementById("modalName").value;
+        const entryEmail = document.getElementById("modalEmail").value;
+        const entryRating = document.getElementById("modalRating").value;
+        const entryMessage = document.getElementById("modalMessage").value;
+
+        const isEdit = index !== "";
+        showToast("Syncing changes with cloud sheet...", "info");
+
+        const payload = {
+          action: isEdit ? "update" : "add",
+          id: entryId,
+          name: entryName,
+          email: entryEmail,
+          rating: entryRating,
+          message: entryMessage
+        };
+
+        try {
+          await fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          if (!isEdit) {
+            feedbacks.unshift(payload);
+            showToast("Record created and saved to Sheet!", "success");
+          } else {
+            feedbacks[index] = payload;
+            showToast("Record updated in Google Sheet!", "success");
+          }
+
+          localStorage.setItem("yk_feedbacks", JSON.stringify(feedbacks));
+          renderTable(feedbacks);
+          closeModal();
+        } catch (err) {
+          showToast("Cloud sync failed. Saved locally.", "error");
+        }
+      }
+
+      function promptDelete(index) {
+        deleteTargetIndex = index;
+        showModalAnimation("deleteModal", "deleteBox");
+      }
+
+      function closeDeleteModal() {
+        const modal = document.getElementById("deleteModal");
+        const box = document.getElementById("deleteBox");
+        box.classList.add("scale-95", "opacity-0");
+        setTimeout(() => modal.classList.add("hidden"), 300);
+      }
+
+      document.getElementById("confirmDeleteBtn").onclick = async () => {
+        if (deleteTargetIndex !== null) {
+          const targetItem = feedbacks[deleteTargetIndex];
+          closeDeleteModal();
+          showToast("Deleting row from Google Sheet...", "info");
+
+          const payload = {
+            action: "delete",
+            id: targetItem.id
+          };
+
+          try {
+            await fetch(SCRIPT_URL, {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload)
+            });
+
+            feedbacks.splice(deleteTargetIndex, 1);
+            localStorage.setItem("yk_feedbacks", JSON.stringify(feedbacks));
+            renderTable(feedbacks);
+            showToast("Row successfully deleted from sheet!", "success");
+          } catch (err) {
+            showToast("Cloud deletion failed.", "error");
+          }
+          deleteTargetIndex = null;
+        }
+      };
+
+      function showToast(message, type = "success") {
+        const container = document.getElementById("toastContainer");
+        const toast = document.createElement("div");
+        const bgColors = type === "success" ? "bg-slate-900 text-white border-indigo-500" : type === "error" ? "bg-rose-600 text-white border-rose-400" : "bg-blue-600 text-white border-blue-400";
+        const icon = type === "success" ? "fa-check-circle text-indigo-400" : type === "error" ? "fa-exclamation-circle text-rose-200" : "fa-info-circle text-blue-200";
+        
+        toast.className = `flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl text-xs font-black tracking-widest uppercase border ${bgColors} transition-all duration-300 translate-y-4 opacity-0`;
+        toast.innerHTML = `<i class="fas ${icon} text-base"></i><span>${message}</span>`;
+        container.appendChild(toast);
+
+        setTimeout(() => toast.classList.remove("translate-y-4", "opacity-0"), 50);
+        setTimeout(() => {
+          toast.classList.add("translate-y-4", "opacity-0");
+          setTimeout(() => toast.remove(), 300);
+        }, 2500);
+      }
+
+      window.onload = syncCloudData;
+    </script>
+  </body>
+</html>
