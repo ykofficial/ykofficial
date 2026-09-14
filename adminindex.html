@@ -256,20 +256,24 @@
             <i class="fa-solid fa-chart-line w-5 text-center"></i>
             <span>Dashboard</span>
           </button>
-          <a
-            href="owner-notification.html"
-            class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-all"
-          >
-            <i class="fa-solid fa-bell w-5 text-center"></i>
-            <span>Notifications Admin</span>
-          </a>
-          <button
-            onclick="openFeedbackAdmin()"
-            class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-all"
-          >
-            <i class="fa-solid fa-comments w-5 text-center"></i>
-            <span>Feedback Admin</span>
-          </button>
+         <button
+  type="button"
+  onclick="openModalIframe('owner-notification.html', 'Notifications Admin', 'fa-bell')"
+  class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-all text-left"
+>
+  <i class="fa-solid fa-bell w-5 text-center"></i>
+  <span>Notifications Admin</span>
+</button>
+
+<!-- Feedback Admin Button -->
+<button
+  type="button"
+ onclick="openModalIframe('feedbackadmin.html', 'Feedback Admin', 'fa-comments')"
+  class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-all text-left"
+>
+  <i class="fa-solid fa-comments w-5 text-center"></i>
+  <span>Feedback Admin</span>
+</button>
           <button
             onclick="openGoogleSheet()"
             class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-emerald-500/10 text-slate-400 hover:text-emerald-400 transition-all"
@@ -428,6 +432,110 @@
         </footer>
       </main>
     </div>
+
+    <!-- Popup Model Feedback and Notifications Model -->
+     <!-- Iframe Modal Container (Aapke modalOverlay ke andar add karein) -->
+<!-- IFRAME POPUP MODAL -->
+<div
+  id="iframeModal"
+  class="hidden fixed inset-0 z-[2000] bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-5"
+>
+  <div
+    class="w-full h-full max-w-[1500px] max-h-[95vh] bg-slate-950 rounded-2xl overflow-hidden border border-indigo-500/20 shadow-2xl flex flex-col"
+  >
+    
+    <div
+      class="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800 shrink-0"
+    >
+      <div class="flex items-center gap-3">
+        <div
+          class="w-9 h-9 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center"
+        >
+          <i id="iframeModalIcon" class="fa-solid fa-window-maximize text-indigo-400"></i>
+        </div>
+
+        <div>
+          <h3
+            id="iframeModalTitle"
+            class="text-white font-bold text-sm sm:text-base"
+          >
+            Admin
+          </h3>
+
+          <p
+            class="text-slate-500 text-[10px] uppercase tracking-wider"
+          >
+            YK OFFICIAL &bull; Admin Management
+          </p>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        onclick="closeModals()"
+        class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-red-500/10 hover:border-red-500/30 transition-all"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="flex-1 bg-white relative">
+      <div
+        id="iframeLoading"
+        class="absolute inset-0 z-10 bg-slate-950 flex flex-col items-center justify-center"
+      >
+        <div class="yk-spinner"></div>
+        <p class="mt-4 text-slate-400 text-sm">
+          Opening Admin Panel...
+        </p>
+      </div>
+
+      <iframe
+        id="iframeContent"
+        src=""
+        class="w-full h-full border-0"
+        loading="lazy"
+      ></iframe>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function openModalIframe(url, titleText, icon = "fa-window-maximize") {
+  const modal = document.getElementById("iframeModal");
+  const iframe = document.getElementById("iframeContent");
+  const title = document.getElementById("iframeModalTitle");
+  const iconEl = document.getElementById("iframeModalIcon");
+  const loading = document.getElementById("iframeLoading");
+
+  if (!modal || !iframe) return;
+
+  if (title) {
+    title.textContent = titleText;
+  }
+
+  if (iconEl) {
+    iconEl.className = `fa-solid ${icon} text-indigo-400`;
+  }
+
+  if (loading) {
+    loading.style.display = "flex";
+  }
+
+  iframe.src = url;
+
+  iframe.onload = function () {
+    if (loading) {
+      loading.style.display = "none";
+    }
+  };
+
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+</script>
+
     <!-- GOOGLE SHEET POPUP -->
     <div
       id="googleSheetModal"
@@ -539,7 +647,7 @@
           </button>
         </div>
       </div>
-
+ <!-- edit modal -->
       <div
         id="editModal"
         class="hidden glass p-8 rounded-3xl w-full max-w-lg border border-blue-500/30"
@@ -582,7 +690,7 @@
           </button>
         </div>
       </div>
-
+      <!-- Help Modal -->
       <div
         id="helpModal"
         class="hidden glass p-8 rounded-3xl w-full max-w-md border border-indigo-500/30 text-center"
@@ -606,7 +714,7 @@
           Close Guide
         </button>
       </div>
-
+      <!-- Support Modal -->
       <div
         id="supportModal"
         class="hidden glass p-8 rounded-3xl w-full max-w-md border border-emerald-500/30 text-center"
@@ -639,6 +747,14 @@
     >
       <div class="yk-spinner"></div>
     </div>
+
+
+
+
+
+
+
+
 
     <!-- SESSION EXPIRED OVERLAY -->
     <div id="sessionExpiredPopup" class="session-expired-popup">
@@ -971,12 +1087,36 @@
       }
 
       function closeModals() {
-        overlay.classList.add("hidden");
-        document.getElementById("helpModal").classList.add("hidden");
-        document.getElementById("supportModal").classList.add("hidden");
-        document.getElementById("addModal").classList.add("hidden");
-        document.getElementById("editModal").classList.add("hidden");
-      }
+  const modals = [
+    "helpModal",
+    "supportModal",
+    "addModal",
+    "editModal",
+    "iframeModal"
+  ];
+
+  modals.forEach((id) => {
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.classList.add("hidden");
+    }
+  });
+
+  // Close iframe completely
+  const iframeContent = document.getElementById("iframeContent");
+  if (iframeContent) {
+    iframeContent.src = "";
+  }
+
+  // Hide old overlay if present
+  const overlay = document.getElementById("modalOverlay");
+  if (overlay) {
+    overlay.classList.add("hidden");
+  }
+
+  // Restore page scrolling
+  document.body.style.overflow = "";
+}
 
       function showSystemHelp() {
         overlay.classList.remove("hidden");
@@ -1003,9 +1143,9 @@
       //   });
       // }
 
-          function openFeedbackAdmin() {
-        window.location.href = "feedbackadmin.html";
-      }
+      //     function openFeedbackAdmin() {
+      //   window.location.href = "feedbackadmin.html";
+      // }
 
       document.addEventListener("contextmenu", (e) => e.preventDefault());
       document.onkeydown = (e) => {
