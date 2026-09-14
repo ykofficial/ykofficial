@@ -348,7 +348,7 @@
         window.onload = () => refreshData(document.querySelector('button[onclick*="refreshData"]'));
     </script>
 
-    <script>
+    <!-- <script>
         document.addEventListener("contextmenu", e => { e.preventDefault(); triggerSecurity(); });
         document.addEventListener("keydown", e => {
             if (e.key === "F12" || (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) || (e.ctrlKey && e.key === "U")) triggerSecurity();
@@ -368,7 +368,9 @@
                 </div>`;
             setTimeout(() => location.reload(), 5000);
         }
-    </script>
+    </script> -->
+
+    <script src="security.js"></script>
 
 </body>
 </html>
