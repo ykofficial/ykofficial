@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YK OFFICIAL - Client Registration</title>
+    <title>YK OFFICIAL - Secure Client Portal</title>
     <link rel="icon" href="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" />
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,460 +11,282 @@
 
     <!-- url id code  -->
     <script>
-      /**
-       * Unique ID Generate aur URL update karne ka function
-       */
       function updateUrlWithUniqueId() {
-        // 6 characters ki Random Unique ID (YK-XXXXXX)
         const uniqueId = Math.random()
           .toString(36)
           .substring(2, 8)
           .toUpperCase();
-
-        // Current Page Name (Pathname se page name nikalna)
         const pageName =
           window.location.pathname.split("/").pop().split(".")[0] || "home";
-
-        // Naya URL Hash format: #pageName?uid=YKOFFICIAL-${uniqueId}
         const newHash = `#${pageName}?uid=yKOfFiciAl${uniqueId}`;
-
-        // Browser ka URL update karna bina reload kiye
         window.history.replaceState(null, null, newHash);
       }
 
-      // Jab page pehli baar load ho
       window.addEventListener("DOMContentLoaded", updateUrlWithUniqueId);
-
-      // Agar aapki site single page hai aur sections change hote hain
       window.addEventListener("hashchange", updateUrlWithUniqueId);
     </script>
+
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
 
       body {
-        font-family: "Inter", sans-serif;
-        background: radial-gradient(
-          circle at top right,
-          #1e1b4b,
-          #0f172a,
-          #000000
-        );
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #090d16 50%, #020617 100%);
         background-attachment: fixed;
       }
 
-      .glass-card {
-        background: rgba(15, 23, 42, 0.6);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      .glass-panel {
+        background: rgba(15, 23, 42, 0.75);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(79, 70, 229, 0.1);
       }
 
-      .input-field {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
-        color: white;
+      .input-glow {
+        background: rgba(2, 6, 23, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        color: #f8fafc;
       }
 
-      .input-field:focus {
+      .input-glow:focus {
         border-color: #6366f1;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(15, 23, 42, 0.9);
         outline: none;
-        box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.25), inset 0 0 10px rgba(99, 102, 241, 0.1);
       }
 
-      .btn-primary {
+      .btn-cyber {
         background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-        transition:
-          transform 0.2s ease,
-          box-shadow 0.2s ease;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
       }
 
-      .btn-primary:hover {
+      .btn-cyber:hover:not(:disabled) {
         transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+        box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.6);
+        filter: brightness(1.1);
       }
 
-      /* Animated background pulse */
-      .bg-glow {
+      /* Ambient 4K Glow Background Spheres */
+      .ambient-glow {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(
-          circle at 50% 50%,
-          rgba(79, 70, 229, 0.05),
-          transparent 50%
-        );
-        pointer-events: none;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         z-index: -1;
+        pointer-events: none;
+        filter: blur(60px);
       }
 
-      #pageLoader {
-        position: fixed;
-        inset: 0;
-        background: #000;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
+      html { scroll-behavior: smooth; }
+      body { overflow-x: hidden; }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
       }
-
-      .spinner {
-        width: 50px;
-        height: 50px;
-        border: 3px solid rgba(99, 102, 241, 0.1);
-        border-top: 3px solid #6366f1;
-        border-radius: 50%;
-        animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
-      }
-
-      @keyframes spin {
-        100% {
-          transform: rotate(360deg);
-        }
-      }
+      .animate-fade { animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     </style>
   </head>
-  <body class="min-h-screen text-slate-200 flex flex-col">
-    <div class="bg-glow"></div>
+  <body class="min-h-screen text-slate-100 flex flex-col items-center justify-center p-3 sm:p-6">
+    <div class="ambient-glow"></div>
 
-    <div id="pageLoader">
-      <div class="spinner"></div>
-      <div
-        class="mt-4 text-sm tracking-widest uppercase font-semibold text-indigo-400"
-      >
-        YK OFFICIAL
-      </div>
-    </div>
+    <!-- Main Container Optimized for Popup Embedding -->
+    <main class="w-full max-w-lg mx-auto">
+      <div class="glass-panel rounded-3xl p-6 sm:p-8 relative overflow-hidden">
+        
+        <!-- Top Brand Accent line -->
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent"></div>
 
-    <nav
-      class="sticky top-0 z-50 border-b border-white/10 bg-black/20 backdrop-blur-xl px-6 py-4"
-    >
-      <div class="max-w-7xl mx-auto flex justify-between items-center">
-        <div class="flex items-center gap-3">
-          <img
-            src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png"
-            class="w-10 h-10 rounded-full border border-indigo-500/30 shadow-lg shadow-indigo-500/20"
-            alt="Logo"
-          />
-          <h1 class="font-bold text-2xl tracking-tight">
-            YK <span class="text-indigo-400">OFFICIAL</span>
-          </h1>
-        </div>
-        <div class="flex gap-3">
-          <button
-            onclick="showHelp()"
-            class="text-sm font-medium hover:text-indigo-400 transition-colors"
-          >
-            Help
-          </button>
-          <button
-            onclick="showContact()"
-            class="bg-white text-black px-5 py-2 rounded-full text-sm font-bold hover:bg-slate-200 transition-all"
-          >
-            Contact
-          </button>
-        </div>
-      </div>
-    </nav>
-
-    <main class="flex-grow flex items-center justify-center p-4 sm:p-8">
-      <div class="glass-card rounded-3xl p-8 sm:p-12 w-full max-w-2xl">
-        <div class="text-center mb-10">
-          <h2 class="text-3xl font-bold text-white mb-2">Project Request</h2>
-          <p class="text-slate-400 text-sm">
-            Secure corporate portal for professional service inquiries.
-          </p>
-        </div>
-
-        <div class="flex justify-between mb-10 px-4 relative">
-          <div
-            class="absolute top-1/2 left-0 w-full h-[1px] bg-white/10 -z-10"
-          ></div>
-
-          <div
-            id="step1-icon"
-            class="step-icon bg-indigo-600 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ring-4 ring-indigo-600/20 text-white transition-all duration-500"
-          >
-            1
+        <!-- Header Section -->
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 mb-3 shadow-inner">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
           </div>
-
-          <div
-            id="step2-icon"
-            class="step-icon bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white transition-all duration-500"
-          >
-            2
-          </div>
-
-          <div
-            id="step3-icon"
-            class="step-icon bg-slate-800 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white transition-all duration-500"
-          >
-            3
-          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-1">YK OFFICIAL</h2>
+          <p class="text-slate-400 text-xs sm:text-sm font-medium tracking-wide uppercase">Secure Client Registration Portal</p>
         </div>
 
-        <div id="verification-area" class="space-y-4">
+        <!-- Step Indicator Progress Bar -->
+        <div class="flex items-center justify-between mb-8 px-2 relative">
+          <div class="absolute top-1/2 left-4 right-4 h-[2px] bg-slate-800 -z-10 -translate-y-1/2"></div>
+          
+          <div id="step1-icon" class="step-icon w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold bg-indigo-600 text-white ring-4 ring-indigo-500/20 transition-all duration-500 shadow-lg shadow-indigo-600/30">1</div>
+          <div id="step2-icon" class="step-icon w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold bg-slate-800 text-slate-400 border border-slate-700 transition-all duration-500">2</div>
+          <div id="step3-icon" class="step-icon w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold bg-slate-800 text-slate-400 border border-slate-700 transition-all duration-500">3</div>
+        </div>
+
+        <!-- Verification Area (Step 1 & 2) -->
+        <div id="verification-area" class="space-y-4 animate-fade">
           <div class="relative">
             <input
               id="email"
               type="email"
-              placeholder="Email Address"
-              class="input-field w-full p-4 rounded-xl"
+              placeholder="Enter corporate email address"
+              class="input-glow w-full px-4 py-3.5 rounded-xl text-sm placeholder:text-slate-500"
             />
           </div>
+          
           <button
             onclick="sendOTP()"
-            class="btn-primary w-full py-4 rounded-xl font-bold text-white uppercase tracking-wide"
+            class="btn-cyber w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white"
           >
             Request Access Code
           </button>
 
-          <div class="pt-4 flex gap-2">
+          <div class="pt-2 flex gap-3">
             <input
               id="otp"
-              placeholder="6-Digit OTP"
-              class="input-field w-1/2 p-4 rounded-xl text-center tracking-[0.5em]"
+              placeholder="••••••"
+              maxlength="6"
+              class="input-glow w-1/2 py-3.5 rounded-xl text-center font-mono text-lg tracking-[0.4em] placeholder:tracking-normal placeholder:text-sm placeholder:font-sans placeholder:text-slate-500"
             />
             <button
               onclick="verifyOTP()"
-              class="bg-emerald-600 hover:bg-emerald-500 w-1/2 rounded-xl font-bold transition-all uppercase text-sm text-white"
+              class="w-1/2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-emerald-600/20"
             >
               Verify Identity
             </button>
           </div>
-          <div class="mt-4 text-center">
+
+          <div class="mt-3 text-center">
             <button
               id="resendBtn"
               onclick="sendOTP()"
               disabled
-              class="text-sm text-slate-500 font-medium hover:text-indigo-400 transition-colors disabled:cursor-not-allowed disabled:hover:text-slate-500"
+              class="text-xs text-slate-500 font-medium hover:text-indigo-400 transition-colors disabled:cursor-not-allowed disabled:hover:text-slate-500"
             >
-              Resend OTP <span id="timer">(30s)</span>
+              Resend OTP <span id="timer" class="font-semibold text-indigo-400">(30s)</span>
             </button>
           </div>
         </div>
 
-        <div
-          id="form"
-          class="hidden space-y-4 mt-8 animate-[fadeIn_0.5s_ease-out]"
-        >
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Project Brief Form (Step 3) -->
+        <div id="form" class="hidden space-y-4 animate-fade">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input
               id="name"
-              placeholder="Your Full Name"
-              class="input-field p-4 rounded-xl"
+              placeholder="Full Name"
+              class="input-glow p-3.5 rounded-xl text-sm placeholder:text-slate-500"
             />
             <input
               id="phone"
               placeholder="Contact Number"
-              class="input-field p-4 rounded-xl"
+              class="input-glow p-3.5 rounded-xl text-sm placeholder:text-slate-500"
             />
           </div>
-          <select
-            id="service"
-            class="input-field w-full p-4 rounded-xl appearance-none"
-          >
-            <option class="text-black">Website Development</option>
-            <option class="text-black">UI Design & Branding</option>
-            <option class="text-black">Portfolio Website</option>
-            <option class="text-black">Custom IT Solution</option>
-          </select>
+
+          <div class="relative">
+            <select
+              id="service"
+              class="input-glow w-full p-3.5 rounded-xl text-sm appearance-none bg-slate-900 cursor-pointer"
+            >
+              <option class="bg-slate-900 text-white">Website Development</option>
+              <option class="bg-slate-900 text-white">UI Design & Branding</option>
+              <option class="bg-slate-900 text-white">Portfolio Website</option>
+              <option class="bg-slate-900 text-white">Custom IT Solution</option>
+            </select>
+            <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+          </div>
+
           <textarea
             id="message"
-            rows="4"
-            placeholder="Briefly describe your project goals..."
-            class="input-field w-full p-4 rounded-xl resize-none"
+            rows="3"
+            placeholder="Briefly describe your project goals and requirements..."
+            class="input-glow w-full p-3.5 rounded-xl text-sm resize-none placeholder:text-slate-500"
           ></textarea>
+
           <button
             onclick="submitForm()"
             id="submitBtn"
-            class="btn-primary w-full py-4 rounded-xl font-bold text-white uppercase shadow-lg"
+            class="btn-cyber w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white shadow-lg"
           >
-            Submit Request
+            Submit Project Brief
           </button>
+        </div>
+
+        <!-- Footer watermark inside card -->
+        <div class="mt-8 pt-4 border-t border-white/5 text-center">
+          <p class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">
+            YK OFFICIAL &bull; Encrypted Portal Session
+          </p>
         </div>
       </div>
     </main>
 
-    <footer class="p-8 text-center border-t border-white/5">
-      <p class="text-slate-500 text-xs font-medium tracking-widest">
-        © 2026 YK OFFICIAL &bull; All Rights Reserved
-      </p>
-    </footer>
-
-    <div
-      id="loader"
-      class="hidden fixed inset-0 z-[100] backdrop-blur-sm bg-black/60 flex items-center justify-center"
-    >
-      <div class="spinner"></div>
+    <!-- Global Cinematic Loader Overlay -->
+    <div id="global-loader" class="hidden fixed inset-0 z-[120] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+      <div class="glass-panel border border-indigo-500/30 p-8 rounded-3xl max-w-xs w-full text-center shadow-2xl animate-fade space-y-4">
+        <div class="relative w-16 h-16 mx-auto">
+          <div class="absolute inset-0 rounded-full border-4 border-indigo-500/20"></div>
+          <div class="absolute inset-0 rounded-full border-4 border-indigo-500 border-t-transparent animate-spin"></div>
+        </div>
+        <div>
+          <h4 class="text-white font-bold text-sm tracking-wider uppercase mb-1">YK OFFICIAL</h4>
+          <p id="loaderText" class="text-slate-400 text-xs">Securing transmission...</p>
+        </div>
+      </div>
     </div>
 
-    <div
-      id="popup"
-      class="hidden fixed inset-0 z-[110] bg-black/80 backdrop-blur-md flex items-center justify-center p-6"
-    >
-      <div
-        class="bg-slate-900 border border-white/10 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl"
-      >
-        <h2 id="popupTitle" class="text-xl font-bold text-white mb-2"></h2>
-        <p
-          id="popupMsg"
-          class="text-slate-400 mb-6 text-sm leading-relaxed"
-        ></p>
+    <!-- Popup Notification Modal -->
+    <div id="popup" class="hidden fixed inset-0 z-[110] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+      <div class="glass-panel border border-white/10 p-6 sm:p-8 rounded-3xl max-w-xs w-full text-center shadow-2xl animate-fade">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <h3 id="popupTitle" class="text-lg font-bold text-white mb-2"></h3>
+        <p id="popupMsg" class="text-slate-300 mb-6 text-xs sm:text-sm leading-relaxed"></p>
         <button
           onclick="closePopup()"
-          class="bg-indigo-600 w-full py-3 rounded-xl font-bold text-white hover:bg-indigo-500 transition-all"
+          class="btn-cyber w-full py-3 rounded-xl font-bold text-xs uppercase tracking-wider text-white"
         >
           Understood
         </button>
       </div>
     </div>
-    <!-- Help Popup -->
-    <div
-      id="help-popup"
-      class="hidden fixed inset-0 z-[120] bg-black/80 backdrop-blur-sm flex items-center justify-center p-6"
-    >
-      <div
-        class="bg-slate-900 border border-white/10 p-8 rounded-3xl max-w-sm w-full"
-      >
-        <div
-          class="w-12 h-12 bg-indigo-600/20 rounded-full flex items-center justify-center mb-6 text-indigo-400"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </div>
-        <h2 class="text-xl font-bold text-white mb-4">Portal Guide</h2>
-        <ul class="text-slate-400 text-sm space-y-3 mb-8 text-left">
-          <li class="flex gap-3">
-            <span class="text-indigo-500 font-bold">1.</span>
-            <span>Provide a valid corporate email address.</span>
-          </li>
-          <li class="flex gap-3">
-            <span class="text-indigo-500 font-bold">2.</span>
-            <span>Enter the 6-digit OTP sent to your inbox.</span>
-          </li>
-          <li class="flex gap-3">
-            <span class="text-indigo-500 font-bold">3.</span>
-            <span>Complete the project brief and submit.</span>
-          </li>
-          <li class="flex gap-3">
-            <span class="text-indigo-500 font-bold">4.</span>
-            <span>Save your Ticket ID for future tracking.</span>
-          </li>
-        </ul>
-        <button
-          onclick="closeHelp()"
-          class="bg-indigo-600 w-full py-3 rounded-xl font-bold text-white hover:bg-indigo-500 transition-all"
-        >
-          Got it
-        </button>
-      </div>
-    </div>
-    <!-- Contact Modal -->
-    <div
-      id="contact"
-      class="hidden fixed inset-0 z-[110] bg-black/80 backdrop-blur-md flex items-center justify-center p-6"
-    >
-      <div
-        class="bg-slate-900 border border-white/10 p-8 rounded-3xl max-w-sm w-full text-center"
-      >
-        <div
-          class="w-16 h-16 bg-indigo-600/20 rounded-full flex items-center justify-center mx-auto mb-4 text-indigo-400"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-8 w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-            />
-          </svg>
-        </div>
-        <h2 class="text-2xl font-bold text-white mb-1">Direct Support</h2>
-        <p class="text-indigo-400 font-semibold mb-4 text-sm">
-          yegnesh7219@gmail.com
-        </p>
-        <p class="text-slate-400 text-xs mb-6 uppercase tracking-widest">
-          Tekadi, Nagpur, India | YK Official Team
-        </p>
-        <button
-          onclick="closeContact()"
-          class="border border-white/10 w-full py-3 rounded-xl font-bold text-white hover:bg-white/5 transition-all"
-        >
-          Close
-        </button>
-      </div>
-    </div>
 
+    <!-- Core Scripts (APIs and Logic Preserved) -->
     <script>
       emailjs.init("IjcMdGc7hhe75v6JE");
       let otpCode;
       const API =
         "https://script.google.com/macros/s/AKfycbwnBjAJdDDIwefyafJ1_1jAh84Vsgr9oslrvaPTYC5BN5Bpra-PkfgcDQ4dlWGw7q6T/exec";
 
-      // --- Core Stepper UI Update Logic ---
       function updateStepUI(stepNumber) {
         for (let i = 1; i <= 3; i++) {
           const stepIcon = document.getElementById(`step${i}-icon`);
           if (i <= stepNumber) {
-            stepIcon.classList.remove("bg-slate-800");
-            stepIcon.classList.add(
-              "bg-indigo-600",
-              "ring-4",
-              "ring-indigo-600/20",
-            );
+            stepIcon.className = "step-icon w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold bg-indigo-600 text-white ring-4 ring-indigo-500/20 transition-all duration-500 shadow-lg shadow-indigo-600/30";
           } else {
-            stepIcon.classList.add("bg-slate-800");
-            stepIcon.classList.remove(
-              "bg-indigo-600",
-              "ring-4",
-              "ring-indigo-600/20",
-            );
+            stepIcon.className = "step-icon w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold bg-slate-800 text-slate-400 border border-slate-700 transition-all duration-500";
           }
         }
       }
 
-      window.addEventListener("load", () => {
-        const loader = document.getElementById("pageLoader");
-        setTimeout(() => {
-          loader.style.opacity = "0";
-          setTimeout(() => (loader.style.display = "none"), 500);
-        }, 800);
-      });
-
-      function showLoader() {
-        document.getElementById("loader").classList.remove("hidden");
+      function showLoader(message = "Processing secure request...") {
+        document.getElementById("loaderText").innerText = message;
+        document.getElementById("global-loader").classList.remove("hidden");
       }
+      
       function hideLoader() {
-        document.getElementById("loader").classList.add("hidden");
+        document.getElementById("global-loader").classList.add("hidden");
       }
+
       function showPopup(title, msg) {
         document.getElementById("popupTitle").innerText = title;
         document.getElementById("popupMsg").innerText = msg;
         document.getElementById("popup").classList.remove("hidden");
       }
+      
       function closePopup() {
         document.getElementById("popup").classList.add("hidden");
       }
@@ -477,8 +299,6 @@
         let timeLeft = 30;
 
         resendBtn.disabled = true;
-
-        // Clear any existing timer
         clearInterval(timerInterval);
 
         timerInterval = setInterval(() => {
@@ -486,36 +306,32 @@
           if (timeLeft <= 0) {
             clearInterval(timerInterval);
             resendBtn.disabled = false;
-            timerText.innerText = ""; // Hide timer when ready
+            timerText.innerText = "";
           } else {
             timerText.innerText = `(${timeLeft}s)`;
           }
         }, 1000);
       }
 
-      // Modify your existing sendOTP function
       async function sendOTP() {
         let email = document.getElementById("email").value;
         if (!email || !email.includes("@"))
-          return showPopup("Required", "Please provide a valid email address.");
+          return showPopup("Required Field", "Please provide a valid corporate email address.");
 
         otpCode = Math.floor(100000 + Math.random() * 900000);
-        showLoader();
+        showLoader("Dispatching access code...");
         try {
           await emailjs.send("service_9uwcu9x", "template_51t8llg", {
             email,
             otp: otpCode,
           });
           hideLoader();
-          showPopup("Success", "Security code dispatched to your inbox.");
-
-          // --- NEW LOGIC START ---
+          showPopup("Dispatch Successful", "Security verification code has been sent to your inbox.");
           updateStepUI(2);
-          startTimer(); // Start the 30s countdown
-          // --- NEW LOGIC END ---
+          startTimer();
         } catch (e) {
           hideLoader();
-          showPopup("Error", "Failed to send verification code.");
+          showPopup("Transmission Error", "Failed to dispatch verification code.");
         }
       }
 
@@ -524,13 +340,10 @@
         if (user == otpCode && otpCode != null) {
           document.getElementById("verification-area").classList.add("hidden");
           document.getElementById("form").classList.remove("hidden");
-          updateStepUI(3); // Move to Step 3
-          showPopup(
-            "Identity Verified",
-            "You may now complete the project details.",
-          );
+          updateStepUI(3);
+          showPopup("Identity Confirmed", "You may now complete your project specifications.");
         } else {
-          showPopup("Security Alert", "Invalid verification code entered.");
+          showPopup("Security Alert", "Invalid verification code entered. Please check your inbox.");
         }
       }
 
@@ -546,7 +359,7 @@
       async function submitForm() {
         let btn = document.getElementById("submitBtn");
         let name = document.getElementById("name").value;
-        if (!name) return showPopup("Incomplete", "Please enter your name.");
+        if (!name) return showPopup("Incomplete Details", "Please enter your full name.");
 
         btn.disabled = true;
         let customerID = generateCustomerID(name);
@@ -559,7 +372,7 @@
           message: document.getElementById("message").value,
         };
 
-        showLoader();
+        showLoader("Logging project ticket...");
         try {
           await fetch(API, { method: "POST", body: JSON.stringify(data) });
           await emailjs.send("service_9uwcu9x", "template_94xq6yl", {
@@ -571,49 +384,24 @@
           });
           hideLoader();
           showPopup(
-            "Inquiry Logged",
-            "Ticket #" + customerID + " generated. Refreshing...",
+            "Inquiry Logged Successfully",
+            "Ticket #" + customerID + " generated. Refreshing portal...",
           );
           setTimeout(() => location.reload(), 3000);
         } catch (err) {
           hideLoader();
           btn.disabled = false;
-          showPopup("System Error", "Communication failed. Please try again.");
+          showPopup("System Error", "Communication link failed. Please try again.");
         }
       }
 
-      // Contact Modal ko open karne ke liye
-      function showContact() {
-        const contactModal = document.getElementById("contact");
-        contactModal.classList.remove("hidden");
-        // Animation add karne ke liye (Optional)
-        contactModal.classList.add("animate-[fadeIn_0.3s_ease-out]");
-      }
-
-      // Contact Modal ko close karne ke liye
-      function closeContact() {
-        const contactModal = document.getElementById("contact");
-        contactModal.classList.add("hidden");
-      }
-
-      function showHelp() {
-        const helpModal = document.getElementById("help-popup");
-        helpModal.classList.remove("hidden");
-        helpModal.classList.add("animate-[fadeIn_0.3s_ease-out]");
-      }
-
-      function closeHelp() {
-        const helpModal = document.getElementById("help-popup");
-        helpModal.classList.add("hidden");
-      }
-
-      // Security Warning
+      // Security Warning Handler
       function showWarning() {
         document.body.innerHTML = `
-                <div style="height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;background:#000;color:#fff;font-family:sans-serif;text-align:center;padding:20px;">
-                    <h1 style="font-size:32px;margin-bottom:20px;color:#ef4444;">⚠ SECURITY BREACH DETECTED</h1>
-                    <p style="font-size:16px;max-width:500px;color:#94a3b8;line-height:1.6;">Developer tools are prohibited on this portal.</p>
-                </div>`;
+            <div style="height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;background:#020617;color:#fff;font-family:sans-serif;text-align:center;padding:20px;">
+                <h1 style="font-size:28px;margin-bottom:12px;color:#ef4444;font-weight:700;">⚠ SECURITY BREACH DETECTED</h1>
+                <p style="font-size:14px;max-width:400px;color:#94a3b8;line-height:1.5;">Developer tools and inspection are restricted on YK OFFICIAL secure portals.</p>
+            </div>`;
       }
       document.addEventListener("contextmenu", (e) => {
         e.preventDefault();
