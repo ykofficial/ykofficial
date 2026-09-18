@@ -1,288 +1,645 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f172a" />
     <title>YK OFFICIAL | Invitation Portal</title>
-    <link rel="icon" type="image/svg+xml" href="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" />
-    
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.ibb.co/hJCHgThF/logo-yk-crop.png"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- url id code  -->
-  <script>
-    /**
-     * Unique ID Generate aur URL update karne ka function
-     */
-    function updateUrlWithUniqueId() {
-        // 6 characters ki Random Unique ID (YK-XXXXXX)
-        const uniqueId = Math.random().toString(36).substring(2, 8).toUpperCase();
-        
-        // Current Page Name (Pathname se page name nikalna)
-        const pageName = window.location.pathname.split("/").pop().split(".")[0] || 'home';
-        
-        // Naya URL Hash format: #pageName?uid=YKOFFICIAL-${uniqueId}
-        const newHash = `#${pageName}?uid=yKOfFiciAl${uniqueId}`;
-        
-        // Browser ka URL update karna bina reload kiye
-        window.history.replaceState(null, null, newHash);
-    }
-
-    // Jab page pehli baar load ho
-    window.addEventListener('DOMContentLoaded', updateUrlWithUniqueId);
-
-    // Agar aapki site single page hai aur sections change hote hain
-    window.addEventListener('hashchange', updateUrlWithUniqueId);
-</script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: Inter, system-ui, sans-serif;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+      .field {
+        width: 100%;
+        border: 1px solid #e2e8f0;
+        background: rgba(248, 250, 252, 0.85);
+        border-radius: 14px;
+        padding: 13px 14px;
+        outline: 0;
+        transition: 0.2s;
+      }
+      .field:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        background: #fff;
+      }
+      .field::placeholder {
+        color: #94a3b8;
+      }
+      .btn {
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s,
+          background 0.2s;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .spin {
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
         }
-
-        .shimmer-btn {
-            position: relative;
-            overflow: hidden;
+      }
+      @keyframes up {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
         }
-        .shimmer-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: rotate(45deg);
-            transition: 0.5s;
+        to {
+          opacity: 1;
+          transform: none;
         }
-        .shimmer-btn:hover::after {
-            left: 100%;
-        }
-
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-slideIn { animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+      }
+      .up {
+        animation: up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+      .modal {
+        animation: up 0.28s ease both;
+      }
+      .dot {
+        box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.1);
+      }
     </style>
-</head>
-
-<body class="bg-[#f8fafc] text-slate-900 overflow-x-hidden">
-
-    <div id="ykLoader" class="fixed inset-0 flex items-center justify-center bg-[#020617] z-[100] transition-opacity duration-700">
-        <div class="text-center">
-            <div class="relative w-24 h-24 mx-auto mb-8">
-                <div class="absolute inset-0 border-4 border-white/5 rounded-full"></div>
-                <div class="absolute inset-0 border-4 border-indigo-500 rounded-full border-t-transparent animate-spin"></div>
-                <!-- <img src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" class="absolute inset-4 w-16 h-16 object-contain brightness-0 invert opacity-80" alt="Logo"> -->
-            </div>
-            <div class="space-y-3">
-                <h2 class="text-white text-xl font-light tracking-[0.4em] uppercase">YK <span class="text-indigo-500">OFFICIAL</span></h2>
-                <div class="w-48 h-[2px] bg-white/10 mx-auto rounded-full overflow-hidden">
-                    <div id="loaderProgress" class="h-full bg-indigo-500 w-0 transition-all duration-[3000ms] ease-out"></div>
-                </div>
-            </div>
+  </head>
+  <body class="min-h-screen overflow-x-hidden bg-slate-950 text-slate-900">
+    <!-- PAGE LOADER -->
+    <div
+      id="ykLoader"
+      class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950"
+    >
+      <div class="w-full max-w-xs px-8 text-center">
+        <div class="relative mx-auto mb-7 h-20 w-20">
+          <div
+            class="absolute inset-0 rounded-full border border-white/10"
+          ></div>
+          <div
+            class="absolute inset-0 rounded-full border-2 border-indigo-500 border-t-transparent spin"
+          ></div>
+          <img
+            src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png"
+            class="absolute inset-4 h-12 w-12 rounded-full object-contain"
+            alt="YK Official"
+          />
         </div>
+        <div class="text-xs font-bold tracking-[.35em] text-white">
+          YK <span class="text-indigo-400">OFFICIAL</span>
+        </div>
+        <div class="mt-4 h-1 overflow-hidden rounded-full bg-white/10">
+          <div
+            id="loaderProgress"
+            class="h-full w-0 rounded-full bg-indigo-500 transition-all duration-[1800ms] ease-out"
+          ></div>
+        </div>
+        <p class="mt-3 text-[10px] uppercase tracking-widest text-slate-500">
+          Secure invitation portal
+        </p>
+      </div>
     </div>
 
-    <main class="min-h-screen flex flex-col items-center justify-center p-6 bg-[radial-gradient(circle_at_top_right,_#e0e7ff_0%,_#f8fafc_40%)]">
-        
-        <header class="text-center mb-10 animate-slideIn">
-            <div class="inline-block px-4 py-1.5 mb-4 border border-indigo-100 bg-indigo-50/50 rounded-full">
-                <span class="text-[10px] font-bold tracking-widest text-indigo-600 uppercase">Executive Concierge</span>
+    <main
+      class="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_15%_10%,#e0e7ff_0,transparent_30%),radial-gradient(circle_at_90%_90%,#dbeafe_0,transparent_28%),#f8fafc]"
+    >
+      <div
+        class="pointer-events-none absolute -left-32 top-20 h-72 w-72 rounded-full bg-indigo-300/20 blur-3xl"
+      ></div>
+      <div
+        class="pointer-events-none absolute -right-24 bottom-10 h-80 w-80 rounded-full bg-sky-300/20 blur-3xl"
+      ></div>
+
+      <section
+        class="relative mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-center px-4 py-10 sm:px-6 lg:px-8"
+      >
+        <header class="mb-8 flex items-center justify-between gap-4 up">
+          <div class="flex items-center gap-3">
+            <img
+              src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png"
+              alt="YK Official"
+              class="h-11 w-11 rounded-2xl object-contain shadow-lg shadow-indigo-200"
+            />
+            <div>
+              <div class="text-sm font-extrabold tracking-tight text-white">
+                YK<span class="font-medium text-indigo-600">OFFICIAL</span>
+              </div>
+              <div
+                class="text-[10px] font-semibold uppercase tracking-[.2em] text-slate-400"
+              >
+                Invitation Portal
+              </div>
             </div>
-            <h1 class="text-5xl font-bold tracking-tight text-slate-900 mb-2">
-                YK<span class="text-indigo-600 font-light">OFFICIAL</span>
-            </h1>
-            <p class="text-slate-500 font-light text-lg">Invitation Request Management</p>
+          </div>
+          <div
+            class="hidden items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-slate-500 sm:flex"
+          >
+            <span class="dot h-2 w-2 rounded-full bg-green-500"></span> Secure
+            online
+          </div>
         </header>
 
-        <div class="w-full max-w-3xl glass p-8 md:p-12 rounded-[2.5rem] shadow-2xl shadow-indigo-100/50 animate-slideIn">
-            <div class="grid md:grid-cols-2 gap-12">
-                
-                <div class="space-y-6">
-                    <h2 class="text-2xl font-semibold text-slate-800">Submit Inquiry</h2>
-                    <p class="text-slate-500 leading-relaxed">Please provide detailed information regarding your event. Our team validates all requests for security and logistical feasibility.</p>
-                    
-                    <div class="space-y-4 pt-4">
-                        <div class="flex items-center gap-4 text-sm text-slate-600">
-                            <span class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center">✓</span>
-                            24-hour Review
-                        </div>
-                        <div class="flex items-center gap-4 text-sm text-slate-600">
-                            <span class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center">✓</span>
-                            Secure Data Encryption
-                        </div>
-                    </div>
-                </div>
-
-                <form id="inviteForm" class="space-y-4">
-                    <div class="space-y-4">
-                        <input type="text" name="name" placeholder="Full Name" required 
-                            class="w-full bg-white/50 border border-slate-200 p-3.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
-                        
-                        <input type="email" name="email" placeholder="Corporate Email" required 
-                            class="w-full bg-white/50 border border-slate-200 p-3.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
-                        
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="text" name="phone" placeholder="Phone" required 
-                                class="w-full bg-white/50 border border-slate-200 p-3.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
-                            <input type="date" name="date" required 
-                                class="w-full bg-white/50 border border-slate-200 p-3.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-slate-500">
-                        </div>
-
-                        <input type="text" name="event" placeholder="Event Type (e.g. Gala, Wedding)" required 
-                            class="w-full bg-white/50 border border-slate-200 p-3.5 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
-                        
-                        <textarea name="purpose" placeholder="Detailed Purpose" 
-                            class="w-full bg-white/50 border border-slate-200 p-3.5 rounded-xl h-24 focus:ring-2 focus:ring-indigo-500 outline-none transition-all resize-none"></textarea>
-                    </div>
-
-                    <button type="submit" class="shimmer-btn w-full bg-slate-900 text-white font-semibold py-4 rounded-xl hover:bg-indigo-700 transition-colors shadow-lg shadow-slate-200">
-                        Send Official Request
-                    </button>
-                </form>
+        <div class="grid items-stretch gap-6 lg:grid-cols-[.85fr_1.15fr]">
+          <aside
+            class="up flex flex-col justify-between rounded-[2rem] bg-slate-950 p-7 text-white shadow-2xl shadow-slate-300/40 sm:p-9"
+          >
+            <div>
+              <span
+                class="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.2em] text-indigo-300"
+                >Executive Concierge</span
+              >
+              <h1
+                class="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl"
+              >
+                Invitation<br /><span class="text-indigo-400">Request</span>
+              </h1>
+              <p class="mt-5 max-w-md text-sm leading-7 text-slate-400">
+                Send your event details through the official YK OFFICIAL request
+                portal. Every submission receives a unique request ID and is
+                securely recorded.
+              </p>
             </div>
+
+            <div class="mt-10 space-y-3">
+              <div
+                class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[.04] p-4"
+              >
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300"
+                  >01</span
+                >
+                <div>
+                  <div class="text-sm font-semibold">Submit details</div>
+                  <div class="text-xs text-slate-500">
+                    Complete the official form
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[.04] p-4"
+              >
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300"
+                  >02</span
+                >
+                <div>
+                  <div class="text-sm font-semibold">Request ID</div>
+                  <div class="text-xs text-slate-500">
+                    Generated automatically
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[.04] p-4"
+              >
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300"
+                  >03</span
+                >
+                <div>
+                  <div class="text-sm font-semibold">Team review</div>
+                  <div class="text-xs text-slate-500">
+                    Your request is logged in the system
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <section
+            class="glass up rounded-[2rem] p-5 shadow-2xl shadow-indigo-100/50 sm:p-8"
+          >
+            <div class="mb-7 flex items-start justify-between gap-4">
+              <div>
+                <div
+                  class="text-[10px] font-extrabold uppercase tracking-[.2em] text-indigo-600"
+                >
+                  Official submission
+                </div>
+                <h2
+                  class="mt-2 text-2xl font-extrabold tracking-tight text-slate-900"
+                >
+                  Event Information
+                </h2>
+                <p class="mt-1 text-sm text-slate-500">
+                  All submitted fields are saved to the invitation record.
+                </p>
+              </div>
+              <div
+                class="hidden rounded-2xl bg-slate-100 px-3 py-2 text-right sm:block"
+              >
+                <div
+                  class="text-[9px] font-bold uppercase tracking-widest text-slate-400"
+                >
+                  System
+                </div>
+                <div class="mt-1 text-xs font-bold text-slate-700">
+                  YK-INVITE
+                </div>
+              </div>
+            </div>
+
+            <form id="inviteForm" class="space-y-4" novalidate>
+              <div class="grid gap-4 sm:grid-cols-2">
+                <label class="block"
+                  ><span class="mb-1.5 block text-xs font-bold text-slate-600"
+                    >Full Name *</span
+                  ><input
+                    class="field"
+                    name="name"
+                    autocomplete="name"
+                    placeholder="Your full name"
+                    required
+                /></label>
+                <label class="block"
+                  ><span class="mb-1.5 block text-xs font-bold text-slate-600"
+                    >Email Address *</span
+                  ><input
+                    class="field"
+                    type="email"
+                    name="email"
+                    autocomplete="email"
+                    placeholder="name@example.com"
+                    required
+                /></label>
+                <label class="block"
+                  ><span class="mb-1.5 block text-xs font-bold text-slate-600"
+                    >Phone Number *</span
+                  ><input
+                    class="field"
+                    type="tel"
+                    name="phone"
+                    autocomplete="tel"
+                    inputmode="tel"
+                    placeholder="+91 XXXXX XXXXX"
+                    required
+                /></label>
+                <label class="block"
+                  ><span class="mb-1.5 block text-xs font-bold text-slate-600"
+                    >Event Date *</span
+                  ><input class="field" type="date" name="date" required
+                /></label>
+              </div>
+
+              <label class="block"
+                ><span class="mb-1.5 block text-xs font-bold text-slate-600"
+                  >Event Type *</span
+                ><input
+                  class="field"
+                  name="event"
+                  placeholder="Wedding, Gala, Corporate Event, etc."
+                  required
+              /></label>
+              <label class="block"
+                ><span class="mb-1.5 block text-xs font-bold text-slate-600"
+                  >Detailed Purpose</span
+                ><textarea
+                  class="field min-h-32 resize-y"
+                  name="purpose"
+                  placeholder="Tell us about the event, requirements, guest details or any additional information..."
+                ></textarea>
+              </label>
+
+              <button
+                id="submitBtn"
+                type="submit"
+                class="btn flex w-full items-center justify-center gap-3 rounded-2xl bg-slate-950 px-5 py-4 text-sm font-extrabold text-white shadow-xl shadow-slate-200 hover:bg-indigo-600"
+              >
+                <span id="submitIcon">↗</span
+                ><span id="submitText">Send Official Request</span>
+              </button>
+              <p class="text-center text-[10px] leading-5 text-slate-400">
+                By submitting, you confirm that the information provided is
+                accurate.
+              </p>
+            </form>
+          </section>
         </div>
 
-        <footer class="mt-12 text-slate-400 text-[11px] uppercase tracking-widest">
-            © 2026 YK Official. All rights reserved.
+        <footer
+          class="mt-7 flex flex-col items-center justify-between gap-2 text-[10px] font-semibold uppercase tracking-widest text-slate-400 sm:flex-row"
+        >
+          <span>© 2026 YK OFFICIAL</span
+          ><span>Invitation Request Management</span>
         </footer>
+      </section>
     </main>
 
-    <div id="formLoader" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-3xl text-center shadow-2xl">
-            <div class="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-            <p class="font-medium text-slate-800">Processing Secure Request...</p>
+    <!-- SUBMISSION LOADER -->
+    <div
+      id="formLoader"
+      class="fixed inset-0 z-[90] hidden items-center justify-center bg-slate-950/70 p-5 backdrop-blur-md"
+    >
+      <div
+        class="modal w-full max-w-sm rounded-[2rem] border border-white/20 bg-white p-7 text-center shadow-2xl"
+      >
+        <div
+          class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-50"
+        >
+          <div
+            class="h-8 w-8 rounded-full border-4 border-indigo-600 border-t-transparent spin"
+          ></div>
         </div>
+        <h3 class="mt-5 text-lg font-extrabold text-slate-900">
+          Saving your request
+        </h3>
+        <p class="mt-2 text-sm leading-6 text-slate-500">
+          Please wait while the official request is being recorded.
+        </p>
+        <div class="mt-5 h-1.5 overflow-hidden rounded-full bg-slate-100">
+          <div
+            class="h-full w-1/2 rounded-full bg-indigo-600 animate-pulse"
+          ></div>
+        </div>
+      </div>
     </div>
 
-    <div id="successPopup" class="fixed inset-0 flex items-center justify-center hidden z-50 p-6">
-        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-md"></div>
-        <div class="relative bg-white p-10 rounded-[2rem] max-w-sm text-center shadow-2xl animate-slideIn">
-            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">✓</div>
-            <h3 class="text-2xl font-bold text-slate-800 mb-2">Request Received</h3>
-            <p class="text-slate-500 mb-8">Your invitation inquiry has been successfully transmitted to our team.</p>
-            <button onclick="closePopups()" class="w-full py-3 bg-slate-900 text-white rounded-xl font-bold">Acknowledge</button>
+    <!-- SUCCESS MODAL -->
+    <div
+      id="successPopup"
+      class="fixed inset-0 z-[95] hidden items-center justify-center bg-slate-950/60 p-5 backdrop-blur-md"
+    >
+      <div
+        class="modal relative w-full max-w-md rounded-[2rem] bg-white p-7 text-center shadow-2xl sm:p-9"
+      >
+        <button
+          type="button"
+          onclick="closeSuccess()"
+          class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200"
+          aria-label="Close"
+        >
+          ×
+        </button>
+        <div
+          class="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-green-50 text-3xl text-green-600"
+        >
+          ✓
         </div>
+        <div
+          class="mt-6 text-[10px] font-extrabold uppercase tracking-[.22em] text-green-600"
+        >
+          Request successfully recorded
+        </div>
+        <h3 class="mt-2 text-2xl font-extrabold text-slate-900">Thank you</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-500">
+          Your invitation request has been submitted and saved to the official
+          system.
+        </p>
+        <div class="mt-6 rounded-2xl border border-indigo-100 bg-indigo-50 p-4">
+          <div
+            class="text-[9px] font-bold uppercase tracking-widest text-indigo-500"
+          >
+            Your Request ID
+          </div>
+          <div
+            id="successId"
+            class="mt-1 break-all text-xl font-extrabold tracking-wide text-indigo-700"
+          >
+            YK-INVITE-000000
+          </div>
+        </div>
+        <button
+          type="button"
+          onclick="closeSuccess()"
+          class="mt-5 w-full rounded-2xl bg-slate-950 py-3.5 text-sm font-extrabold text-white hover:bg-indigo-600"
+        >
+          Done
+        </button>
+      </div>
     </div>
 
-    <div id="ykShield" class="fixed inset-0 hidden items-center justify-center z-[9999]">
-        <div class="absolute inset-0 bg-slate-950/90 backdrop-blur-2xl"></div>
-        <div class="relative glass border-white/10 p-12 w-[420px] rounded-[3rem] text-center">
-            <div class="mb-8">
-                <img src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" alt="YK" class="w-16 h-16 mx-auto rounded-full mb-4 ">
-                <h2 class="text-indigo-400 text-xs font-bold tracking-[0.3em] uppercase mb-2">System Lockdown</h2>
-                <h1 class="text-black text-2xl font-bold">Unauthorized Access</h1>
-            </div>
-            <p id="ykMsg" class="text-black-400 text-sm leading-relaxed mb-8 h-12"></p>
-            <div class="space-y-4">
-                <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                    <div id="ykBar" class="h-full bg-indigo-500 w-0 transition-all duration-1000"></div>
-                </div>
-                <div class="flex justify-between text-[10px] font-bold text-black-300 tracking-tighter uppercase">
-                    <span id="ykStatus">Validating Integrity...</span>
-                    <span id="ykCount">5s</span>
-                </div>
-            </div>
+    <!-- ERROR MODAL -->
+    <div
+      id="errorPopup"
+      class="fixed inset-0 z-[95] hidden items-center justify-center bg-slate-950/60 p-5 backdrop-blur-md"
+    >
+      <div
+        class="modal relative w-full max-w-md rounded-[2rem] bg-white p-7 text-center shadow-2xl"
+      >
+        <button
+          type="button"
+          onclick="closeError()"
+          class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-500"
+          aria-label="Close"
+        >
+          ×
+        </button>
+        <div
+          class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-red-50 text-2xl text-red-600"
+        >
+          !
         </div>
+        <h3 class="mt-5 text-xl font-extrabold text-slate-900">
+          Submission not completed
+        </h3>
+        <p id="errorText" class="mt-2 text-sm leading-6 text-slate-500">
+          Please try again.
+        </p>
+        <button
+          type="button"
+          onclick="closeError()"
+          class="mt-6 w-full rounded-2xl bg-slate-950 py-3.5 text-sm font-extrabold text-white"
+        >
+          Try Again
+        </button>
+      </div>
     </div>
 
     <script>
-        // INIT EMAILJS
-        emailjs.init("9P9_Nz0_Es2Y6Ffvm");
+      const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbyUJSruVELA_wCcyNQN9WJKIXjk65aL_A15gPkRnr19d9x0TNiwdaR-9vkcLq_t1W1q/exec";
+      const EMAILJS_PUBLIC_KEY = "9P9_Nz0_Es2Y6Ffvm";
+      const EMAILJS_SERVICE_ID = "service_dgrc179";
+      const EMAILJS_TEMPLATE_ID = "template_qxhyh7i";
 
-        // PAGE LOADER
-        window.addEventListener("load", () => {
-            const bar = document.getElementById("loaderProgress");
-            const loader = document.getElementById("ykLoader");
-            bar.style.width = "100%";
-            setTimeout(() => {
-                loader.style.opacity = "0";
-                setTimeout(() => loader.style.display = "none", 700);
-            }, 3200);
-        });
+      emailjs.init(EMAILJS_PUBLIC_KEY);
 
-        // FORM LOGIC
-        const inviteForm = document.getElementById("inviteForm");
-        inviteForm.addEventListener("submit", async function(e) {
-            e.preventDefault();
-            const loader = document.getElementById("formLoader");
-            loader.classList.replace("hidden", "flex");
+      function makeRequestId() {
+        const now = Date.now().toString(36).toUpperCase();
+        const random = Math.random().toString(36).slice(2, 7).toUpperCase();
+        return `YK-INVITE-${now}-${random}`;
+      }
 
-            const data = Object.fromEntries(new FormData(this));
+      function setUrlId() {
+        const page =
+          location.pathname.split("/").pop().replace(".html", "") || "invite";
+        const uid = makeRequestId().replace("YK-INVITE-", "");
+        history.replaceState(null, "", `#${page}?uid=yKOfFiciAl${uid}`);
+      }
 
-            try {
-                // GOOGLE SHEET
-                await fetch("https://script.google.com/macros/s/AKfycbxqQWXt8JMQlyPZFqjJfSLwynDqi9GmzjyflVYujRmUu3HR2vV0S-CrT33CGKV1FMNj/exec", {
-                    method: "POST",
-                    body: JSON.stringify(data),
-                });
+      function openModal(id) {
+        const el = document.getElementById(id);
+        el.classList.remove("hidden");
+        el.classList.add("flex");
+        document.body.classList.add("overflow-hidden");
+      }
+      function closeModal(id) {
+        const el = document.getElementById(id);
+        el.classList.add("hidden");
+        el.classList.remove("flex");
+        document.body.classList.remove("overflow-hidden");
+      }
+      function closeSuccess() {
+        closeModal("successPopup");
+      }
+      function closeError() {
+        closeModal("errorPopup");
+      }
 
-                // EMAILJS
-                await emailjs.send("service_dgrc179", "template_qxhyh7i", data);
+      window.addEventListener("load", () => {
+        setUrlId();
+        document.getElementById("loaderProgress").style.width = "100%";
+        setTimeout(() => {
+          const loader = document.getElementById("ykLoader");
+          loader.style.opacity = "0";
+          setTimeout(() => loader.remove(), 450);
+        }, 1900);
+      });
 
-                loader.classList.replace("flex", "hidden");
-                document.getElementById("successPopup").classList.remove("hidden");
-                this.reset();
-            } catch (err) {
-                loader.classList.replace("flex", "hidden");
-                alert("Submission error. Please verify network connection.");
-            }
-        });
+      const form = document.getElementById("inviteForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const submitText = document.getElementById("submitText");
+      const submitIcon = document.getElementById("submitIcon");
 
-        function closePopups() {
-            document.getElementById("successPopup").classList.add("hidden");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
         }
 
-        // SECURITY LOGIC
-        let ykTriggered = false;
-        const msgText = "The system has detected a potential security breach attempt. Initiating protocol YK-99 to secure environment variables.";
+        const requestId = makeRequestId();
+        const data = Object.fromEntries(new FormData(form));
+        data.id = requestId;
+        data.timestamp = new Date().toISOString();
+        data.source = "YK OFFICIAL Invitation Portal";
 
-        function showYKShield() {
-            if (ykTriggered) return;
-            ykTriggered = true;
-            
-            const shield = document.getElementById("ykShield");
-            shield.classList.remove("hidden");
-            shield.classList.add("flex");
+        submitBtn.disabled = true;
+        submitText.textContent = "Submitting securely...";
+        submitIcon.textContent = "•";
+        openModal("formLoader");
 
-            let i = 0;
-            const type = () => {
-                if (i < msgText.length) {
-                    document.getElementById("ykMsg").innerHTML += msgText.charAt(i);
-                    i++;
-                    setTimeout(type, 25);
-                }
-            };
-            type();
+        try {
+          /*
+           * Google Apps Script receives every form field plus ID/timestamp/source.
+           * The script must return JSON with {success:true,id:"..."}.
+           */
+          const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            mode: "cors",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(data),
+          });
 
-            let time = 5;
-            document.getElementById("ykBar").style.width = "100%";
-            const countdown = setInterval(() => {
-                time--;
-                document.getElementById("ykCount").innerText = `${time}s`;
-                if(time === 3) document.getElementById("ykStatus").innerText = "Flushing Cache...";
-                if(time <= 0) {
-                    clearInterval(countdown);
-                    location.reload();
-                }
-            }, 1000);
+          let result = {};
+          try {
+            result = await response.json();
+          } catch (_) {}
+
+          if (!response.ok || result.success === false) {
+            throw new Error(
+              result.message || "Google Sheet could not save the request.",
+            );
+          }
+
+          // EmailJS is secondary: Sheet save is the primary success condition.
+          try {
+            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, data);
+          } catch (mailError) {
+            console.warn("EmailJS notification failed:", mailError);
+          }
+
+          closeModal("formLoader");
+          document.getElementById("successId").textContent =
+            result.id || requestId;
+          openModal("successPopup");
+          form.reset();
+        } catch (err) {
+          closeModal("formLoader");
+          document.getElementById("errorText").textContent =
+            err.message || "Network error. Please try again.";
+          openModal("errorPopup");
+        } finally {
+          submitBtn.disabled = false;
+          submitText.textContent = "Send Official Request";
+          submitIcon.textContent = "↗";
         }
+      });
 
-        // BLOCKS
-        document.addEventListener("contextmenu", e => { e.preventDefault(); showYKShield(); });
-        document.addEventListener("keydown", e => {
-            if ((e.ctrlKey && ['u','s','i','j','c'].includes(e.key.toLowerCase())) || e.key === 'F12') {
-                e.preventDefault();
-                showYKShield();
-            }
-        });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeSuccess();
+          closeError();
+        }
+      });
+
+      // Keep the existing YK security behavior, but make it less intrusive and responsive.
+      let ykTriggered = false;
+      function showYKShield() {
+        if (ykTriggered) return;
+        ykTriggered = true;
+        const shield = document.createElement("div");
+        shield.className =
+          "fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/95 p-5 backdrop-blur-xl";
+        shield.innerHTML = `
+        <div class="w-full max-w-md rounded-[2rem] border border-white/10 bg-white/5 p-8 text-center text-white shadow-2xl">
+          <img src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" class="mx-auto h-14 w-14 rounded-2xl object-contain">
+          <div class="mt-5 text-xs font-bold uppercase tracking-[.25em] text-indigo-300">Security Protocol</div>
+          <h2 class="mt-2 text-2xl font-extrabold">Protected Portal</h2>
+          <p class="mt-3 text-sm leading-6 text-slate-400">This action is restricted on the official portal. The page will refresh shortly.</p>
+          <div class="mt-6 h-1.5 overflow-hidden rounded-full bg-white/10"><div class="h-full w-full bg-indigo-500"></div></div>
+          <div id="shieldCount" class="mt-3 text-xs font-bold text-slate-500">5s</div>
+        </div>`;
+        document.body.appendChild(shield);
+        let n = 5;
+        const timer = setInterval(() => {
+          n--;
+          const c = shield.querySelector("#shieldCount");
+          if (c) c.textContent = `${n}s`;
+          if (n <= 0) {
+            clearInterval(timer);
+            location.reload();
+          }
+        }, 1000);
+      }
+
+      document.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        showYKShield();
+      });
+      document.addEventListener("keydown", (e) => {
+        const blocked =
+          e.key === "F12" ||
+          (e.ctrlKey &&
+            ["u", "s", "i", "j", "c"].includes(e.key.toLowerCase()));
+        if (blocked) {
+          e.preventDefault();
+          showYKShield();
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
