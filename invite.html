@@ -597,49 +597,51 @@
       });
 
       // Keep the existing YK security behavior, but make it less intrusive and responsive.
-      let ykTriggered = false;
-      function showYKShield() {
-        if (ykTriggered) return;
-        ykTriggered = true;
-        const shield = document.createElement("div");
-        shield.className =
-          "fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/95 p-5 backdrop-blur-xl";
-        shield.innerHTML = `
-        <div class="w-full max-w-md rounded-[2rem] border border-white/10 bg-white/5 p-8 text-center text-white shadow-2xl">
-          <img src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" class="mx-auto h-14 w-14 rounded-2xl object-contain">
-          <div class="mt-5 text-xs font-bold uppercase tracking-[.25em] text-indigo-300">Security Protocol</div>
-          <h2 class="mt-2 text-2xl font-extrabold">Protected Portal</h2>
-          <p class="mt-3 text-sm leading-6 text-slate-400">This action is restricted on the official portal. The page will refresh shortly.</p>
-          <div class="mt-6 h-1.5 overflow-hidden rounded-full bg-white/10"><div class="h-full w-full bg-indigo-500"></div></div>
-          <div id="shieldCount" class="mt-3 text-xs font-bold text-slate-500">5s</div>
-        </div>`;
-        document.body.appendChild(shield);
-        let n = 5;
-        const timer = setInterval(() => {
-          n--;
-          const c = shield.querySelector("#shieldCount");
-          if (c) c.textContent = `${n}s`;
-          if (n <= 0) {
-            clearInterval(timer);
-            location.reload();
-          }
-        }, 1000);
-      }
+      // let ykTriggered = false;
+      // function showYKShield() {
+      //   if (ykTriggered) return;
+      //   ykTriggered = true;
+      //   const shield = document.createElement("div");
+      //   shield.className =
+      //     "fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/95 p-5 backdrop-blur-xl";
+      //   shield.innerHTML = `
+      //   <div class="w-full max-w-md rounded-[2rem] border border-white/10 bg-white/5 p-8 text-center text-white shadow-2xl">
+      //     <img src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" class="mx-auto h-14 w-14 rounded-2xl object-contain">
+      //     <div class="mt-5 text-xs font-bold uppercase tracking-[.25em] text-indigo-300">Security Protocol</div>
+      //     <h2 class="mt-2 text-2xl font-extrabold">Protected Portal</h2>
+      //     <p class="mt-3 text-sm leading-6 text-slate-400">This action is restricted on the official portal. The page will refresh shortly.</p>
+      //     <div class="mt-6 h-1.5 overflow-hidden rounded-full bg-white/10"><div class="h-full w-full bg-indigo-500"></div></div>
+      //     <div id="shieldCount" class="mt-3 text-xs font-bold text-slate-500">5s</div>
+      //   </div>`;
+      //   document.body.appendChild(shield);
+      //   let n = 5;
+      //   const timer = setInterval(() => {
+      //     n--;
+      //     const c = shield.querySelector("#shieldCount");
+      //     if (c) c.textContent = `${n}s`;
+      //     if (n <= 0) {
+      //       clearInterval(timer);
+      //       location.reload();
+      //     }
+      //   }, 1000);
+      // }
 
-      document.addEventListener("contextmenu", (e) => {
-        e.preventDefault();
-        showYKShield();
-      });
-      document.addEventListener("keydown", (e) => {
-        const blocked =
-          e.key === "F12" ||
-          (e.ctrlKey &&
-            ["u", "s", "i", "j", "c"].includes(e.key.toLowerCase()));
-        if (blocked) {
-          e.preventDefault();
-          showYKShield();
-        }
-      });
+      // document.addEventListener("contextmenu", (e) => {
+      //   e.preventDefault();
+      //   showYKShield();
+      // });
+      // document.addEventListener("keydown", (e) => {
+      //   const blocked =
+      //     e.key === "F12" ||
+      //     (e.ctrlKey &&
+      //       ["u", "s", "i", "j", "c"].includes(e.key.toLowerCase()));
+      //   if (blocked) {
+      //     e.preventDefault();
+      //     showYKShield();
+      //   }
+      // });
     </script>
+
+    <script src="security.js"></script>
   </body>
 </html>
