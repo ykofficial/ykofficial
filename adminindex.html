@@ -230,6 +230,8 @@
           >
             Sign In System
           </button>
+
+          
         </div>
       </div>
     </div>
@@ -250,30 +252,47 @@
         </div>
 
         <nav class="space-y-2 flex-grow">
+
+          <!-- Dashboard Button -->
           <button
             class="w-full flex items-center gap-3 p-3 rounded-xl bg-indigo-500/10 text-indigo-400 font-semibold border border-indigo-500/20"
           >
             <i class="fa-solid fa-chart-line w-5 text-center"></i>
             <span>Dashboard</span>
           </button>
-         <button
-  type="button"
-  onclick="openModalIframe('owner-notification.html', 'Notifications Admin', 'fa-bell')"
-  class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-all text-left"
->
-  <i class="fa-solid fa-bell w-5 text-center"></i>
-  <span>Notifications Admin</span>
-</button>
 
-<!-- Feedback Admin Button -->
-<button
-  type="button"
- onclick="openModalIframe('feedbackadmin.html', 'Feedback Admin', 'fa-comments')"
-  class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-all text-left"
->
-  <i class="fa-solid fa-comments w-5 text-center"></i>
-  <span>Feedback Admin</span>
-</button>
+
+          <!-- Notifications Admin Button -->
+         <button
+           type="button"
+           onclick="openModalIframe('owner-notification.html', 'Notifications Admin', 'fa-bell')"
+           class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-all text-left"
+         >
+           <i class="fa-solid fa-bell w-5 text-center"></i>
+           <span>Notifications Admin</span>
+         </button>
+         
+         <!-- Feedback Admin Button -->
+         <button
+           type="button"
+          onclick="openModalIframe('feedbackadmin.html', 'Feedback Admin', 'fa-comments')"
+           class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-all text-left"
+         >
+           <i class="fa-solid fa-comments w-5 text-center"></i>
+           <span>Feedback Admin</span>
+         </button>
+         
+          <!-- Invite Admin Button -->
+         <button
+           type="button"
+          onclick="openModalIframe('inviteadmin.html', 'Invite Admin', 'fa-user-plus')"
+           class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-all text-left"
+         >
+           <i class="fa-solid fa-user-plus w-5 text-center"></i>
+           <span>Invite Admin</span>
+         </button>
+
+          <!-- Google Sheet Button -->
           <button
             onclick="openGoogleSheet()"
             class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-emerald-500/10 text-slate-400 hover:text-emerald-400 transition-all"
@@ -281,6 +300,8 @@
             <i class="fa-solid fa-table-cells-large w-5 text-center"></i>
             <span>Google Sheet</span>
           </button>
+
+
           <button
             onclick="showSystemHelp()"
             class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-all"
@@ -288,6 +309,7 @@
             <i class="fa-solid fa-circle-question w-5 text-center"></i>
             <span>System Help</span>
           </button>
+
           <button
             onclick="showSupport()"
             class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-all"
@@ -295,6 +317,7 @@
             <i class="fa-solid fa-headset w-5 text-center"></i>
             <span>Support</span>
           </button>
+
         </nav>
 
         <button
@@ -433,9 +456,18 @@
       </main>
     </div>
 
+
+
+
+
+
+
+
+
+
     <!-- Popup Model Feedback and Notifications Model -->
      <!-- Iframe Modal Container (Aapke modalOverlay ke andar add karein) -->
-<!-- IFRAME POPUP MODAL -->
+    <!-- IFRAME POPUP MODAL -->
 <div
   id="iframeModal"
   class="hidden fixed inset-0 z-[2000] bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-5"
@@ -535,6 +567,8 @@
   document.body.style.overflow = "hidden";
 }
 </script>
+
+
 
     <!-- GOOGLE SHEET POPUP -->
     <div
@@ -647,6 +681,10 @@
           </button>
         </div>
       </div>
+
+
+
+
  <!-- edit modal -->
       <div
         id="editModal"
@@ -690,6 +728,9 @@
           </button>
         </div>
       </div>
+
+
+
       <!-- Help Modal -->
       <div
         id="helpModal"
@@ -714,6 +755,9 @@
           Close Guide
         </button>
       </div>
+
+
+
       <!-- Support Modal -->
       <div
         id="supportModal"
