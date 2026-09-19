@@ -1,649 +1,2167 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>YK OFFICIAL | Invitation Admin</title>
-    <link rel="icon" href="https://i.ibb.co/hJCHgThF/logo-yk-crop.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      window["__codeletBootstrap__"] = JSON.parse(
+        '{"A":"A","B":"20260918-05-13efa67","C":{"Abril Fatface":"YACgEZbkUVE,0","Alfa Slab One":"YACgEYS9sJU,0","Anton":"YACgEcYqQ-A,0","Archivo":"YACgEZulLoA,0","Arial Narrow":"YAGyDvJ_4Ts,0","Arial Rounded MT Bold":"YAFcfoaHu-s,0","Arial":"YAGyDvJ_4Ts,0","Avenir Next":"YAFcfmNq6UY,0","Baloo 2":"YADK30bC6HQ,0","Bebas Neue":"YACgESME5ew,0","Bricolage Grotesque":"YAFyMcdwzpc,0","Broken Glyph":"YADZ-exUkv0,0","Canva Sans":"YAFdJjTk5UU,1","Caveat":"YALBs2ploWQ,0","Comic Sans MS":"YAFcfvtOAUY,1","Cormorant Garamond":"YAFdJhX-538,0","Courier New":"YAGzXiGs0_8,0","Courier Prime":"YAD1aFjegN8,0","DM Sans":"YAD1aU3sLnI,0","DM Serif Display":"YAD1aYG82rc,0","Forum":"YACgEcnnqB4,0","Fraunces":"YAFdJpU7Kkk,0","Georgia":"YAGzXkO0pEM,0","Ghost Mono":"YAHQutsX00Q,0","Hanken Grotesk":"YAFcfhwp99E,0","Helvetica Neue":"YAFcf6CtJfI,0","Helvetica":"YAFcf6CtJfI,0","IBM Plex Mono":"YAFdJkmvhGI,0","Impact":"YAFcfnjI7Vk,0","Instrument Serif":"YAHFeOnZNEk,0","Inter":"YAFdJvSyp_k,3","Iowan Old Style":"YAGNIFa8j9o,0","Jacques Francois":"YADK3zbC6RM,0","JetBrains Mono":"YAFdJksXcAk,0","Josefin Sans":"YAFdJjvw9Ps,0","Lato":"YAFdJuFCnaw,0","Libre Baskerville":"YACgEUFdPdA,0","Lobster":"YAD8SnSjSFI,0","Lora":"YACgEXvxf8Q,0","Merriweather":"YACgEXvHxxs,0","Montserrat":"YAFdtQi73Xs,0","Nunito":"YAFdJoNRMmU,1","Oleo Script":"YACgEQQ14jI,0","Oswald":"YACgEQY10lw,0","Pacifico":"YADLjORQ1u4,0","Phantom Sans":"YAFdJvgJ5TU,0","Playfair Display":"YAFdJhem5V8,1","Plus Jakarta Sans":"YAGvf3_u0_Q,0","Poppins":"YAFdJjbTu24,1","Press Start 2P":"YAFyGr-8pmQ,0","Quicksand":"YAFdJpYtCxE,1","Raleway":"YAFdJhmxbVQ,1","Roboto Slab":"YAFdJswIKAg,0","Rockwell":"YAFcfyVZnN0,0","Rye":"YACgEdQP21k,0","Segoe UI":"YAHNdRD1Klw,0","Source Sans 3":"YAG4lO1Mj10,0","Source Serif 4":"YACgEfdj394,0","Space Grotesk":"YADZ-dYEmhg,0","Space Mono":"YADW1-vpsoc,0","Times New Roman":"YAGzXW3gftg,0","Times":"YAGzXW3gftg,0","Trebuchet MS":"YAFcfrglpVA,0","UV Display":"YAEdVfSSpYo,0","UV Sans":"YAFdJvgJ5TU,0","Ubuntu":"YACgERDU--Q,0","Verdana":"YAGzXTctYtQ,0","Work Sans":"YAGXhLOKv44,0","Yellowtail":"YACgEYG4kG4,0","ui-monospace":"YAD1aFjegN8,0","ui-sans-serif":"YACkoD1yZN0,0"}}',
+      );
+    </script>
+    <script
+      src="/_sdk/83d6dfdadcd4750a.telemetry_sdk.js"
+      integrity="sha512-XS4Dvzp6vbagZS9vFErihvr8aO3S0tH78KWUefn06fmL4WYqryBtZj/IOLITYj7dFA4gPVvPg1W/JB1DK3uLNQ=="
+    ></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YK Official | Invite Admin Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
       rel="stylesheet"
     />
     <style>
+      :root {
+        --ink: #17203b;
+        --muted: #66708a;
+        --line: rgba(93, 105, 145, 0.16);
+        --indigo: #4f46e5;
+        --violet: #7c3aed;
+        --success: #15803d;
+        --danger: #dc2626;
+      }
+
       * {
         box-sizing: border-box;
       }
       body {
-        font-family: Inter, sans-serif;
-      }
-      .field {
         width: 100%;
-        border: 1px solid #e2e8f0;
-        background: #f8fafc;
-        border-radius: 14px;
-        padding: 12px;
-        outline: 0;
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(
+            circle at 8% 10%,
+            rgba(199, 210, 254, 0.72),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 90% 12%,
+            rgba(233, 213, 255, 0.75),
+            transparent 26%
+          ),
+          linear-gradient(135deg, #fcfdff 0%, #f5f7ff 48%, #fdfaff 100%);
       }
-      .field:focus {
-        border-color: #6366f1;
-        box-shadow: 0 0 0 4px #6366f11a;
-        background: white;
+
+      button,
+      input,
+      textarea {
+        font: inherit;
       }
-      .spin {
-        animation: spin 1s linear infinite;
+      button {
+        cursor: pointer;
       }
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.58;
+      }
+
+      .glass {
+        background: rgba(255, 255, 255, 0.74);
+        border: 1px solid rgba(255, 255, 255, 0.88);
+        box-shadow:
+          0 18px 50px rgba(60, 70, 110, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+
+      .page-grid {
+        background-image:
+          linear-gradient(rgba(99, 102, 241, 0.034) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(99, 102, 241, 0.034) 1px, transparent 1px);
+        background-size: 42px 42px;
+      }
+
+      .brand-orb {
+        background: linear-gradient(145deg, #312e81, #6d28d9 55%, #a855f7);
+        box-shadow: 0 12px 28px rgba(91, 63, 206, 0.28);
+      }
+
+      .primary-button {
+        color: #fff;
+        background: linear-gradient(135deg, #4338ca, #6d28d9);
+        box-shadow: 0 10px 22px rgba(79, 70, 229, 0.24);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease;
+      }
+
+      .primary-button:hover:not(:disabled) {
+        transform: translateY(-2px);
+        filter: brightness(1.05);
+        box-shadow: 0 14px 28px rgba(79, 70, 229, 0.31);
+      }
+
+      .subtle-button {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.75);
+        color: #44506f;
+        transition: all 0.2s ease;
+      }
+
+      .subtle-button:hover:not(:disabled) {
+        border-color: rgba(79, 70, 229, 0.3);
+        background: #fff;
+        color: #4338ca;
+        transform: translateY(-1px);
+      }
+
+      .icon-button {
+        width: 2.25rem;
+        height: 2.25rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.8rem;
+        border: 1px solid var(--line);
+        transition: all 0.18s ease;
+      }
+
+      .icon-button:hover {
+        transform: translateY(-1px);
+        background: #fff;
+        border-color: rgba(79, 70, 229, 0.34);
+        color: #4338ca;
+      }
+
+      .record-row {
+        transition:
+          background 0.18s ease,
+          transform 0.18s ease;
+      }
+      .record-row:hover {
+        background: rgba(238, 242, 255, 0.58);
+      }
+
+      .modal-shell {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+
+      .modal-shell.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-card {
+        transform: translateY(12px) scale(0.98);
+        transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .modal-shell.is-open .modal-card {
+        transform: translateY(0) scale(1);
+      }
+
+      .toast {
+        transform: translateY(18px);
+        opacity: 0;
+        transition: all 0.25s ease;
+        pointer-events: none;
+      }
+
+      .toast.is-visible {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .loader-ring {
+        width: 58px;
+        height: 58px;
+        border: 4px solid rgba(99, 102, 241, 0.14);
+        border-top-color: #5b4ce6;
+        border-radius: 50%;
+        animation: spin 0.85s linear infinite;
+      }
+
+      .progress-shimmer {
+        background: linear-gradient(90deg, #4f46e5, #a855f7, #4f46e5);
+        background-size: 200% 100%;
+        animation: shimmer 1.3s linear infinite;
+      }
+
       @keyframes spin {
         to {
           transform: rotate(360deg);
         }
       }
-      .modal {
-        animation: up 0.22s ease;
+      @keyframes shimmer {
+        to {
+          background-position: -200% 0;
+        }
       }
-      @keyframes up {
+      @keyframes rise {
         from {
           opacity: 0;
-          transform: translateY(12px);
+          transform: translateY(14px);
         }
         to {
           opacity: 1;
-          transform: none;
+          transform: translateY(0);
         }
       }
-      ::-webkit-scrollbar {
-        width: 7px;
+
+      .reveal {
+        animation: rise 0.55s ease both;
       }
-      ::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 9px;
+      .reveal-delay-1 {
+        animation-delay: 0.08s;
+      }
+      .reveal-delay-2 {
+        animation-delay: 0.16s;
+      }
+
+      .status-dot {
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 50%;
+        display: inline-block;
+        background: #94a3b8;
+      }
+
+      .status-dot.connected {
+        background: #22c55e;
+        box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.13);
+      }
+
+      .status-dot.offline {
+        background: #ef4444;
+        box-shadow: 0 0 0 5px rgba(239, 68, 68, 0.1);
+      }
+
+      .field {
+        width: 100%;
+        border: 1px solid rgba(125, 137, 173, 0.24);
+        background: rgba(255, 255, 255, 0.84);
+        border-radius: 13px;
+        outline: none;
+        color: var(--ink);
+        padding: 0.72rem 0.85rem;
+        transition:
+          border-color 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+
+      .field:focus {
+        border-color: #7067ed;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+      }
+
+      .action-loader {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+
+      .action-loader.is-active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      @media (max-width: 640px) {
+        .mobile-card-row td {
+          display: block;
+          border: 0;
+          padding: 0.35rem 1rem;
+        }
+        .mobile-card-row td:first-child {
+          padding-top: 1rem;
+        }
+        .mobile-card-row td:last-child {
+          padding-bottom: 1rem;
+        }
+        .mobile-card-row td::before {
+          content: attr(data-label);
+          display: block;
+          margin-bottom: 0.15rem;
+          color: #7b849c;
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+        .mobile-card-row td.actions-cell::before {
+          display: none;
+        }
+        .mobile-card-row {
+          display: block;
+          margin: 0.7rem;
+          border: 1px solid rgba(125, 137, 173, 0.16);
+          border-radius: 16px;
+          overflow: hidden;
+        }
+        thead {
+          display: none;
+        }
+        tbody {
+          display: block;
+        }
       }
     </style>
+    <script
+      src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"
+      type="text/javascript"
+    ></script>
+    <script
+      src="https://cdn.tailwindcss.com/3.4.17"
+      type="text/javascript"
+    ></script>
+    <script
+      src="/_sdk/8de366929c5f3b48.data_sdk.js"
+      type="text/javascript"
+      integrity="sha512-TyQ8k8cZj66xe/aENmn6RyZpdOFZXbAo5+KBG3PeFM+Q4qMTHU8xAqmq4ADClNfPrstgQYV6OzZHwLTnElzB2g=="
+    ></script>
+    <script
+      src="/_sdk/0ddbbee1c66b1212.editing_sdk.js"
+      type="text/javascript"
+      integrity="sha512-HQn5LM1yruQSbY78ATUril6QeOJ9xj7KqO64ltLtb4vBwI5Qv3/tloFFOndBPZTNZoeV5xKzuth5y6FTi9crsg=="
+    ></script>
+    <script
+      src="/_sdk/765e1fea0cec97ce.resizing_sdk.js"
+      type="text/javascript"
+      integrity="sha512-IRTJnqww0+HQ5V/LlWEQrlD5SrYHaVvaeVoNe8HYQXoaguzUGheSd9+n9s6WOgaTcEH0g37DuINHZ9aqfzWjlw=="
+    ></script>
   </head>
-  <body class="min-h-screen bg-slate-950">
-    <div
-      id="loader"
-      class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950"
-    >
-      <div class="text-center">
-        <div class="relative mx-auto h-20 w-20">
-          <div
-            class="absolute inset-0 rounded-3xl border border-white/10"
-          ></div>
-          <div
-            class="absolute inset-1 rounded-3xl border-2 border-indigo-500 border-t-transparent spin"
-          ></div>
-          <img
-            src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png"
-            class="absolute inset-4 h-12 w-12 rounded-2xl"
-          />
-        </div>
-        <div class="mt-6 text-xs font-extrabold tracking-[.35em] text-white">
-          YK <span class="text-indigo-400">OFFICIAL</span>
-        </div>
-        <div class="mx-auto mt-4 h-1 w-48 overflow-hidden rounded bg-white/10">
-          <div
-            id="bar"
-            class="h-full w-0 bg-indigo-500 transition-all duration-[1400ms]"
-          ></div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="min-h-screen bg-[radial-gradient(circle_at_15%_0,#312e81,transparent_28%),#f8fafc]"
-    >
-      <header
-        class="sticky top-0 z-40 border-b border-white/10 bg-slate-950/90 text-white backdrop-blur-xl"
-      >
+  <body
+    data-template-id="__page-root"
+    class="w-full min-h-screen"
+    style="
+      background: linear-gradient(
+        135deg,
+        rgb(252, 253, 255),
+        rgb(245, 247, 255)
+      );
+    "
+  >
+    <div class="page-grid w-full min-h-screen">
+      <header class="w-full px-4 pt-4 sm:px-6 lg:px-10 lg:pt-7">
         <div
-          class="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 sm:px-6"
+          data-template-id="header-surface"
+          class="canva-header glass mx-auto flex max-w-[1540px] flex-col gap-4 rounded-[24px] px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6"
+          style="background: rgba(255, 255, 255, 0.74)"
         >
-          <div class="flex items-center gap-3">
-            <img
-              src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png"
-              class="h-9 w-9 rounded-xl"
-            />
-            <div>
-              <b class="text-sm"
-                >YK<span class="text-indigo-400">OFFICIAL</span></b
+          <div class="flex min-w-0 items-center gap-3">
+            <div
+              class="brand-orb flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl p-2"
+            >
+              <img
+                data-template-id="brand-logo"
+                class="canva-image h-full w-full object-contain"
+                loading="lazy"
+                src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png"
+                alt="YK Official logo"
+              />
+            </div>
+            <div class="min-w-0">
+              <p
+                data-template-id="brand-kicker"
+                class="canva-text m-0 text-[10px] font-bold uppercase tracking-[.2em] text-indigo-500"
+                style="
+                  color: rgb(99, 102, 241);
+                  font-weight: 700;
+                  font-style: normal;
+                  font-size: 10px;
+                  letter-spacing: 0.16rem;
+                "
               >
-              <div class="text-[9px] uppercase tracking-[.22em] text-slate-500">
-                Invitation Admin
-              </div>
+                Private Office
+              </p>
+              <h1
+                data-template-id="brand-title"
+                class="canva-text m-0 truncate text-lg font-extrabold tracking-tight text-slate-900"
+                style="
+                  color: rgb(23, 32, 59);
+                  font-weight: 800;
+                  font-style: normal;
+                  font-size: 28px;
+                "
+              >
+                YK OFFICIAL
+              </h1>
             </div>
           </div>
-          <div class="flex gap-2">
-            <button
-              onclick="openSheet()"
-              class="hidden rounded-xl border border-white/10 px-3 py-2 text-xs font-bold sm:block"
+          <nav
+            aria-label="Dashboard actions"
+            class="flex flex-wrap items-center gap-2"
+          >
+            <div
+              class="mr-1 flex items-center gap-2 rounded-xl border border-slate-200/70 bg-white/60 px-3 py-2"
             >
-              Google Sheet ↗</button
-            ><button
-              onclick="load()"
-              class="rounded-xl bg-indigo-600 px-3 py-2 text-xs font-bold"
+              <span
+                id="connectionDot"
+                class="status-dot"
+                aria-hidden="true"
+              ></span>
+              <span
+                id="connectionText"
+                class="text-xs font-semibold text-slate-600"
+                aria-live="polite"
+                >Checking connection</span
+              >
+            </div>
+            <button
+              id="refreshButton"
+              data-template-id="refresh-button"
+              class="canva-button subtle-button inline-flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-indigo-200"
+              type="button"
+              style="
+                background: rgba(255, 255, 255, 0.75);
+                color: rgb(68, 80, 111);
+                font-weight: 600;
+                font-style: normal;
+                font-size: 14px;
+              "
             >
               Refresh
             </button>
-          </div>
+            <button
+              id="sheetButton"
+              data-template-id="sheet-button"
+              class="canva-button primary-button inline-flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-semibold focus:outline-none focus:ring-4 focus:ring-violet-200"
+              type="button"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  rgb(67, 56, 202),
+                  rgb(109, 40, 217)
+                );
+                color: rgb(255, 255, 255);
+                font-weight: 600;
+                font-style: normal;
+                font-size: 14px;
+              "
+            >
+              Google Sheet
+            </button>
+          </nav>
         </div>
       </header>
-      <main class="mx-auto max-w-[1600px] px-4 py-6 sm:px-6">
-        <div class="grid gap-4 md:grid-cols-3">
-          <div class="rounded-2xl border bg-white p-5 shadow-sm">
-            <small class="font-bold uppercase tracking-widest text-slate-400"
-              >Total invitations</small
+      <main class="w-full px-4 pb-10 pt-6 sm:px-6 lg:px-10">
+        <div class="mx-auto max-w-[1540px]">
+          <section aria-labelledby="overview-title" class="reveal">
+            <div
+              class="mb-5 flex flex-col justify-between gap-3 md:flex-row md:items-end"
             >
-            <div id="total" class="mt-2 text-3xl font-extrabold">—</div>
-          </div>
-          <div class="rounded-2xl border bg-white p-5 shadow-sm">
-            <small class="font-bold uppercase tracking-widest text-slate-400"
-              >Latest request</small
-            >
-            <div id="latest" class="mt-2 truncate text-sm font-extrabold">
-              —
-            </div>
-          </div>
-          <div class="rounded-2xl border bg-white p-5 shadow-sm">
-            <small class="font-bold uppercase tracking-widest text-slate-400"
-              >Connection</small
-            >
-            <div class="mt-2 text-sm font-bold">
-              <span
-                class="mr-2 inline-block h-2 w-2 rounded-full bg-green-500"
-              ></span
-              ><span id="status">Checking…</span>
-            </div>
-          </div>
-        </div>
-        <section
-          class="mt-5 overflow-hidden rounded-[1.5rem] border bg-white shadow-xl"
-        >
-          <div
-            class="flex flex-col gap-3 border-b p-5 sm:flex-row sm:items-center sm:justify-between"
-          >
-            <div>
-              <div
-                class="text-[10px] font-extrabold uppercase tracking-widest text-indigo-600"
-              >
-                Live records
+              <div>
+                <p
+                  data-template-id="overview-kicker"
+                  class="canva-text mb-1 text-xs font-bold uppercase tracking-[.18em] text-violet-600"
+                  style="
+                    color: rgb(124, 58, 237);
+                    font-weight: 700;
+                    font-style: normal;
+                    font-size: 12px;
+                    letter-spacing: 0.12rem;
+                  "
+                >
+                  Invitation operations
+                </p>
+                <h2
+                  id="overview-title"
+                  data-template-id="overview-title"
+                  class="canva-text m-0 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl"
+                  style="
+                    color: rgb(23, 32, 59);
+                    font-weight: 800;
+                    font-style: normal;
+                    font-size: 21px;
+                  "
+                >
+                  Invitation Administration
+                </h2>
               </div>
-              <h1 class="text-xl font-extrabold">Invitation Requests</h1>
-            </div>
-            <div class="flex gap-2">
-              <input
-                id="search"
-                oninput="render()"
-                class="field sm:w-64"
-                placeholder="Search name, email, ID…"
-              /><button
-                onclick="openSheet()"
-                class="rounded-xl border px-4 text-xs font-bold"
+              <p
+                data-template-id="overview-helper"
+                class="canva-text max-w-xl text-sm leading-6 text-slate-500"
+                style="
+                  color: rgb(102, 112, 138);
+                  font-weight: 400;
+                  font-style: normal;
+                  font-size: 14px;
+                "
               >
-                Sheet
-              </button>
+                Review, respond to, and manage every YK OFFICIAL invitation
+                request from one refined workspace.
+              </p>
             </div>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full min-w-[1000px] text-left text-sm">
-              <thead
-                class="bg-slate-50 text-[10px] uppercase tracking-widest text-slate-400"
+            <div class="grid gap-4 md:grid-cols-3">
+              <article
+                data-template-id="stat-total-card"
+                class="canva-card glass relative overflow-hidden rounded-[22px] p-5"
+                style="background: rgba(255, 255, 255, 0.74)"
               >
-                <tr>
-                  <th class="p-4">Request</th>
-                  <th class="p-4">Guest</th>
-                  <th class="p-4">Event</th>
-                  <th class="p-4">Date</th>
-                  <th class="p-4">Contact</th>
-                  <th class="p-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody id="rows"></tbody>
-            </table>
-          </div>
-          <div id="empty" class="hidden p-12 text-center text-slate-400">
-            No invitations found.
-          </div>
-        </section>
+                <div
+                  class="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-indigo-100/65 blur-2xl"
+                ></div>
+                <div class="relative flex items-start justify-between">
+                  <div>
+                    <p
+                      data-template-id="stat-total-label"
+                      class="canva-text mb-2 text-xs font-bold uppercase tracking-[.15em] text-slate-500"
+                      style="
+                        color: rgb(100, 116, 139);
+                        font-weight: 700;
+                        font-style: normal;
+                        font-size: 12px;
+                        letter-spacing: 0.1rem;
+                      "
+                    >
+                      Total Invitations
+                    </p>
+                    <p
+                      id="totalCount"
+                      class="m-0 text-3xl font-extrabold tracking-tight text-slate-900"
+                      aria-live="polite"
+                    >
+                      —
+                    </p>
+                  </div>
+                  <div class="rounded-2xl bg-indigo-50 p-3 text-indigo-600">
+                    <i data-lucide="inbox" class="h-5 w-5"></i>
+                  </div>
+                </div>
+              </article>
+              <article
+                data-template-id="stat-latest-card"
+                class="canva-card glass relative overflow-hidden rounded-[22px] p-5"
+                style="background: rgba(255, 255, 255, 0.74)"
+              >
+                <div
+                  class="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-violet-100/65 blur-2xl"
+                ></div>
+                <div class="relative flex items-start justify-between gap-4">
+                  <div class="min-w-0">
+                    <p
+                      data-template-id="stat-latest-label"
+                      class="canva-text mb-2 text-xs font-bold uppercase tracking-[.15em] text-slate-500"
+                      style="
+                        color: rgb(100, 116, 139);
+                        font-weight: 700;
+                        font-style: normal;
+                        font-size: 12px;
+                        letter-spacing: 0.1rem;
+                      "
+                    >
+                      Latest Request
+                    </p>
+                    <p
+                      id="latestRequest"
+                      class="m-0 truncate text-lg font-extrabold tracking-tight text-slate-900"
+                      aria-live="polite"
+                    >
+                      —
+                    </p>
+                  </div>
+                  <div class="rounded-2xl bg-violet-50 p-3 text-violet-600">
+                    <i data-lucide="sparkles" class="h-5 w-5"></i>
+                  </div>
+                </div>
+              </article>
+              <article
+                data-template-id="stat-connection-card"
+                class="canva-card glass relative overflow-hidden rounded-[22px] p-5"
+                style="background: rgba(255, 255, 255, 0.74)"
+              >
+                <div
+                  class="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-emerald-100/65 blur-2xl"
+                ></div>
+                <div class="relative flex items-start justify-between">
+                  <div>
+                    <p
+                      data-template-id="stat-connection-label"
+                      class="canva-text mb-2 text-xs font-bold uppercase tracking-[.15em] text-slate-500"
+                      style="
+                        color: rgb(100, 116, 139);
+                        font-weight: 700;
+                        font-style: normal;
+                        font-size: 12px;
+                        letter-spacing: 0.1rem;
+                      "
+                    >
+                      Connection
+                    </p>
+                    <p
+                      id="connectionStat"
+                      class="m-0 text-lg font-extrabold tracking-tight text-slate-900"
+                      aria-live="polite"
+                    >
+                      Checking
+                    </p>
+                  </div>
+                  <div class="rounded-2xl bg-emerald-50 p-3 text-emerald-600">
+                    <i data-lucide="radio-tower" class="h-5 w-5"></i>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+          <section
+            aria-labelledby="records-title"
+            class="reveal reveal-delay-1 mt-6"
+          >
+            <div
+              data-template-id="records-panel"
+              class="canva-panel glass overflow-hidden rounded-[24px]"
+              style="background: rgba(255, 255, 255, 0.74)"
+            >
+              <div
+                class="flex flex-col gap-4 border-b border-slate-200/70 px-5 py-5 lg:flex-row lg:items-center lg:justify-between sm:px-6"
+              >
+                <div>
+                  <h2
+                    id="records-title"
+                    data-template-id="records-title"
+                    class="canva-text m-0 text-lg font-extrabold text-slate-900"
+                    style="
+                      color: rgb(23, 32, 59);
+                      font-weight: 800;
+                      font-style: normal;
+                      font-size: 21px;
+                    "
+                  >
+                    Live invitation records
+                  </h2>
+                  <p
+                    data-template-id="records-helper"
+                    class="canva-text mt-1 text-sm text-slate-500"
+                    style="
+                      color: rgb(102, 112, 138);
+                      font-weight: 400;
+                      font-style: normal;
+                      font-size: 14px;
+                    "
+                  >
+                    Live requests from your connected Google Sheet.
+                  </p>
+                </div>
+                <div class="relative w-full lg:max-w-sm">
+                  <label
+                    data-template-id="search-label"
+                    class="canva-text sr-only"
+                    for="searchInput"
+                    style="
+                      color: rgb(23, 32, 59);
+                      font-weight: 400;
+                      font-style: normal;
+                      font-size: 14px;
+                    "
+                    >Search invitation records</label
+                  >
+                  <i
+                    data-lucide="search"
+                    class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+                  ></i>
+                  <input
+                    id="searchInput"
+                    data-template-id="search-input"
+                    class="canva-input field pl-10 text-sm"
+                    type="search"
+                    autocomplete="off"
+                    placeholder="Search by request, guest, email, phone or event"
+                    style="
+                      color: rgb(23, 32, 59);
+                      font-weight: 400;
+                      font-style: normal;
+                      font-size: 14px;
+                    "
+                  />
+                </div>
+              </div>
+              <div id="tableLoading" class="px-6 py-16 text-center">
+                <div
+                  class="mx-auto mb-3 h-8 w-8 animate-spin rounded-full border-4 border-indigo-100 border-t-indigo-600"
+                ></div>
+                <p
+                  data-template-id="records-loading-label"
+                  class="canva-text text-sm font-semibold text-slate-500"
+                  style="
+                    color: rgb(102, 112, 138);
+                    font-weight: 600;
+                    font-style: normal;
+                    font-size: 14px;
+                  "
+                >
+                  Loading invitation records…
+                </p>
+              </div>
+              <div id="tableWrap" class="hidden overflow-x-auto">
+                <table class="w-full min-w-[930px] border-collapse text-left">
+                  <thead class="bg-slate-50/75">
+                    <tr
+                      class="text-[10px] font-bold uppercase tracking-[.13em] text-slate-500"
+                    >
+                      <th class="px-6 py-4">Request</th>
+                      <th class="px-4 py-4">Guest</th>
+                      <th class="px-4 py-4">Contact</th>
+                      <th class="px-4 py-4">Event</th>
+                      <th class="px-4 py-4">Date</th>
+                      <th class="px-4 py-4">Source</th>
+                      <th class="px-6 py-4 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recordsBody"></tbody>
+                </table>
+              </div>
+              <div id="emptyState" class="hidden px-6 py-16 text-center">
+                <div
+                  class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-500"
+                >
+                  <i data-lucide="search-x" class="h-7 w-7"></i>
+                </div>
+                <h3
+                  data-template-id="empty-title"
+                  class="canva-text mb-1 text-base font-bold text-slate-800"
+                  style="
+                    color: rgb(30, 41, 59);
+                    font-weight: 700;
+                    font-style: normal;
+                    font-size: 16px;
+                  "
+                >
+                  No invitation records found
+                </h3>
+                <p
+                  data-template-id="empty-description"
+                  class="canva-text mx-auto max-w-sm text-sm leading-6 text-slate-500"
+                  style="
+                    color: rgb(102, 112, 138);
+                    font-weight: 400;
+                    font-style: normal;
+                    font-size: 14px;
+                  "
+                >
+                  Try a different search term or refresh the connected
+                  invitation records.
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
       </main>
     </div>
     <div
-      id="actionLoader"
-      class="fixed inset-0 z-[90] hidden items-center justify-center bg-slate-950/60 p-5 backdrop-blur-md"
+      id="initialLoader"
+      class="fixed inset-0 z-[100] flex items-center justify-center bg-[#f8f9ff]/90 p-5 backdrop-blur-xl"
     >
-      <div
-        class="modal w-full max-w-sm rounded-[2rem] bg-white p-7 text-center"
+      <section
+        data-template-id="loader-card"
+        class="canva-card w-full max-w-sm rounded-[28px] border border-white bg-white/80 p-8 text-center shadow-2xl shadow-indigo-950/10"
+        style="background: rgba(255, 255, 255, 0.8)"
       >
         <div
-          class="mx-auto h-12 w-12 rounded-full border-4 border-indigo-600 border-t-transparent spin"
-        ></div>
-        <h3 id="lt" class="mt-5 font-extrabold">Updating</h3>
-        <p id="lm" class="mt-2 text-sm text-slate-500">Please wait…</p>
+          class="brand-orb mx-auto flex h-16 w-16 items-center justify-center rounded-[22px] p-3"
+        >
+          <img
+            data-template-id="loader-logo"
+            class="canva-image h-full w-full object-contain"
+            loading="lazy"
+            src="https://i.ibb.co/hJCHgThF/logo-yk-crop.png"
+            alt="YK Official logo"
+          />
+        </div>
+        <h2
+          data-template-id="loader-title"
+          class="canva-text mt-5 text-xl font-extrabold tracking-tight text-slate-900"
+          style="
+            color: rgb(23, 32, 59);
+            font-weight: 800;
+            font-style: normal;
+            font-size: 21px;
+          "
+        >
+          YK OFFICIAL
+        </h2>
+        <p
+          data-template-id="loader-description"
+          class="canva-text mt-2 text-sm text-slate-500"
+          style="
+            color: rgb(102, 112, 138);
+            font-weight: 400;
+            font-style: normal;
+            font-size: 14px;
+          "
+        >
+          Preparing invitation administration
+        </p>
+        <div class="mt-6 h-1.5 overflow-hidden rounded-full bg-indigo-100">
+          <div class="progress-shimmer h-full w-full rounded-full"></div>
+        </div>
+      </section>
+    </div>
+    <div
+      id="actionLoader"
+      class="action-loader fixed inset-0 z-[90] flex items-center justify-center bg-slate-950/20 p-5 backdrop-blur-sm"
+      aria-hidden="true"
+    >
+      <div
+        class="flex items-center gap-4 rounded-2xl border border-white/80 bg-white/90 px-5 py-4 shadow-xl"
+      >
+        <div class="loader-ring !h-7 !w-7 !border-[3px]"></div>
+        <p id="actionLoaderText" class="text-sm font-bold text-slate-700">
+          Working securely…
+        </p>
       </div>
     </div>
     <div
-      id="modal"
-      class="fixed inset-0 z-[80] hidden items-center justify-center bg-slate-950/60 p-4 backdrop-blur-md"
+      id="toast"
+      class="toast fixed bottom-5 right-5 z-[110] max-w-sm rounded-2xl border border-white/80 bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-2xl"
+      role="status"
+      aria-live="polite"
     >
-      <div
-        class="modal max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-[2rem] bg-white p-6"
+      <div class="flex items-center gap-2">
+        <i
+          id="toastIcon"
+          data-lucide="check-circle-2"
+          class="h-4 w-4 text-emerald-300"
+        ></i>
+        <span id="toastMessage"></span>
+      </div>
+    </div>
+    <div
+      id="detailsModal"
+      class="modal-shell fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/35 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="detailsTitle"
+    >
+      <section
+        class="modal-card glass max-h-[90%] w-full max-w-2xl overflow-y-auto rounded-[26px]"
       >
-        <div class="flex justify-between">
+        <div
+          class="flex items-start justify-between border-b border-slate-200/70 px-6 py-5"
+        >
           <div>
-            <div
-              id="mTag"
-              class="text-[10px] font-bold uppercase tracking-widest text-indigo-600"
+            <p
+              data-template-id="details-kicker"
+              class="canva-text text-xs font-bold uppercase tracking-[.16em] text-indigo-600"
+              style="
+                color: rgb(79, 70, 229);
+                font-weight: 700;
+                font-style: normal;
+                font-size: 12px;
+                letter-spacing: 0.12rem;
+              "
             >
-              Invitation
-            </div>
-            <h2 id="mTitle" class="mt-1 text-2xl font-extrabold">Details</h2>
+              Invitation request
+            </p>
+            <h2
+              id="detailsTitle"
+              data-template-id="details-title"
+              class="canva-text mt-1 text-xl font-extrabold text-slate-900"
+              style="
+                color: rgb(23, 32, 59);
+                font-weight: 800;
+                font-style: normal;
+                font-size: 21px;
+              "
+            >
+              Request details
+            </h2>
           </div>
-          <button onclick="closeM()" class="h-9 w-9 rounded-full bg-slate-100">
-            ×
+          <button
+            class="icon-button modal-close text-slate-500 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            type="button"
+            data-close="detailsModal"
+            aria-label="Close details"
+          >
+            <i data-lucide="x" class="h-4 w-4"></i>
           </button>
         </div>
-        <form id="form" class="mt-5 grid gap-4 sm:grid-cols-2">
-          <input type="hidden" name="id" /><label
-            >Name<input class="field mt-1" name="name" required /></label
-          ><label>Email<input class="field mt-1" name="email" required /></label
-          ><label>Phone<input class="field mt-1" name="phone" required /></label
-          ><label
-            >Date<input class="field mt-1" type="date" name="date" /></label
-          ><label class="sm:col-span-2"
-            >Event<input class="field mt-1" name="event" /></label
-          ><label class="sm:col-span-2"
-            >Purpose<textarea
-              class="field mt-1 min-h-28"
-              name="purpose"
-            ></textarea>
-          </label>
-          <div class="flex gap-2 sm:col-span-2 sm:justify-end">
-            <button
-              type="button"
-              onclick="closeM()"
-              class="rounded-xl border px-5 py-3 text-sm font-bold"
+        <div
+          id="detailsContent"
+          class="grid gap-3 px-6 py-5 sm:grid-cols-2"
+        ></div>
+        <div
+          class="flex flex-col-reverse gap-2 border-t border-slate-200/70 px-6 py-5 sm:flex-row sm:justify-end"
+        >
+          <button
+            id="detailsHistoryButton"
+            data-template-id="details-history-button"
+            class="canva-button subtle-button inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            type="button"
+            style="
+              background: rgba(255, 255, 255, 0.75);
+              color: rgb(68, 80, 111);
+              font-weight: 700;
+              font-style: normal;
+              font-size: 14px;
+            "
+          >
+            History
+          </button>
+          <button
+            id="detailsReplyButton"
+            data-template-id="details-reply-button"
+            class="canva-button subtle-button inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            type="button"
+            style="
+              background: rgba(255, 255, 255, 0.75);
+              color: rgb(68, 80, 111);
+              font-weight: 700;
+              font-style: normal;
+              font-size: 14px;
+            "
+          >
+            Reply by Email
+          </button>
+          <button
+            id="detailsEditButton"
+            data-template-id="details-edit-button"
+            class="canva-button primary-button inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-violet-200"
+            type="button"
+            style="
+              background: linear-gradient(
+                135deg,
+                rgb(67, 56, 202),
+                rgb(109, 40, 217)
+              );
+              color: rgb(255, 255, 255);
+              font-weight: 700;
+              font-style: normal;
+              font-size: 14px;
+            "
+          >
+            Edit Request
+          </button>
+        </div>
+      </section>
+    </div>
+    <div
+      id="editModal"
+      class="modal-shell fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/35 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="editTitle"
+    >
+      <section
+        class="modal-card glass max-h-[92%] w-full max-w-2xl overflow-y-auto rounded-[26px]"
+      >
+        <div
+          class="flex items-start justify-between border-b border-slate-200/70 px-6 py-5"
+        >
+          <div>
+            <p
+              data-template-id="edit-kicker"
+              class="canva-text text-xs font-bold uppercase tracking-[.16em] text-indigo-600"
+              style="
+                color: rgb(79, 70, 229);
+                font-weight: 700;
+                font-style: normal;
+                font-size: 12px;
+                letter-spacing: 0.12rem;
+              "
             >
-              Cancel</button
-            ><button
-              class="rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white"
+              Request management
+            </p>
+            <h2
+              id="editTitle"
+              data-template-id="edit-title"
+              class="canva-text mt-1 text-xl font-extrabold text-slate-900"
+              style="
+                color: rgb(23, 32, 59);
+                font-weight: 800;
+                font-style: normal;
+                font-size: 21px;
+              "
+            >
+              Edit invitation request
+            </h2>
+          </div>
+          <button
+            class="icon-button modal-close text-slate-500 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            type="button"
+            data-close="editModal"
+            aria-label="Close edit form"
+          >
+            <i data-lucide="x" class="h-4 w-4"></i>
+          </button>
+        </div>
+        <form id="editForm" class="px-6 py-5">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label
+                data-template-id="edit-id-label"
+                class="canva-text mb-1.5 block text-sm font-bold text-slate-700"
+                for="editId"
+                style="
+                  color: rgb(51, 65, 85);
+                  font-weight: 700;
+                  font-style: normal;
+                  font-size: 14px;
+                "
+                >Request ID</label
+              ><input id="editId" class="field text-sm" required="" />
+            </div>
+            <div>
+              <label
+                data-template-id="edit-name-label"
+                class="canva-text mb-1.5 block text-sm font-bold text-slate-700"
+                for="editName"
+                style="
+                  color: rgb(51, 65, 85);
+                  font-weight: 700;
+                  font-style: normal;
+                  font-size: 14px;
+                "
+                >Name</label
+              ><input id="editName" class="field text-sm" required="" />
+            </div>
+            <div>
+              <label
+                data-template-id="edit-email-label"
+                class="canva-text mb-1.5 block text-sm font-bold text-slate-700"
+                for="editEmail"
+                style="
+                  color: rgb(51, 65, 85);
+                  font-weight: 700;
+                  font-style: normal;
+                  font-size: 14px;
+                "
+                >Email</label
+              ><input id="editEmail" type="email" class="field text-sm" />
+            </div>
+            <div>
+              <label
+                data-template-id="edit-phone-label"
+                class="canva-text mb-1.5 block text-sm font-bold text-slate-700"
+                for="editPhone"
+                style="
+                  color: rgb(51, 65, 85);
+                  font-weight: 700;
+                  font-style: normal;
+                  font-size: 14px;
+                "
+                >Phone</label
+              ><input id="editPhone" type="tel" class="field text-sm" />
+            </div>
+            <div>
+              <label
+                data-template-id="edit-date-label"
+                class="canva-text mb-1.5 block text-sm font-bold text-slate-700"
+                for="editDate"
+                style="
+                  color: rgb(51, 65, 85);
+                  font-weight: 700;
+                  font-style: normal;
+                  font-size: 14px;
+                "
+                >Event Date</label
+              ><input id="editDate" type="date" class="field text-sm" />
+            </div>
+            <div>
+              <label
+                data-template-id="edit-event-label"
+                class="canva-text mb-1.5 block text-sm font-bold text-slate-700"
+                for="editEvent"
+                style="
+                  color: rgb(51, 65, 85);
+                  font-weight: 700;
+                  font-style: normal;
+                  font-size: 14px;
+                "
+                >Event Type</label
+              ><input id="editEvent" class="field text-sm" />
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                data-template-id="edit-purpose-label"
+                class="canva-text mb-1.5 block text-sm font-bold text-slate-700"
+                for="editPurpose"
+                style="
+                  color: rgb(51, 65, 85);
+                  font-weight: 700;
+                  font-style: normal;
+                  font-size: 14px;
+                "
+                >Purpose</label
+              ><textarea
+                id="editPurpose"
+                class="field min-h-[100px] resize-y text-sm"
+              ></textarea>
+            </div>
+          </div>
+          <div
+            class="mt-6 flex flex-col-reverse gap-2 border-t border-slate-200/70 pt-5 sm:flex-row sm:justify-end"
+          >
+            <button
+              data-template-id="edit-cancel-button"
+              class="canva-button subtle-button modal-close rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-indigo-200"
+              type="button"
+              data-close="editModal"
+              style="
+                background: rgba(255, 255, 255, 0.75);
+                color: rgb(68, 80, 111);
+                font-weight: 700;
+                font-style: normal;
+                font-size: 14px;
+              "
+            >
+              Cancel
+            </button>
+            <button
+              id="editSaveButton"
+              data-template-id="edit-save-button"
+              class="canva-button primary-button inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-violet-200"
+              type="submit"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  rgb(67, 56, 202),
+                  rgb(109, 40, 217)
+                );
+                color: rgb(255, 255, 255);
+                font-weight: 700;
+                font-style: normal;
+                font-size: 14px;
+              "
             >
               Save Changes
             </button>
           </div>
         </form>
-      </div>
+      </section>
     </div>
     <div
-      id="reply"
-      class="fixed inset-0 z-[85] hidden items-center justify-center bg-slate-950/60 p-4 backdrop-blur-md"
+      id="deleteModal"
+      class="modal-shell fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/35 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="deleteTitle"
     >
-      <div class="modal w-full max-w-2xl rounded-[2rem] bg-white p-6">
-        <div class="flex justify-between">
-          <div>
-            <div
-              class="text-[10px] font-bold uppercase tracking-widest text-indigo-600"
-            >
-              Direct response
-            </div>
-            <h2 class="mt-1 text-2xl font-extrabold">Reply by Email</h2>
+      <section class="modal-card glass w-full max-w-md rounded-[26px]">
+        <div class="p-6">
+          <div
+            class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-red-50 text-red-600"
+          >
+            <i data-lucide="trash-2" class="h-5 w-5"></i>
           </div>
-          <button
-            onclick="closeReply()"
-            class="h-9 w-9 rounded-full bg-slate-100"
+          <h2
+            id="deleteTitle"
+            data-template-id="delete-title"
+            class="canva-text text-xl font-extrabold text-slate-900"
+            style="
+              color: rgb(23, 32, 59);
+              font-weight: 800;
+              font-style: normal;
+              font-size: 21px;
+            "
           >
-            ×
-          </button>
-        </div>
-        <form id="replyForm" class="mt-5 space-y-4">
-          <input type="hidden" name="to" /><input
-            type="hidden"
-            name="requestId"
-          /><label
-            >Recipient<input
-              id="to"
-              class="field mt-1 bg-slate-50"
-              readonly /></label
-          ><label
-            >Subject<input name="subject" class="field mt-1" required /></label
-          ><label
-            >Message<textarea
-              name="message"
-              class="field mt-1 min-h-44"
-              required
-            ></textarea></label
-          ><button
-            class="w-full rounded-xl bg-slate-950 py-3.5 text-sm font-bold text-white"
+            Delete invitation request?
+          </h2>
+          <p
+            data-template-id="delete-description"
+            class="canva-text mt-2 text-sm leading-6 text-slate-500"
+            style="
+              color: rgb(102, 112, 138);
+              font-weight: 400;
+              font-style: normal;
+              font-size: 14px;
+            "
           >
-            Send Official Reply
-          </button>
-        </form>
-      </div>
-    </div>
-    <div
-      id="history"
-      class="fixed inset-0 z-[85] hidden items-center justify-center bg-slate-950/60 p-4 backdrop-blur-md"
-    >
-      <div class="modal w-full max-w-xl rounded-[2rem] bg-white p-6">
-        <div class="flex justify-between">
-          <div>
-            <div
-              class="text-[10px] font-bold uppercase tracking-widest text-indigo-600"
-            >
-              Audit trail
-            </div>
-            <h2 class="mt-1 text-2xl font-extrabold">History</h2>
-          </div>
-          <button
-            onclick="closeHistory()"
-            class="h-9 w-9 rounded-full bg-slate-100"
-          >
-            ×
-          </button>
+            This action removes the request from the connected invitation
+            records and cannot be undone.
+          </p>
+          <p
+            id="deleteRecordId"
+            class="mt-4 rounded-xl bg-red-50 px-3 py-2 text-sm font-extrabold text-red-700"
+          ></p>
         </div>
         <div
-          id="historyList"
-          class="mt-5 max-h-[55vh] space-y-3 overflow-y-auto"
-        ></div>
-      </div>
+          class="flex flex-col-reverse gap-2 border-t border-slate-200/70 px-6 py-5 sm:flex-row sm:justify-end"
+        >
+          <button
+            data-template-id="delete-cancel-button"
+            class="canva-button subtle-button modal-close rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            type="button"
+            data-close="deleteModal"
+            style="
+              background: rgba(255, 255, 255, 0.75);
+              color: rgb(68, 80, 111);
+              font-weight: 700;
+              font-style: normal;
+              font-size: 14px;
+            "
+          >
+            Cancel
+          </button>
+          <button
+            id="confirmDeleteButton"
+            data-template-id="delete-confirm-button"
+            class="canva-button inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-red-600/20 transition hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-200"
+            type="button"
+            style="
+              background: rgb(220, 38, 38);
+              color: rgb(255, 255, 255);
+              font-weight: 700;
+              font-style: normal;
+              font-size: 14px;
+            "
+          >
+            Delete Request
+          </button>
+        </div>
+      </section>
     </div>
     <div
-      id="toast"
-      class="fixed bottom-5 left-1/2 z-[120] hidden -translate-x-1/2 rounded-2xl bg-slate-950 px-5 py-3 text-xs font-bold text-white"
-    ></div>
+      id="replyModal"
+      class="modal-shell fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/35 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="replyTitle"
+    >
+      <section
+        class="modal-card glass max-h-[92%] w-full max-w-2xl overflow-y-auto rounded-[26px]"
+      >
+        <div
+          class="flex items-start justify-between border-b border-slate-200/70 px-6 py-5"
+        >
+          <div>
+            <p
+              data-template-id="reply-kicker"
+              class="canva-text text-xs font-bold uppercase tracking-[.16em] text-indigo-600"
+              style="
+                color: rgb(79, 70, 229);
+                font-weight: 700;
+                font-style: normal;
+                font-size: 12px;
+                letter-spacing: 0.12rem;
+              "
+            >
+              Guest communication
+            </p>
+            <h2
+              id="replyTitle"
+              data-template-id="reply-title"
+              class="canva-text mt-1 text-xl font-extrabold text-slate-900"
+              style="
+                color: rgb(23, 32, 59);
+                font-weight: 800;
+                font-style: normal;
+                font-size: 21px;
+              "
+            >
+              Reply by Email
+            </h2>
+          </div>
+          <button
+            class="icon-button modal-close text-slate-500 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            type="button"
+            data-close="replyModal"
+            aria-label="Close reply form"
+          >
+            <i data-lucide="x" class="h-4 w-4"></i>
+          </button>
+        </div>
+        <form id="replyForm" class="px-6 py-5">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label
+                data-template-id="reply-recipient-label"
+                class="canva-text mb-1.5 block text-sm font-bold text-slate-700"
+                for="replyRecipient"
+                style="
+                  color: rgb(51, 65, 85);
+                  font-weight: 700;
+                  font-style: normal;
+                  font-size: 14px;
+                "
+                >Recipient Email</label
+              ><input id="replyRecipient" class="field text-sm" readonly="" />
+            </div>
+            <div>
+              <label
+                data-template-id="reply-id-label"
+                class="canva-text mb-1.5 block text-sm font-bold text-slate-700"
+                for="replyRequestId"
+                style="
+                  color: rgb(51, 65, 85);
+                  font-weight: 700;
+                  font-style: normal;
+                  font-size: 14px;
+                "
+                >Request ID</label
+              ><input id="replyRequestId" class="field text-sm" readonly="" />
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                data-template-id="reply-subject-label"
+                class="canva-text mb-1.5 block text-sm font-bold text-slate-700"
+                for="replySubject"
+                style="
+                  color: rgb(51, 65, 85);
+                  font-weight: 700;
+                  font-style: normal;
+                  font-size: 14px;
+                "
+                >Subject</label
+              ><input id="replySubject" class="field text-sm" required="" />
+            </div>
+            <div class="sm:col-span-2">
+              <label
+                data-template-id="reply-message-label"
+                class="canva-text mb-1.5 block text-sm font-bold text-slate-700"
+                for="replyMessage"
+                style="
+                  color: rgb(51, 65, 85);
+                  font-weight: 700;
+                  font-style: normal;
+                  font-size: 14px;
+                "
+                >Message</label
+              ><textarea
+                id="replyMessage"
+                class="field min-h-[180px] resize-y text-sm"
+                required=""
+              ></textarea>
+            </div>
+          </div>
+          <div
+            class="mt-6 flex flex-col-reverse gap-2 border-t border-slate-200/70 pt-5 sm:flex-row sm:justify-end"
+          >
+            <button
+              data-template-id="reply-cancel-button"
+              class="canva-button subtle-button modal-close rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-indigo-200"
+              type="button"
+              data-close="replyModal"
+              style="
+                background: rgba(255, 255, 255, 0.75);
+                color: rgb(68, 80, 111);
+                font-weight: 700;
+                font-style: normal;
+                font-size: 14px;
+              "
+            >
+              Cancel
+            </button>
+            <button
+              id="replySendButton"
+              data-template-id="reply-send-button"
+              class="canva-button primary-button inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-violet-200"
+              type="submit"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  rgb(67, 56, 202),
+                  rgb(109, 40, 217)
+                );
+                color: rgb(255, 255, 255);
+                font-weight: 700;
+                font-style: normal;
+                font-size: 14px;
+              "
+            >
+              Send Reply
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+    <div
+      id="historyModal"
+      class="modal-shell fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/35 p-4 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="historyTitle"
+    >
+      <section
+        class="modal-card glass max-h-[90%] w-full max-w-xl overflow-y-auto rounded-[26px]"
+      >
+        <div
+          class="flex items-start justify-between border-b border-slate-200/70 px-6 py-5"
+        >
+          <div>
+            <p
+              data-template-id="history-kicker"
+              class="canva-text text-xs font-bold uppercase tracking-[.16em] text-indigo-600"
+              style="
+                color: rgb(79, 70, 229);
+                font-weight: 700;
+                font-style: normal;
+                font-size: 12px;
+                letter-spacing: 0.12rem;
+              "
+            >
+              Local audit trail
+            </p>
+            <h2
+              id="historyTitle"
+              data-template-id="history-title"
+              class="canva-text mt-1 text-xl font-extrabold text-slate-900"
+              style="
+                color: rgb(23, 32, 59);
+                font-weight: 800;
+                font-style: normal;
+                font-size: 21px;
+              "
+            >
+              Request History
+            </h2>
+          </div>
+          <button
+            class="icon-button modal-close text-slate-500 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+            type="button"
+            data-close="historyModal"
+            aria-label="Close history"
+          >
+            <i data-lucide="x" class="h-4 w-4"></i>
+          </button>
+        </div>
+        <div id="historyContent" class="space-y-3 px-6 py-5"></div>
+      </section>
+    </div>
     <script>
       const API =
-          "https://script.google.com/macros/s/AKfycbyUJSruVELA_wCcyNQN9WJKIXjk65aL_A15gPkRnr19d9x0TNiwdaR-9vkcLq_t1W1q/exec",
-        SHEET = API;
-      const EMAILJS_SERVICE = "service_dgrc179",
-        EMAILJS_TEMPLATE = "template_qxhyh7i";
-      emailjs.init("9P9_Nz0_Es2Y6Ffvm");
-      let data = [],
-        selected = null,
-        history = JSON.parse(localStorage.ykInviteHistory || "{}");
-      const $ = (x) => document.getElementById(x);
-      function show(id) {
-        $(id).classList.remove("hidden");
-        $(id).classList.add("flex");
+        "https://script.google.com/macros/s/AKfycbyUJSruVELA_wCcyNQN9WJKIXjk65aL_A15gPkRnr19d9x0TNiwdaR-9vkcLq_t1W1q/exec";
+
+      const EMAIL_SERVICE_ID = "service_m9z75qm";
+      const EMAIL_TEMPLATE_ID = "template_9jjja82";
+      const EMAIL_PUBLIC_KEY = "crgYHhnHFIA5yPld7";
+      // const HISTORY_KEY = "ykInviteHistory";
+
+      const state = {
+        records: [],
+        filteredRecords: [],
+        activeRecord: null,
+        pendingDelete: null,
+        toastTimer: null,
+      };
+
+      const el = {
+        loader: document.getElementById("initialLoader"),
+        actionLoader: document.getElementById("actionLoader"),
+        actionLoaderText: document.getElementById("actionLoaderText"),
+        tableLoading: document.getElementById("tableLoading"),
+        tableWrap: document.getElementById("tableWrap"),
+        body: document.getElementById("recordsBody"),
+        emptyState: document.getElementById("emptyState"),
+        search: document.getElementById("searchInput"),
+        total: document.getElementById("totalCount"),
+        latest: document.getElementById("latestRequest"),
+        connectionText: document.getElementById("connectionText"),
+        connectionDot: document.getElementById("connectionDot"),
+        connectionStat: document.getElementById("connectionStat"),
+        toast: document.getElementById("toast"),
+        toastMessage: document.getElementById("toastMessage"),
+        toastIcon: document.getElementById("toastIcon"),
+      };
+
+      function text(value) {
+        return value === undefined || value === null ? "" : String(value);
       }
-      function hide(id) {
-        $(id).classList.add("hidden");
-        $(id).classList.remove("flex");
+
+      function normalizeRecord(row, index) {
+        if (Array.isArray(row)) {
+          return {
+            id: text(row[0] || "REQ-" + (index + 1)),
+            name: text(row[1]),
+            email: text(row[2]),
+            phone: text(row[3]),
+            date: text(row[4]),
+            event: text(row[5]),
+            purpose: text(row[6]),
+            timestamp: text(row[7]),
+            source: text(row[8]),
+          };
+        }
+
+        const record = row || {};
+        const get = (...keys) => {
+          for (const key of keys) {
+            if (record[key] !== undefined && record[key] !== null)
+              return text(record[key]);
+          }
+          return "";
+        };
+
+        return {
+          id: get("id", "ID") || "REQ-" + (index + 1),
+          name: get("name", "Name"),
+          email: get("email", "Email"),
+          phone: get("phone", "Phone"),
+          date: get("date", "Event Date"),
+          event: get("event", "Event Type"),
+          purpose: get("purpose", "Purpose"),
+          timestamp: get("timestamp", "Timestamp"),
+          source: get("source", "Source"),
+        };
       }
-      function busy(on, t = "Updating", m = "Please wait…") {
-        on ? show("actionLoader") : hide("actionLoader");
-        $("lt").textContent = t;
-        $("lm").textContent = m;
-      }
-      function toast(x) {
-        $("toast").textContent = x;
-        $("toast").classList.remove("hidden");
-        clearTimeout(window.tt);
-        window.tt = setTimeout(() => $("toast").classList.add("hidden"), 2600);
-      }
-      function esc(v) {
-        return String(v ?? "").replace(
-          /[&<>"']/g,
-          (m) =>
-            ({
-              "&": "&amp;",
-              "<": "&lt;",
-              ">": "&gt;",
-              '"': "&quot;",
-              "'": "&#039;",
-            })[m],
+
+      function getResponseRows(payload) {
+        if (Array.isArray(payload)) return payload;
+        if (!payload || typeof payload !== "object") return [];
+        return (
+          payload.data ||
+          payload.rows ||
+          payload.invitations ||
+          payload.records ||
+          []
         );
       }
-      function norm(x) {
-        return Array.isArray(x)
-          ? {
-              id: x[0],
-              name: x[1],
-              email: x[2],
-              phone: x[3],
-              date: x[4],
-              event: x[5],
-              purpose: x[6],
-              timestamp: x[7],
-              source: x[8],
-            }
-          : {
-              id: x.id || x.ID,
-              name: x.name || x.Name,
-              email: x.email || x.Email,
-              phone: x.phone || x.Phone,
-              date: x.date || x["Event Date"],
-              event: x.event || x["Event Type"],
-              purpose: x.purpose || x.Purpose,
-              timestamp: x.timestamp || x.Timestamp,
-              source: x.source || x.Source,
-            };
+
+      function setConnection(connected) {
+        el.connectionDot.classList.toggle("connected", connected);
+        el.connectionDot.classList.toggle("offline", !connected);
+        el.connectionText.textContent = connected ? "Connected" : "Unavailable";
+        el.connectionStat.textContent = connected ? "Connected" : "Unavailable";
       }
-      async function load() {
-        busy(true, "Loading invitations", "Syncing Google Sheet…");
-        try {
-          let r = await fetch(API + "?action=list&t=" + Date.now());
-          let j = await r.json();
-          data = (
-            j.data ||
-            j.rows ||
-            j.invitations ||
-            j.records ||
-            j ||
-            []
-          ).map(norm);
-          $("status").textContent = "Connected to Google Sheet";
-          $("total").textContent = data.length;
-          let l = data[data.length - 1];
-          $("latest").textContent = l?.id || "—";
-          render();
-        } catch (e) {
-          $("status").textContent = "Connection unavailable";
-          toast("Could not read Google Sheet.");
-        } finally {
-          busy(false);
-        }
+
+      function showActionLoader(message) {
+        el.actionLoaderText.textContent = message;
+        el.actionLoader.classList.add("is-active");
+        el.actionLoader.setAttribute("aria-hidden", "false");
       }
-      function render() {
-        let q = $("search").value.toLowerCase(),
-          a = data.filter((r) =>
-            [r.id, r.name, r.email, r.phone, r.event, r.purpose]
-              .join(" ")
-              .toLowerCase()
-              .includes(q),
+
+      function hideActionLoader() {
+        el.actionLoader.classList.remove("is-active");
+        el.actionLoader.setAttribute("aria-hidden", "true");
+      }
+
+      function showToast(message, type = "success") {
+        el.toastMessage.textContent = message;
+        el.toast.classList.remove("bg-slate-900", "bg-red-700");
+        el.toast.classList.add(
+          type === "error" ? "bg-red-700" : "bg-slate-900",
+        );
+        el.toastIcon.setAttribute(
+          "data-lucide",
+          type === "error" ? "circle-alert" : "check-circle-2",
+        );
+        el.toastIcon.className =
+          "h-4 w-4 " + (type === "error" ? "text-red-100" : "text-emerald-300");
+        el.toast.classList.add("is-visible");
+        lucide.createIcons();
+        clearTimeout(state.toastTimer);
+        state.toastTimer = setTimeout(
+          () => el.toast.classList.remove("is-visible"),
+          4200,
+        );
+      }
+
+      function openModal(id) {
+        document.getElementById(id).classList.add("is-open");
+        const focusable = document
+          .getElementById(id)
+          .querySelector("button, input, textarea");
+        if (focusable) setTimeout(() => focusable.focus(), 80);
+      }
+
+      function closeModal(id) {
+        document.getElementById(id).classList.remove("is-open");
+      }
+
+      function closeAllModals() {
+        document
+          .querySelectorAll(".modal-shell.is-open")
+          .forEach((modal) => modal.classList.remove("is-open"));
+      }
+
+      function createCell(label, content, className = "") {
+        const td = document.createElement("td");
+        td.dataset.label = label;
+        td.className =
+          "px-4 py-4 align-middle text-sm text-slate-600 " + className;
+        td.textContent = content || "—";
+        return td;
+      }
+
+      function createActionButton(icon, label, handler, tone = "normal") {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className =
+          "icon-button focus:outline-none focus:ring-4 focus:ring-indigo-200 " +
+          (tone === "danger"
+            ? "text-red-500 hover:!border-red-200 hover:!text-red-600"
+            : "text-slate-500");
+        button.setAttribute("aria-label", label);
+        const iconEl = document.createElement("i");
+        iconEl.setAttribute("data-lucide", icon);
+        iconEl.className = "h-4 w-4";
+        button.appendChild(iconEl);
+        button.addEventListener("click", handler);
+        return button;
+      }
+
+      function renderRecords(records) {
+        el.body.replaceChildren();
+        el.tableLoading.classList.add("hidden");
+        const noRecords = records.length === 0;
+        el.tableWrap.classList.toggle("hidden", noRecords);
+        el.emptyState.classList.toggle("hidden", !noRecords);
+
+        records.forEach((record) => {
+          const row = document.createElement("tr");
+          row.className =
+            "record-row mobile-card-row border-b border-slate-100 last:border-0";
+
+          const idCell = document.createElement("td");
+          idCell.dataset.label = "Request";
+          idCell.className = "px-6 py-4 align-middle";
+          const idBadge = document.createElement("span");
+          idBadge.className =
+            "inline-flex rounded-lg bg-indigo-50 px-2.5 py-1 text-xs font-extrabold text-indigo-700";
+          idBadge.textContent = record.id;
+          idCell.appendChild(idBadge);
+
+          const guestCell = document.createElement("td");
+          guestCell.dataset.label = "Guest";
+          guestCell.className = "px-4 py-4 align-middle";
+          const guestName = document.createElement("p");
+          guestName.className = "m-0 font-bold text-slate-800";
+          guestName.textContent = record.name || "—";
+          const purpose = document.createElement("p");
+          purpose.className =
+            "mt-1 max-w-[220px] truncate text-xs text-slate-500";
+          purpose.textContent = record.purpose || "No purpose provided";
+          guestCell.append(guestName, purpose);
+
+          const contactCell = document.createElement("td");
+          contactCell.dataset.label = "Contact";
+          contactCell.className = "px-4 py-4 align-middle";
+          const email = document.createElement("p");
+          email.className = "m-0 max-w-[190px] truncate text-sm text-slate-600";
+          email.textContent = record.email || "—";
+          const phone = document.createElement("p");
+          phone.className = "mt-1 text-xs text-slate-400";
+          phone.textContent = record.phone || "No phone";
+          contactCell.append(email, phone);
+
+          const eventCell = createCell("Event", record.event);
+          const dateCell = createCell("Date", record.date);
+          const sourceCell = createCell("Source", record.source);
+
+          const actionsCell = document.createElement("td");
+          actionsCell.dataset.label = "Actions";
+          actionsCell.className = "actions-cell px-6 py-4 align-middle";
+          const actions = document.createElement("div");
+          actions.className = "flex justify-end gap-2";
+          actions.append(
+            createActionButton("eye", "View " + record.id, () =>
+              openDetails(record),
+            ),
+            createActionButton("pencil", "Edit " + record.id, () =>
+              openEdit(record),
+            ),
+            createActionButton(
+              "trash-2",
+              "Delete " + record.id,
+              () => openDelete(record),
+              "danger",
+            ),
           );
-        $("rows").innerHTML = a
-          .map(
-            (r) =>
-              `<tr class="border-t hover:bg-indigo-50/30"><td class="p-4"><b class="text-indigo-600">${esc(r.id)}</b><div class="text-[10px] text-slate-400">${esc(r.timestamp)}</div></td><td class="p-4"><b>${esc(r.name)}</b><div class="text-xs text-slate-400">${esc(r.email)}</div></td><td class="p-4"><b>${esc(r.event)}</b><div class="max-w-xs truncate text-xs text-slate-400">${esc(r.purpose)}</div></td><td class="p-4">${esc(r.date)}</td><td class="p-4">${esc(r.phone)}</td><td class="p-4"><div class="flex justify-end gap-2"><button onclick="view('${encodeURIComponent(r.id)}')" class="rounded-lg border px-3 py-2 text-[10px] font-bold">Details</button><button onclick="edit('${encodeURIComponent(r.id)}')" class="rounded-lg bg-indigo-600 px-3 py-2 text-[10px] font-bold text-white">Edit</button><button onclick="del('${encodeURIComponent(r.id)}')" class="rounded-lg bg-red-50 px-3 py-2 text-[10px] font-bold text-red-600">Delete</button></div></td></tr>`,
-          )
-          .join("");
-        $("empty").classList.toggle("hidden", a.length > 0);
-      }
-      function get(id) {
-        return data.find((x) => String(x.id) === String(id));
-      }
-      function view(id) {
-        selected = get(decodeURIComponent(id));
-        if (!selected) return;
-        openReply(selected, false);
-        closeReply();
-        showDetails(selected);
-      }
-      function showDetails(r) {
-        let html = Object.entries({
-          ID: r.id,
-          Name: r.name,
-          Email: r.email,
-          Phone: r.phone,
-          "Event Date": r.date,
-          "Event Type": r.event,
-          Purpose: r.purpose,
-          Timestamp: r.timestamp,
-          Source: r.source,
-        })
-          .map(
-            ([k, v]) =>
-              `<div class="rounded-xl bg-slate-50 p-3"><small class="font-bold uppercase text-slate-400">${esc(k)}</small><div class="mt-1 whitespace-pre-wrap break-words text-sm font-semibold">${esc(v || "—")}</div></div>`,
-          )
-          .join("");
-        $("mTag").textContent = "Full invitation details";
-        $("mTitle").textContent = r.name || "Invitation";
-        $("form").innerHTML =
-          `<div class="sm:col-span-2 grid gap-3 sm:grid-cols-2">${html}</div><div class="flex flex-wrap gap-2 sm:col-span-2"><button type="button" onclick="edit('${encodeURIComponent(r.id)}')" class="rounded-xl bg-indigo-600 px-4 py-3 text-sm font-bold text-white">Edit</button><button type="button" onclick="replyTo('${encodeURIComponent(r.id)}')" class="rounded-xl bg-slate-950 px-4 py-3 text-sm font-bold text-white">Reply by Email</button><button type="button" onclick="openHistory('${encodeURIComponent(r.id)}')" class="rounded-xl border px-4 py-3 text-sm font-bold">History</button></div>`;
-        show("modal");
-      }
-      function edit(id) {
-        selected = get(decodeURIComponent(id));
-        if (!selected) return;
-        $("mTag").textContent = "Record management";
-        $("mTitle").textContent = "Edit Invitation";
-        $("form").innerHTML =
-          `<input type="hidden" name="id"><label>Name<input class="field mt-1" name="name" required></label><label>Email<input class="field mt-1" name="email" required></label><label>Phone<input class="field mt-1" name="phone"></label><label>Date<input class="field mt-1" type="date" name="date"></label><label class="sm:col-span-2">Event<input class="field mt-1" name="event"></label><label class="sm:col-span-2">Purpose<textarea class="field mt-1 min-h-28" name="purpose"></textarea></label><div class="flex gap-2 sm:col-span-2 sm:justify-end"><button type="button" onclick="closeM()" class="rounded-xl border px-5 py-3 font-bold">Cancel</button><button class="rounded-xl bg-indigo-600 px-5 py-3 font-bold text-white">Save Changes</button></div>`;
-        let f = $("form");
-        Object.keys(selected).forEach((k) => {
-          if (f.elements[k]) f.elements[k].value = selected[k] || "";
+          actionsCell.appendChild(actions);
+
+          row.append(
+            idCell,
+            guestCell,
+            contactCell,
+            eventCell,
+            dateCell,
+            sourceCell,
+            actionsCell,
+          );
+          el.body.appendChild(row);
         });
-        show("modal");
+
+        lucide.createIcons();
       }
-      $("form").onsubmit = async (e) => {
-        e.preventDefault();
-        let d = Object.fromEntries(new FormData(e.target));
-        if (!d.id) return closeM();
-        d.action = "update";
-        busy(true, "Updating invitation", "Saving changes to Google Sheet…");
-        try {
-          await api(d);
-          saveH(d.id, "Invitation details edited");
-          closeM();
-          toast("Invitation updated in Google Sheet.");
-          load();
-        } catch (x) {
-          toast(x.message);
-        } finally {
-          busy(false);
+
+      function applySearch() {
+        const query = el.search.value.trim().toLowerCase();
+        state.filteredRecords = state.records.filter((record) =>
+          [
+            record.id,
+            record.name,
+            record.email,
+            record.phone,
+            record.event,
+            record.purpose,
+          ].some((value) => text(value).toLowerCase().includes(query)),
+        );
+        renderRecords(state.filteredRecords);
+      }
+
+      async function loadRecords(showLoader = true) {
+        if (showLoader) {
+          el.tableLoading.classList.remove("hidden");
+          el.tableWrap.classList.add("hidden");
+          el.emptyState.classList.add("hidden");
         }
-      };
-      async function api(d) {
-        let r = await fetch(API, {
+
+        try {
+          const response = await fetch(API + "?action=list&t=" + Date.now(), {
+            method: "GET",
+          });
+          if (!response.ok)
+            throw new Error("Unable to reach the invitation service.");
+          const payload = await response.json();
+          const rows = getResponseRows(payload);
+          if (!Array.isArray(rows))
+            throw new Error(
+              "The invitation service returned an invalid record format.",
+            );
+
+          state.records = rows.map(normalizeRecord);
+          el.total.textContent = state.records.length;
+          el.latest.textContent = state.records.length
+            ? state.records[0].id
+            : "No requests";
+          setConnection(true);
+          applySearch();
+        } catch (error) {
+          state.records = [];
+          state.filteredRecords = [];
+          el.total.textContent = "—";
+          el.latest.textContent = "—";
+          setConnection(false);
+          renderRecords([]);
+          showToast(
+            error.message || "Could not load invitation requests.",
+            "error",
+          );
+        } finally {
+          el.tableLoading.classList.add("hidden");
+        }
+      }
+
+      function openDetails(record) {
+        state.activeRecord = record;
+        const details = [
+          ["Request ID", record.id],
+          ["Name", record.name],
+          ["Email", record.email],
+          ["Phone", record.phone],
+          ["Event Date", record.date],
+          ["Event Type", record.event],
+          ["Purpose", record.purpose],
+          ["Timestamp", record.timestamp],
+          ["Source", record.source],
+        ];
+
+        const content = document.getElementById("detailsContent");
+        content.replaceChildren();
+        details.forEach(([label, value]) => {
+          const item = document.createElement("div");
+          item.className =
+            "rounded-xl border border-slate-200/80 bg-white/60 p-3";
+          const labelEl = document.createElement("p");
+          labelEl.className =
+            "m-0 text-[10px] font-bold uppercase tracking-[.12em] text-slate-400";
+          labelEl.textContent = label;
+          const valueEl = document.createElement("p");
+          valueEl.className =
+            "mt-1 break-words text-sm font-semibold leading-6 text-slate-700";
+          valueEl.textContent = value || "—";
+          item.append(labelEl, valueEl);
+          content.appendChild(item);
+        });
+        openModal("detailsModal");
+      }
+
+      function openEdit(record) {
+        state.activeRecord = record;
+        closeModal("detailsModal");
+        document.getElementById("editId").value = record.id;
+        document.getElementById("editName").value = record.name;
+        document.getElementById("editEmail").value = record.email;
+        document.getElementById("editPhone").value = record.phone;
+        document.getElementById("editDate").value = record.date;
+        document.getElementById("editEvent").value = record.event;
+        document.getElementById("editPurpose").value = record.purpose;
+        openModal("editModal");
+      }
+
+      function openDelete(record) {
+        state.pendingDelete = record;
+        document.getElementById("deleteRecordId").textContent = record.id;
+        openModal("deleteModal");
+      }
+
+      function openReply(record) {
+        state.activeRecord = record;
+        closeModal("detailsModal");
+
+        const recipient = String(record?.email || "").trim();
+        const name = String(record?.name || "Guest").trim();
+        const requestId = String(record?.id || "").trim();
+
+        document.getElementById("replyRecipient").value = recipient;
+        document.getElementById("replyRequestId").value = requestId;
+        document.getElementById("replySubject").value =
+          `Re: Invitation Request ${requestId}`;
+        document.getElementById("replyMessage").value =
+          `Dear ${name},\n\nThank you for contacting YK OFFICIAL.\n\nWe have received your invitation request successfully. Our team will review the details and get back to you shortly.\n\nIf you have any additional information to share, please feel free to reply to this email.\n\nWarm regards,\nYK OFFICIAL\nOfficial Support Team`;
+
+        openModal("replyModal");
+      }
+
+      function readHistory() {
+        try {
+          const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || "{}");
+          return history && typeof history === "object" ? history : {};
+        } catch {
+          return {};
+        }
+      }
+
+      function saveHistory(recordId, action) {
+        const history = readHistory();
+        if (!Array.isArray(history[recordId])) history[recordId] = [];
+        history[recordId].unshift({
+          action,
+          timestamp: new Date().toLocaleString("en-IN"),
+        });
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+      }
+
+      function openHistory(record) {
+        state.activeRecord = record;
+        closeModal("detailsModal");
+        const entries = readHistory()[record.id] || [
+          {
+            action: "Record loaded from Google Sheet",
+            timestamp: record.timestamp || new Date().toLocaleString("en-IN"),
+          },
+        ];
+
+        const content = document.getElementById("historyContent");
+        content.replaceChildren();
+        entries.forEach((entry) => {
+          const item = document.createElement("article");
+          item.className =
+            "flex gap-3 rounded-xl border border-slate-200/80 bg-white/60 p-4";
+          const dot = document.createElement("div");
+          dot.className =
+            "mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-indigo-600";
+          const icon = document.createElement("i");
+          icon.setAttribute("data-lucide", "clock-3");
+          icon.className = "h-4 w-4";
+          dot.appendChild(icon);
+          const body = document.createElement("div");
+          const action = document.createElement("p");
+          action.className = "m-0 text-sm font-bold text-slate-700";
+          action.textContent = entry.action;
+          const timestamp = document.createElement("p");
+          timestamp.className = "mt-1 text-xs text-slate-400";
+          timestamp.textContent = entry.timestamp;
+          body.append(action, timestamp);
+          item.append(dot, body);
+          content.appendChild(item);
+        });
+        openModal("historyModal");
+        lucide.createIcons();
+      }
+
+      async function postToApi(payload) {
+        const response = await fetch(API, {
           method: "POST",
           headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(d),
+          body: JSON.stringify(payload),
         });
-        let j = {};
+
+        let result = null;
         try {
-          j = await r.json();
-        } catch (e) {}
-        if (!r.ok || j.success === false)
-          throw Error(j.message || "API request failed");
-        return j;
-      }
-      function del(id) {
-        selected = get(decodeURIComponent(id));
-        if (
-          confirm(
-            "Delete " +
-              selected.id +
-              "? This will delete the connected Google Sheet row.",
-          )
-        ) {
-          busy(
-            true,
-            "Deleting invitation",
-            "Removing record from Google Sheet…",
+          result = await response.json();
+        } catch {
+          result = null;
+        }
+        if (!response.ok || (result && result.success === false)) {
+          throw new Error(
+            (result && (result.message || result.error)) ||
+              "The request could not be completed.",
           );
-          api({ action: "delete", id: selected.id })
-            .then(() => {
-              saveH(selected.id, "Invitation deleted");
-              toast("Invitation deleted.");
-              load();
-            })
-            .catch((e) => toast(e.message))
-            .finally(() => busy(false));
         }
+        return result;
       }
-      function replyTo(id) {
-        selected = get(decodeURIComponent(id));
-        openReply(selected, true);
-      }
-      function openReply(r, open = true) {
-        $("replyForm").to.value = r.email || "";
-        $("to").value = r.email || "";
-        $("replyForm").requestId.value = r.id || "";
-        $("replyForm").subject.value = "Re: Invitation Request " + r.id;
-        $("replyForm").message.value =
-          `Dear ${r.name || "Guest"},\n\nThank you for contacting YK OFFICIAL regarding your invitation request (${r.id || ""}).\n\nRegards,\nYK OFFICIAL`;
-        if (open) {
-          closeM();
-          show("reply");
+
+      document
+        .getElementById("editForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const record = state.activeRecord;
+          if (!record) return;
+
+          const saveButton = document.getElementById("editSaveButton");
+          saveButton.disabled = true;
+          showActionLoader("Saving invitation changes…");
+
+          try {
+            const data = {
+              action: "update",
+              id: document.getElementById("editId").value.trim(),
+              name: document.getElementById("editName").value.trim(),
+              email: document.getElementById("editEmail").value.trim(),
+              phone: document.getElementById("editPhone").value.trim(),
+              date: document.getElementById("editDate").value,
+              event: document.getElementById("editEvent").value.trim(),
+              purpose: document.getElementById("editPurpose").value.trim(),
+            };
+            await postToApi(data);
+            saveHistory(data.id, "Invitation details updated");
+            closeModal("editModal");
+            showToast("Invitation request updated successfully.");
+            await loadRecords(false);
+          } catch (error) {
+            showToast(
+              error.message || "Unable to save invitation changes.",
+              "error",
+            );
+          } finally {
+            saveButton.disabled = false;
+            hideActionLoader();
+          }
+        });
+
+      document
+        .getElementById("confirmDeleteButton")
+        .addEventListener("click", async () => {
+          const record = state.pendingDelete;
+          if (!record) return;
+
+          const button = document.getElementById("confirmDeleteButton");
+          button.disabled = true;
+          showActionLoader("Deleting invitation request…");
+
+          try {
+            await postToApi({ action: "delete", id: record.id });
+            saveHistory(record.id, "Invitation request deleted");
+            closeModal("deleteModal");
+            showToast("Invitation request deleted.");
+            await loadRecords(false);
+          } catch (error) {
+            showToast(
+              error.message || "Unable to delete this invitation request.",
+              "error",
+            );
+          } finally {
+            button.disabled = false;
+            hideActionLoader();
+          }
+        });
+
+      document
+        .getElementById("replyForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const record = state.activeRecord;
+          if (!record) {
+            showToast("No invitation request selected.", "error");
+            return;
+          }
+
+          const button = document.getElementById("replySendButton");
+          const recipient = String(
+            document.getElementById("replyRecipient").value || "",
+          ).trim();
+          const requestId = String(
+            document.getElementById("replyRequestId").value || "",
+          ).trim();
+          const subject = String(
+            document.getElementById("replySubject").value || "",
+          ).trim();
+          const message = String(
+            document.getElementById("replyMessage").value || "",
+          ).trim();
+          const name = String(record.name || "Guest").trim();
+
+          const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+          if (!recipient) {
+            showToast("Recipient email is missing.", "error");
+            return;
+          }
+          if (!emailPattern.test(recipient)) {
+            showToast("Please enter a valid recipient email.", "error");
+            return;
+          }
+          if (!subject) {
+            showToast("Please enter an email subject.", "error");
+            return;
+          }
+          if (!message) {
+            showToast("Please enter your reply message.", "error");
+            return;
+          }
+          if (!window.emailjs) {
+            showToast("Email service is not loaded. Please refresh the page.", "error");
+            return;
+          }
+
+          button.disabled = true;
+          const originalButtonHTML = button.innerHTML;
+          button.innerHTML = `
+            <span class="inline-flex items-center gap-2">
+              <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
+              Sending...
+            </span>`;
+          if (typeof lucide !== "undefined") lucide.createIcons();
+          showActionLoader("Sending email reply…");
+
+          try {
+            initializeEmailJS();
+
+            const templateParams = {
+              to_email: recipient,
+              to_name: name,
+              subject: subject,
+              message: message,
+              request_id: requestId,
+
+              // Common aliases for flexible EmailJS templates.
+              email: recipient,
+              recipient_email: recipient,
+              recipient: recipient,
+              name: name,
+              guest_name: name,
+              reply_subject: subject,
+              reply_message: message,
+              requestId: requestId,
+              from_name: "YK OFFICIAL",
+              company_name: "YK OFFICIAL",
+            };
+
+            console.log("YK OFFICIAL EmailJS: sending reply", {
+              recipient,
+              requestId,
+              service: EMAIL_SERVICE_ID,
+              template: EMAIL_TEMPLATE_ID,
+            });
+
+            const result = await window.emailjs.send(
+              EMAIL_SERVICE_ID,
+              EMAIL_TEMPLATE_ID,
+              templateParams,
+            );
+
+            console.log("YK OFFICIAL EmailJS response:", result);
+
+            if (!result || Number(result.status) >= 400) {
+              throw new Error(
+                result?.text || "Email service rejected the request.",
+              );
+            }
+
+            try {
+              saveHistory(record.id, "Reply email sent");
+            } catch (historyError) {
+              console.warn(
+                "Email sent, but reply history could not be saved:",
+                historyError,
+              );
+            }
+
+            closeModal("replyModal");
+            showToast(`Reply email sent successfully to ${recipient}.`);
+          } catch (error) {
+            console.error("YK OFFICIAL EmailJS error:", error);
+            const errorMessage =
+              error?.text ||
+              error?.message ||
+              error?.responseText ||
+              "Unable to send reply email.";
+            showToast(`Email could not be sent: ${errorMessage}`, "error");
+          } finally {
+            button.disabled = false;
+            button.innerHTML = originalButtonHTML;
+            if (typeof lucide !== "undefined") lucide.createIcons();
+            hideActionLoader();
+          }
+        });
+
+      document
+        .getElementById("refreshButton")
+        .addEventListener("click", async () => {
+          const button = document.getElementById("refreshButton");
+          button.disabled = true;
+          showActionLoader("Refreshing invitation records…");
+          await loadRecords(true);
+          hideActionLoader();
+          button.disabled = false;
+        });
+
+      document.getElementById("sheetButton").addEventListener("click", () => {
+        window.open(API, "_blank", "noopener,noreferrer");
+      });
+
+      document
+        .getElementById("detailsEditButton")
+        .addEventListener(
+          "click",
+          () => state.activeRecord && openEdit(state.activeRecord),
+        );
+      document
+        .getElementById("detailsReplyButton")
+        .addEventListener(
+          "click",
+          () => state.activeRecord && openReply(state.activeRecord),
+        );
+      document
+        .getElementById("detailsHistoryButton")
+        .addEventListener(
+          "click",
+          () => state.activeRecord && openHistory(state.activeRecord),
+        );
+
+      el.search.addEventListener("input", applySearch);
+
+      document.querySelectorAll(".modal-close").forEach((button) => {
+        button.addEventListener("click", () =>
+          closeModal(button.dataset.close),
+        );
+      });
+
+      document.querySelectorAll(".modal-shell").forEach((modal) => {
+        modal.addEventListener("click", (event) => {
+          if (event.target === modal) closeModal(modal.id);
+        });
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeAllModals();
+          hideActionLoader();
         }
-      }
-      function closeReply() {
-        hide("reply");
-      }
-      $("replyForm").onsubmit = async (e) => {
-        e.preventDefault();
-        let d = Object.fromEntries(new FormData(e.target));
-        busy(true, "Sending reply", "Sending official email…");
+      });
+
+      function initializeEmailJS() {
+        if (!window.emailjs) {
+          console.error("YK OFFICIAL: EmailJS SDK not loaded.");
+          return false;
+        }
+
         try {
-          await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, {
-            to_email: d.to,
-            to_name: selected.name,
-            subject: d.subject,
-            message: d.message,
-            request_id: d.requestId,
-          });
-          saveH(d.requestId, "Email reply sent to " + d.to);
-          closeReply();
-          toast("Email reply sent successfully.");
-        } catch (x) {
-          toast("Email failed. Check EmailJS template variables.");
-        } finally {
-          busy(false);
+          window.emailjs.init(EMAIL_PUBLIC_KEY);
+          return true;
+        } catch (error) {
+          console.error("YK OFFICIAL: EmailJS initialization failed:", error);
+          return false;
         }
-      };
-      function saveH(id, a) {
-        history[id] ??= [];
-        history[id].unshift({ a, t: new Date().toLocaleString("en-IN") });
-        localStorage.ykInviteHistory = JSON.stringify(history);
       }
-      function openHistory(id) {
-        let r = get(decodeURIComponent(id));
-        let h = history[r.id] || [
-          { a: "Record loaded from Google Sheet", t: r.timestamp || "Unknown" },
-        ];
-        $("historyList").innerHTML = h
-          .map(
-            (x) =>
-              `<div class="rounded-xl bg-slate-50 p-4"><b class="text-sm">${esc(x.a)}</b><div class="mt-1 text-xs text-slate-400">${esc(x.t)}</div></div>`,
-          )
-          .join("");
-        show("history");
-      }
-      function closeHistory() {
-        hide("history");
-      }
-      function closeM() {
-        hide("modal");
-      }
-      function openSheet() {
-        window.open(SHEET, "_blank", "noopener");
-      }
-      window.addEventListener("load", () => {
-        $("bar").style.width = "100%";
+
+      async function initialize() {
+        initializeEmailJS();
+        lucide.createIcons();
+        await loadRecords(true);
         setTimeout(() => {
-          $("loader").remove();
-          load();
-        }, 1500);
-      });
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          closeM();
-          closeReply();
-          closeHistory();
-          hide("actionLoader");
-        }
-      });
+          el.loader.style.opacity = "0";
+          el.loader.style.transition = "opacity .35s ease";
+          setTimeout(() => el.loader.remove(), 360);
+        }, 500);
+      }
+
+      initialize();
     </script>
     <script src="security.js"></script>
+    
   </body>
 </html>
