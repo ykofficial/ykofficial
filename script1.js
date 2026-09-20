@@ -290,6 +290,8 @@ document.addEventListener("touchend", () => {
   isDragging = false;
 });
 
+
+
 // SUPPORT CHAT BOT LOGIC
 
 (function () {
@@ -393,60 +395,125 @@ function generateID() {
 /**
  * Handles the Mail Dispatch with Error Catching
  */
-function sendMail() {
-  // Elements
-  const nameEl = document.getElementById("name");
-  const emailEl = document.getElementById("email");
-  const phoneEl = document.getElementById("phone");
-  const msgEl = document.getElementById("message");
+function sendMail(event) {
+
+  if(event) event.preventDefault();
+
+  // CHAT FORM IDS
+  const nameEl = document.getElementById("chatName");
+  const emailEl = document.getElementById("chatEmail");
+  const phoneEl = document.getElementById("chatPhone");
+  const msgEl = document.getElementById("chatMessage");
+
+  const btn = document.getElementById("chatSubmitBtn");
 
   const name = nameEl.value.trim();
   const email = emailEl.value.trim();
   const phone = phoneEl.value.trim();
   const message = msgEl.value.trim();
 
-  // Validation
+  // VALIDATION
   if (!name || !email || !phone || !message) {
-    addBotMessage("⚠️ **Protocol Error:** All fields are mandatory for system verification.");
+    addBotMessage("⚠️ Please fill all required fields.");
     return;
   }
 
-  // Display User Entry in Chat
+  // EMAIL CHECK
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
+    addBotMessage("⚠️ Please enter valid email.");
+    return;
+  }
+
+  // USER MESSAGE
   addUserMessage(name, message);
 
   const userID = generateID();
-  const templateParams = { name, email, phone, message, user_id: userID };
 
-  // Change Button State to Loading
-  const btn = event.target;
-  const originalText = btn.innerText;
-  btn.innerText = "ENCRYPTING...";
+  const templateParams = {
+    name: name,
+    email: email,
+    phone: phone,
+    message: message,
+    user_id: userID
+  };
+
+  // BUTTON LOADING
   btn.disabled = true;
 
-  emailjs
-    .send("service_zyg352n", "template_s2su8xr", templateParams)
-    .then(function () {
-      addBotMessage(`✅ **Dispatch Successful**<br>Request ID: <span class="font-mono font-bold text-indigo-600">${userID}</span>`);
-      
+  btn.innerHTML = `
+      <div class="flex items-center justify-center gap-2">
+          <div class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+          <span>Dispatching...</span>
+      </div>
+  `;
+
+  emailjs.send(
+      "service_zyg352n",
+      "template_s2su8xr",
+      templateParams
+  )
+
+  .then(function () {
+
+      addBotMessage(`
+        ✅ Request Sent Successfully <br>
+        Request ID:
+        <span class="font-bold text-indigo-600">
+            ${userID}
+        </span>
+      `);
+
       document.getElementById("chatForm").style.display = "none";
+
       formSubmitted = true;
 
       setTimeout(() => {
-        addBotMessage("A summary has been sent to your email. Would you like to initiate another request?");
-        addFormButton();
+
+          addBotMessage(
+            "Your request has been received. Need another inquiry?"
+          );
+
+          addFormButton();
+
       }, 1000);
 
-      // Reset Fields
-      [nameEl, emailEl, phoneEl, msgEl].forEach(el => el.value = "");
-    })
-    .catch(function (error) {
-      addBotMessage("❌ **System Failure:** Integration error. Please contact yegnesh7219@gmail.com directly.");
-      console.error("EmailJS Error:", error);
-    })
-    .finally(() => {
-      btn.innerText = originalText;
+      // RESET
+      nameEl.value = "";
+      emailEl.value = "";
+      phoneEl.value = "";
+      msgEl.value = "";
+  })
+
+  .catch(function(error){
+
+      console.error(error);
+
+      addBotMessage(
+        "❌ Mail sending failed. Please try again."
+      );
+  })
+
+  .finally(function(){
+
       btn.disabled = false;
-    });
+
+      btn.innerHTML = `
+        <span class="flex items-center justify-center gap-2">
+            Initiate Request
+            <svg class="w-4 h-4"
+                 fill="none"
+                 stroke="currentColor"
+                 viewBox="0 0 24 24">
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 12h14M13 6l6 6-6 6"/>
+            </svg>
+        </span>
+      `;
+  });
 }
 
 function scrollBottom() {
@@ -456,6 +523,10 @@ function scrollBottom() {
     behavior: 'smooth'
   });
 }
+//  chat box end
+
+
+
 
 //   VIDEO PLAYER LOGIC
 
