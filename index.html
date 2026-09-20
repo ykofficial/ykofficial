@@ -39,7 +39,7 @@
           window.location.pathname.split("/").pop().split(".")[0] || "home";
 
         // Naya URL Hash format: #pageName?uid=YKOFFICIAL-${uniqueId}
-        const newHash = `#${pageName}?port=yKOfFi2026${uniqueId}`;
+        const newHash = `#${pageName}?port=yKOfFi${uniqueId}`;
 
         // Browser ka URL update karna bina reload kiye
         window.history.replaceState(null, null, newHash);
@@ -505,7 +505,14 @@
                   </a>
                   <!-- ITEM 1 -->
                   <a
-                    href="certification.html"
+                    type="button"
+                    onclick="
+                      openModalIframe(
+                        'certification.html',
+                        'Certification',
+                        'fa-award',
+                      )
+                    "
                     class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-purple-100 transition"
                   >
                     🏆 Certification
@@ -597,14 +604,24 @@
                 >
                   <!-- ITEM 1 -->
                   <a
-                    href="invite.html"
+                    href="#"
+                    onclick="
+                      openModalIframe('invite.html', 'Invite Me', 'fa-gift')
+                    "
                     class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-purple-100 transition"
                   >
                     🎁 Invite Me
                   </a>
                   <!-- ITEM 1 -->
                   <a
-                    href="refer.html"
+                    href="#"
+                    onclick="
+                      openModalIframe(
+                        'refer.html',
+                        'Refer a Friend',
+                        'fa-handshake',
+                      )
+                    "
                     class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-purple-100 transition"
                   >
                     🤝 Refer a Friend
@@ -612,7 +629,10 @@
 
                   <!-- ITEM 1 -->
                   <a
-                    href="feedbackyk.html"
+                    href="#"
+                    onclick="
+                      openModalIframe('feedbackyk.html', 'Feedback', 'fa-star')
+                    "
                     class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-purple-100 transition"
                   >
                     ⭐ Feedback
@@ -622,8 +642,10 @@
 
               <!-- ========================= GALLERY BUTTON ========================= -->
               <a
-                href="gallery.html"
-                target="_blank"
+                type="button"
+                onclick="
+                  openModalIframe('gallery.html', 'Gallery', 'fa-images')
+                "
                 rel="noopener noreferrer"
                 class="group relative inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 text-slate-700 border border-slate-200 text-sm font-semibold shadow-sm transition-all duration-300 hover:bg-white hover:text-indigo-600 hover:border-indigo-200 hover:shadow-[0_6px_20px_rgba(79,70,229,0.10)] hover:-translate-y-0.5"
               >
@@ -833,7 +855,14 @@
 
             <!-- Certification -->
             <a
-              href="certification.html"
+              type="button"
+              onclick="
+                openModalIframe(
+                  'certification.html',
+                  'Certification',
+                  'fa-award',
+                )
+              "
               class="mobile-nav-link flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-700 hover:bg-purple-50 hover:text-purple-600 font-medium transition-all duration-200"
             >
               <svg
@@ -961,19 +990,32 @@
                 class="max-h-0 overflow-hidden transition-all duration-300 space-y-1 mt-1"
               >
                 <a
-                  href="invite.html"
+                  type="button"
+                  onclick="
+                    openModalIframe('invite.html', 'Invite Me', 'fa-gift')
+                  "
                   class="flex items-center space-x-3 px-8 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-purple-50 hover:text-purple-600 transition"
                 >
                   🎁 <span>Invite Me</span>
                 </a>
                 <a
-                  href="refer.html"
+                  type="button"
+                  onclick="
+                    openModalIframe(
+                      'refer.html',
+                      'Refer a Friend',
+                      'fa-handshake',
+                    )
+                  "
                   class="flex items-center space-x-3 px-8 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-purple-50 hover:text-purple-600 transition"
                 >
                   🤝 <span>Refer a Friend</span>
                 </a>
                 <a
-                  href="feedbackyk.html"
+                  type="button"
+                  onclick="
+                    openModalIframe('feedbackyk.html', 'Feedback', 'fa-star')
+                  "
                   class="flex items-center space-x-3 px-8 py-2.5 rounded-lg text-sm text-gray-600 hover:bg-purple-50 hover:text-purple-600 transition"
                 >
                   ⭐ <span>Feedback</span>
@@ -986,8 +1028,8 @@
           <div class="mt-6 pt-5 border-t border-gray-100 space-y-3">
             <!-- GALLERY BUTTON -->
             <a
-              href="gallery.html"
-              target="_blank"
+              type="button"
+              onclick="openModalIframe('gallery.html', 'Gallery', 'fa-images')"
               rel="noopener noreferrer"
               class="group relative flex items-center justify-between w-full px-4 py-3 rounded-xl bg-slate-50 text-slate-700 border border-slate-200 text-sm font-semibold shadow-sm transition-all duration-300 hover:bg-white hover:text-indigo-600 hover:border-indigo-200 hover:shadow-[0_6px_20px_rgba(79,70,229,0.10)] hover:-translate-y-0.5"
             >
@@ -1270,8 +1312,15 @@
 
               <!-- SYSTEM NETWORK STATUS -->
               <a
-                href="networkdetails.html"
-                target="_blank"
+                href="#"
+                type="button"
+                onclick="
+                  openModalIframe(
+                    'networkdetails.html',
+                    'Network Details',
+                    'fa-signal',
+                  )
+                "
                 rel="noopener noreferrer"
                 id="networkStatusContainer"
                 class="flex-shrink-0 flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/[0.02] border border-white/5 hover:border-emerald-500/30 hover:bg-white/[0.05] transition-all duration-300"
@@ -3490,7 +3539,7 @@
                   <!-- Image Frame -->
 
                   <video
-                    id="video"
+                    id="contactVideo"
                     class="w-full h-full object-cover"
                     playsinline
                     muted
@@ -3755,6 +3804,24 @@
               .join("");
           } catch (error) {
             console.error("Error fetching data:", error);
+            const grid = document.getElementById("testimonialGrid");
+            const loader = document.getElementById("loading");
+
+            if (loader) loader.classList.add("hidden");
+            if (grid) {
+              grid.innerHTML = `
+                <div class="col-span-full text-center py-8">
+                  <p class="text-slate-400 font-semibold">Feedback is temporarily unavailable.</p>
+                  <button
+                    type="button"
+                    onclick="fetchFeedback()"
+                    class="mt-3 px-4 py-2 rounded-lg bg-slate-900 text-white text-xs font-semibold hover:bg-indigo-600 transition"
+                  >
+                    Retry
+                  </button>
+                </div>
+              `;
+            }
           }
         }
         fetchFeedback();
@@ -3874,21 +3941,38 @@
                 </li>
                 <li>
                   <a
-                    href="doc.html"
+                    type="button"
+                    onclick="
+                      openModalIframe('doc.html', 'Documentation', 'fa-book')
+                    "
                     class="hover:text-indigo-400 transition-colors"
                     >Documentation</a
                   >
                 </li>
                 <li>
                   <a
-                    href="resume.html"
+                    type="button"
+                    onclick="
+                      openModalIframe(
+                        'resume.html',
+                        'Executive CV',
+                        'fa-file-alt',
+                      )
+                    "
                     class="hover:text-indigo-400 transition-colors"
                     >Executive CV</a
                   >
                 </li>
                 <li>
                   <a
-                    href="ykvideoplayer.html"
+                    type="button"
+                    onclick="
+                      openModalIframe(
+                        'ykvideoplayer.html',
+                        'Media Suite',
+                        'fa-video',
+                      )
+                    "
                     class="hover:text-indigo-400 transition-colors"
                     >Media Suite</a
                   >
@@ -4571,42 +4655,6 @@
       </div>
     </div>
 
-    <!-- PROJECT MODAL -->
-    <div
-      id="projectModal"
-      class="fixed inset-0 hidden items-center justify-center z-50 bg-black/60 backdrop-blur-md transition-all duration-300"
-    >
-      <!-- MODAL BOX -->
-      <div
-        class="relative w-[95%] sm:w-[85%] md:w-[70%] lg:w-[60%] max-h-[90vh] rounded-3xl overflow-hidden bg-white/80 backdrop-blur-xl border border-white/30 shadow-[0_20px_60px_rgba(0,0,0,0.3)] animate-[fadeInScale_0.3s_ease]"
-      >
-        <!-- HEADER -->
-        <div
-          class="flex justify-between items-center px-6 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white"
-        >
-          <h3
-            id="projectModalTitle"
-            class="text-lg sm:text-xl md:text-2xl font-bold tracking-wide"
-          ></h3>
-
-          <button
-            onclick="closeProjectModal()"
-            class="text-2xl hover:scale-110 hover:text-red-700 transition animation-[pulse_1s_infinite]"
-          >
-            ✖
-          </button>
-        </div>
-
-        <!-- CONTENT -->
-        <div
-          id="projectModalContent"
-          class="p-6 md:p-8 overflow-y-auto max-h-[70vh] bg-gradient-to-br from-white to-gray-100 text-gray-700 text-sm md:text-base"
-        >
-          <!-- Dynamic Project Content -->
-        </div>
-      </div>
-    </div>
-
     <!-- Toast Notification -->
     <div id="toast" class="toast"></div>
 
@@ -4918,8 +4966,10 @@
         </span>
       </button>
     </div>
+
     <!-- CHAT BOX -->
     <!-- ================= OFFICIAL SUPPORT CHAT ================= -->
+
     <div
       id="chatBox"
       class="hidden fixed bottom-24 left-3 right-3 sm:left-5 sm:right-5 md:left-8 md:right-auto md:w-[390px] h-[min(600px,calc(100vh-110px))] bg-white rounded-[1.75rem] border border-slate-200 shadow-[0_25px_80px_rgba(15,23,42,0.25)] flex flex-col overflow-hidden"
@@ -5054,7 +5104,7 @@
         id="chatForm"
         class="shrink-0 p-4 sm:p-5 bg-white border-t border-slate-200"
       >
-        <!-- Form Label -->
+        <!-- FORM HEADER -->
         <div class="flex items-center justify-between mb-3">
           <div>
             <p
@@ -5064,14 +5114,21 @@
             </p>
 
             <p class="text-[9px] text-slate-400 mt-0.5">
-              Our team will review your request
+              Secure support request • YK OFFICIAL
             </p>
           </div>
 
           <div
             class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-emerald-50 border border-emerald-100"
           >
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            <span class="relative flex h-1.5 w-1.5">
+              <span
+                class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping"
+              ></span>
+              <span
+                class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"
+              ></span>
+            </span>
 
             <span
               class="text-[8px] font-bold text-emerald-600 uppercase tracking-wide"
@@ -5081,79 +5138,69 @@
           </div>
         </div>
 
-        <!-- Name + Email -->
+        <!-- NAME + EMAIL -->
         <div class="grid grid-cols-2 gap-2 mb-2">
           <div class="relative">
             <input
-              id="name"
+              id="chatName"
               type="text"
-              placeholder="Name"
+              autocomplete="name"
+              placeholder="Your name"
+              maxlength="80"
               class="w-full h-10 px-3.5 text-[11px] text-slate-700 placeholder:text-slate-400 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-200"
             />
           </div>
 
           <div class="relative">
             <input
-              id="email"
+              id="chatEmail"
               type="email"
-              placeholder="Email"
+              autocomplete="email"
+              placeholder="Email address"
+              maxlength="120"
               class="w-full h-10 px-3.5 text-[11px] text-slate-700 placeholder:text-slate-400 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-200"
             />
           </div>
         </div>
 
-        <!-- Phone -->
+        <!-- PHONE -->
         <div class="mb-2">
           <input
-            id="phone"
-            type="text"
+            id="chatPhone"
+            type="tel"
+            autocomplete="tel"
             placeholder="Phone / WhatsApp"
+            maxlength="20"
             class="w-full h-10 px-3.5 text-[11px] text-slate-700 placeholder:text-slate-400 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-200"
           />
         </div>
 
-        <!-- Message -->
+        <!-- MESSAGE -->
         <div class="mb-3">
           <textarea
-            id="message"
-            rows="2"
+            id="chatMessage"
+            rows="3"
+            maxlength="1000"
             placeholder="Tell us how we can help..."
             class="w-full px-3.5 py-3 text-[11px] text-slate-700 placeholder:text-slate-400 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-200 resize-none"
           ></textarea>
         </div>
 
-        <!-- Submit -->
+        <!-- SUBMIT BUTTON -->
         <button
-          onclick="sendMail()"
-          class="group relative w-full h-11 overflow-hidden rounded-xl bg-slate-950 text-white text-[10px] font-bold uppercase tracking-[0.14em] shadow-[0_8px_20px_rgba(15,23,42,0.18)] hover:shadow-[0_10px_28px_rgba(79,70,229,0.22)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
+          id="chatSubmitBtn"
+          onclick="sendMail(event)"
+          class="group relative w-full h-11 rounded-xl bg-slate-950 text-white"
         >
-          <!-- Hover Glow -->
-          <span
-            class="absolute inset-0 bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-          ></span>
-
-          <span class="relative z-10 flex items-center justify-center gap-2">
+          <span class="flex items-center justify-center gap-2">
             Initiate Request
-
-            <svg
-              class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="m13 6 6 6-6 6" />
-            </svg>
           </span>
         </button>
 
-        <!-- Privacy / Footer -->
+        <!-- SECURITY FOOTER -->
         <div class="flex items-center justify-center gap-1.5 mt-3">
           <svg
-            class="w-3 h-3 text-slate-400"
+            class="w-3 h-3 text-emerald-500"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -5343,6 +5390,176 @@
             window.closeRegistrationPopup();
         });
       })();
+    </script>
+
+    <!-- Popup Model Certificate and Gallery , Refer friend -->
+
+    <div
+      id="iframeModal"
+      class="hidden fixed inset-0 z-[2000] bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-5"
+    >
+      <div
+        class="w-full h-full max-w-[1500px] max-h-[95vh] bg-slate-950 rounded-2xl overflow-hidden border border-indigo-500/20 shadow-2xl flex flex-col"
+      >
+        <div
+          class="flex items-center justify-between px-4 py-3 bg-slate-900 border-b border-slate-800 shrink-0"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-9 h-9 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center"
+            >
+              <i
+                id="iframeModalIcon"
+                class="fa-solid fa-window-maximize text-indigo-400"
+              ></i>
+            </div>
+
+            <div>
+              <h3
+                id="iframeModalTitle"
+                class="text-white font-bold text-sm sm:text-base"
+              >
+                Admin
+              </h3>
+
+              <p class="text-slate-500 text-[10px] uppercase tracking-wider">
+                YK OFFICIAL &bull; Secure
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onclick="closeModals()"
+            class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-red-500/10 hover:border-red-500/30 transition-all"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="flex-1 bg-white relative">
+          <div
+            id="iframeLoading"
+            class="absolute inset-0 z-10 bg-slate-950 flex flex-col items-center justify-center"
+          >
+            <div class="yk-spinner"></div>
+            <p class="mt-4 text-slate-400 text-sm">
+              Opening Page... Please wait
+            </p>
+          </div>
+
+          <iframe
+            id="iframeContent"
+            src=""
+            class="w-full h-full border-0"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function openModalIframe(url, titleText, icon = "fa-window-maximize") {
+        const modal = document.getElementById("iframeModal");
+        const iframe = document.getElementById("iframeContent");
+        const title = document.getElementById("iframeModalTitle");
+        const iconEl = document.getElementById("iframeModalIcon");
+        const loading = document.getElementById("iframeLoading");
+
+        if (!modal || !iframe) return;
+
+        if (title) {
+          title.textContent = titleText;
+        }
+
+        if (iconEl) {
+          iconEl.className = `fa-solid ${icon} text-indigo-400`;
+        }
+
+        if (loading) {
+          loading.style.display = "flex";
+        }
+
+        iframe.src = url;
+
+        iframe.onload = function () {
+          if (loading) {
+            loading.style.display = "none";
+          }
+        };
+
+        modal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
+    </script>
+
+    <!-- ================= CHAT EMAIL BRIDGE ================= -->
+    <script>
+      /*
+       * The main inquiry form already owns the existing sendMail() / EmailJS
+       * configuration in script1.js. The support-chat form uses unique IDs,
+       * then safely forwards its values to that existing sender.
+       */
+      window.sendMailFromChat = function (event) {
+        if (event) event.preventDefault();
+
+        const chatName = document.getElementById("chatName");
+        const chatEmail = document.getElementById("chatEmail");
+        const chatMessage = document.getElementById("chatMessage");
+
+        const mainName = document.getElementById("name");
+        const mainEmail = document.getElementById("email");
+        const mainMessage = document.getElementById("message");
+
+        if (!chatName || !chatEmail || !chatMessage) {
+          console.error("YK OFFICIAL: chat form fields are missing.");
+          return;
+        }
+
+        const name = chatName.value.trim();
+        const email = chatEmail.value.trim();
+        const message = chatMessage.value.trim();
+
+        if (!name || !email || !message) {
+          if (typeof Swal !== "undefined") {
+            Swal.fire({
+              icon: "warning",
+              title: "Complete the request",
+              text: "Please enter your name, email and message.",
+              confirmButtonColor: "#4f46e5",
+            });
+          } else {
+            alert("Please enter your name, email and message.");
+          }
+          return;
+        }
+
+        if (mainName) mainName.value = name;
+        if (mainEmail) mainEmail.value = email;
+        if (mainMessage) mainMessage.value = message;
+
+        if (typeof window.sendMail === "function") {
+          window.sendMail();
+        } else {
+          console.error(
+            "YK OFFICIAL: sendMail() was not found. Check script1.js.",
+          );
+        }
+      };
+    </script>
+
+    <!-- ================= IFRAME MODAL CLOSE FALLBACK ================= -->
+    <script>
+      if (typeof window.closeModals !== "function") {
+        window.closeModals = function () {
+          const modal = document.getElementById("iframeModal");
+          const iframe = document.getElementById("iframeContent");
+
+          if (modal) modal.classList.add("hidden");
+          if (iframe) iframe.src = "about:blank";
+          document.body.style.overflow = "";
+        };
+      }
     </script>
 
     <script src="security.js"></script>
