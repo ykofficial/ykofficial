@@ -5566,4 +5566,237 @@
     <script src="script1.js"></script>
     <script src="smoothscroll.js"></script>
   </body>
+
+
+  <!-- Maintence Code -->
+
+  <script>
+  /*
+   * YK OFFICIAL — MAINTENANCE MODE
+   *
+   * Public:
+   * https://ykofficial.github.io/ykofficial/
+   *
+   * Private testing:
+   * https://ykofficial.github.io/ykofficial/?maintenance=off
+   */
+
+  const MAINTENANCE_MODE = true;
+
+  const MAINTENANCE_PAGE = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>YK OFFICIAL | Maintenance</title>
+      <style>
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          font-family: Arial, sans-serif;
+          background: #fff;
+          color: #0f172a;
+          overflow: hidden;
+        }
+
+        .bg {
+          position: fixed;
+          inset: 0;
+          background:
+            radial-gradient(circle at 15% 15%, #f1f5f9, transparent 32%),
+            radial-gradient(circle at 85% 85%, #e2e8f0, transparent 30%);
+          z-index: -1;
+        }
+
+        .card {
+          width: min(700px, 100%);
+          text-align: center;
+          padding: 55px 35px;
+          border: 1px solid rgba(15,23,42,.08);
+          border-radius: 36px;
+          background: rgba(255,255,255,.72);
+          backdrop-filter: blur(25px);
+          -webkit-backdrop-filter: blur(25px);
+          box-shadow:
+            0 30px 80px rgba(15,23,42,.10),
+            inset 0 1px 0 rgba(255,255,255,.9);
+          animation: enter .7s ease;
+        }
+
+        @keyframes enter {
+          from {
+            opacity: 0;
+            transform: translateY(25px) scale(.97);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        .icon {
+          width: 82px;
+          height: 82px;
+          margin: 0 auto 25px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 27px;
+          background: #fff;
+          border: 1px solid rgba(15,23,42,.07);
+          box-shadow: 0 15px 35px rgba(15,23,42,.08);
+          font-size: 32px;
+        }
+
+        .brand {
+          font-size: 13px;
+          font-weight: 800;
+          letter-spacing: .25em;
+          margin-bottom: 20px;
+        }
+
+        .status {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 9px 15px;
+          border-radius: 999px;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          color: #64748b;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: .12em;
+          text-transform: uppercase;
+        }
+
+        .dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #94a3b8;
+          animation: pulse 1.6s infinite;
+        }
+
+        @keyframes pulse {
+          50% {
+            opacity: .35;
+            transform: scale(.8);
+          }
+        }
+
+        h1 {
+          margin: 25px 0 18px;
+          font-size: clamp(40px, 7vw, 64px);
+          line-height: 1.05;
+          letter-spacing: -.05em;
+        }
+
+        h1 span {
+          color: #64748b;
+        }
+
+        p {
+          max-width: 520px;
+          margin: auto;
+          color: #64748b;
+          line-height: 1.8;
+          font-size: 15px;
+        }
+
+        .line {
+          width: 180px;
+          height: 4px;
+          margin: 32px auto 0;
+          border-radius: 99px;
+          background: #0f172a;
+          animation: loading 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes loading {
+          from { width: 80px; }
+          to { width: 180px; }
+        }
+
+        .footer {
+          margin-top: 30px;
+          padding-top: 20px;
+          border-top: 1px solid #e2e8f0;
+          color: #94a3b8;
+          font-size: 11px;
+        }
+
+        @media(max-width:600px) {
+          .card {
+            padding: 42px 22px;
+            border-radius: 30px;
+          }
+
+          h1 {
+            font-size: 42px;
+          }
+        }
+      </style>
+    </head>
+
+    <body>
+      <div class="bg"></div>
+
+      <div class="card">
+
+        <div class="icon">⚙</div>
+
+        <div class="brand">YK OFFICIAL</div>
+
+        <div class="status">
+          <span class="dot"></span>
+          System Maintenance
+        </div>
+
+        <h1>
+          We'll be back<br>
+          <span>shortly.</span>
+        </h1>
+
+        <p>
+          We're currently improving YK OFFICIAL.
+          The website is temporarily unavailable while
+          we work on updates and improvements.
+        </p>
+
+        <div class="line"></div>
+
+        <div class="footer">
+          YK OFFICIAL · Future Ready Digital Solutions
+        </div>
+
+      </div>
+    </body>
+    </html>
+  `;
+
+  /*
+   * SECRET BYPASS
+   * ?maintenance=off
+   */
+
+  const bypass =
+    new URLSearchParams(window.location.search).get("maintenance") === "off";
+
+  if (MAINTENANCE_MODE && !bypass) {
+    document.open();
+    document.write(MAINTENANCE_PAGE);
+    document.close();
+  }
+</script>
 </html>
