@@ -201,6 +201,353 @@
     </style>
 
     <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+
+    <!-- Maintenance Mode Script 10pm to 7am Daily -->
+    <script>
+      (function () {
+        "use strict";
+
+        // ==========================================
+        // YK OFFICIAL - DAILY MAINTENANCE MODE
+        // 10:00 PM TO 07:00 AM - INDIA TIME
+        // ==========================================
+
+        function getIndiaHour() {
+          const parts = new Intl.DateTimeFormat("en-IN", {
+            timeZone: "Asia/Kolkata",
+            hour: "numeric",
+            hour12: false,
+          }).formatToParts(new Date());
+
+          return Number(
+            parts.find(function (p) {
+              return p.type === "hour";
+            }).value,
+          );
+        }
+
+        function isMaintenanceTime() {
+          const hour = getIndiaHour();
+
+          // 22:00 → 23:59
+          // 00:00 → 06:59
+          return hour >= 22 || hour < 7;
+        }
+
+        function createMaintenancePage() {
+          if (document.getElementById("yk-maintenance-screen")) {
+            return;
+          }
+
+          const screen = document.createElement("div");
+
+          screen.id = "yk-maintenance-screen";
+
+          screen.innerHTML = `
+            <div class="yk-maintenance-box">
+
+                <div class="yk-maintenance-icon">
+                    ⚙
+                </div>
+
+                <div class="yk-maintenance-brand">
+                    YK OFFICIAL
+                </div>
+
+                <h1>
+                    Under Maintenance
+                </h1>
+
+                <p>
+                    Our website is currently unavailable for
+                    scheduled maintenance.
+                </p>
+
+                <div class="yk-maintenance-time">
+                    <span>Maintenance Hours</span>
+                    <strong>10:00 PM – 7:00 AM</strong>
+                </div>
+
+                <p class="yk-maintenance-small">
+                    The website will automatically become available
+                    after 7:00 AM.
+                </p>
+
+            </div>
+        `;
+
+          document.body.appendChild(screen);
+
+          document.body.style.overflow = "hidden";
+        }
+
+        function removeMaintenancePage() {
+          const screen = document.getElementById("yk-maintenance-screen");
+
+          if (screen) {
+            screen.remove();
+          }
+
+          document.body.style.overflow = "";
+        }
+
+        function checkMaintenance() {
+          if (isMaintenanceTime()) {
+            createMaintenancePage();
+          } else {
+            removeMaintenancePage();
+          }
+        }
+
+        // CSS
+        const style = document.createElement("style");
+
+        style.innerHTML = `
+
+        #yk-maintenance-screen {
+
+            position: fixed;
+
+            inset: 0;
+
+            width: 100vw;
+            height: 100vh;
+
+            z-index: 2147483647;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff 0%,
+                    #f4f6f8 50%,
+                    #ffffff 100%
+                );
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: #111827;
+
+        }
+
+        .yk-maintenance-box {
+
+            width: min(620px, 100%);
+
+            padding: 50px 35px;
+
+            text-align: center;
+
+            background:
+                rgba(255,255,255,0.82);
+
+            border:
+                1px solid rgba(0,0,0,0.08);
+
+            border-radius: 30px;
+
+            box-shadow:
+                0 25px 80px
+                rgba(0,0,0,0.12);
+
+            backdrop-filter:
+                blur(25px);
+
+            -webkit-backdrop-filter:
+                blur(25px);
+
+        }
+
+        .yk-maintenance-icon {
+
+            width: 82px;
+            height: 82px;
+
+            margin:
+                0 auto 22px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #111827;
+
+            color: white;
+
+            font-size: 36px;
+
+            animation:
+                ykRotate 3s linear infinite;
+
+        }
+
+        @keyframes ykRotate {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        .yk-maintenance-brand {
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+            color: #6b7280;
+
+            margin-bottom: 10px;
+
+        }
+
+        .yk-maintenance-box h1 {
+
+            margin: 0 0 14px;
+
+            font-size:
+                clamp(30px, 6vw, 48px);
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+
+        }
+
+        .yk-maintenance-box p {
+
+            margin: 0 auto;
+
+            max-width: 500px;
+
+            color: #6b7280;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+        }
+
+        .yk-maintenance-time {
+
+            margin:
+                28px auto 20px;
+
+            padding: 16px 22px;
+
+            width: fit-content;
+
+            max-width: 100%;
+
+            border-radius: 16px;
+
+            background: #f3f4f6;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+        }
+
+        .yk-maintenance-time span {
+
+            font-size: 12px;
+
+            color: #6b7280;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+        .yk-maintenance-time strong {
+
+            font-size: 17px;
+
+            color: #111827;
+
+        }
+
+        .yk-maintenance-small {
+
+            font-size: 13px !important;
+
+            color: #9ca3af !important;
+
+        }
+
+        @media (max-width: 500px) {
+
+            .yk-maintenance-box {
+
+                padding: 40px 22px;
+
+                border-radius: 24px;
+
+            }
+
+            .yk-maintenance-icon {
+
+                width: 70px;
+                height: 70px;
+
+                font-size: 30px;
+
+            }
+
+            .yk-maintenance-box h1 {
+
+                font-size: 31px;
+
+            }
+
+        }
+
+    `;
+
+        document.head.appendChild(style);
+
+        // Initial check
+        function startYKMaintenance() {
+          checkMaintenance();
+
+          // Check every 30 seconds
+          setInterval(function () {
+            checkMaintenance();
+          }, 30000);
+        }
+
+        // Wait for body
+        if (document.body) {
+          startYKMaintenance();
+        } else {
+          document.addEventListener("DOMContentLoaded", startYKMaintenance);
+        }
+      })();
+    </script>
   </head>
 
   <body class="bg-gray-50">
@@ -429,11 +776,15 @@
           <div class="flex justify-between items-center h-16">
             <!-- LOGO + NAME -->
             <div class="flex items-center space-x-3">
-              <div class="w-12 h-12 rounded-xl overflow-hidden shadow-md">
+              <div class="w-12 h-12 rounded-xl overflow-hidden">
                 <img
                   src="https://i.ibb.co/RpjD8n0C/Chat-GPT-Image-Jan-20-2026-08-56-30-AM.png"
                   class="w-full h-full object-cover"
                 />
+                <!-- <img
+                  src="newlogoyk5.png"
+                  class="w-full h-full object-cover"
+                />  -->
               </div>
 
               <span
@@ -4012,244 +4363,476 @@
                 © 2026 YK OFFICIAL. all rights reserved.
               </p>
 
-              <!-- Version Selector -->
+              <!-- ================= VERSION SELECTOR ================= -->
               <div class="relative" id="versionSelector">
                 <!-- Trigger -->
                 <button
                   type="button"
                   onclick="toggleVersions()"
-                  class="group flex items-center gap-3 text-[10px] font-bold tracking-widest bg-slate-900/80 px-4 py-2.5 rounded-xl border border-slate-800 hover:border-indigo-500/40 hover:bg-slate-900 transition-all duration-300"
+                  aria-expanded="false"
+                  aria-controls="versionDropdown"
+                  class="group flex items-center gap-3 text-[10px] font-bold tracking-widest bg-slate-950/85 backdrop-blur-xl px-4 py-2.5 rounded-xl border border-slate-800/90 hover:border-indigo-500/50 hover:bg-slate-900 transition-all duration-300 shadow-lg shadow-black/10"
                 >
-                  <span class="text-slate-500">VERSION</span>
+                  <span class="relative flex h-2 w-2">
+                    <span
+                      class="absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-60 animate-ping"
+                    ></span>
+                    <span
+                      class="relative inline-flex h-2 w-2 rounded-full bg-indigo-400"
+                    ></span>
+                  </span>
 
-                  <span class="text-indigo-400"> 2026 </span>
+                  <span class="text-slate-500">VERSION</span>
+                  <span class="text-indigo-400 font-black">2026</span>
 
                   <span
                     id="versionArrow"
                     class="text-slate-500 transition-transform duration-300"
+                    >▾</span
                   >
-                    ▾
-                  </span>
                 </button>
 
-                <!-- Dropdown -->
+                <!-- ================= DROPDOWN ================= -->
                 <div
                   id="versionDropdown"
-                  class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-72 opacity-0 invisible translate-y-3 transition-all duration-300 ease-out z-50"
+                  class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-[min(360px,calc(100vw-20px))] opacity-0 invisible translate-y-3 pointer-events-none transition-all duration-300 ease-out z-[9999]"
                 >
                   <div
-                    class="relative overflow-hidden rounded-2xl bg-slate-950/95 backdrop-blur-xl border border-slate-800 shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
+                    class="relative overflow-hidden rounded-2xl bg-[#070b14]/95 backdrop-blur-2xl border border-white/[0.08] shadow-[0_25px_80px_rgba(0,0,0,0.65)]"
                   >
-                    <!-- Header -->
-                    <div class="px-5 py-4 border-b border-slate-800/80">
-                      <div class="flex items-center justify-between">
-                        <div>
-                          <p
-                            class="text-[9px] uppercase tracking-[0.25em] text-slate-500"
-                          >
-                            YK OFFICIAL
-                          </p>
+                    <!-- Decorative glow -->
+                    <div
+                      class="pointer-events-none absolute -top-24 -right-20 w-48 h-48 rounded-full bg-indigo-600/10 blur-3xl"
+                    ></div>
+                    <div
+                      class="pointer-events-none absolute -bottom-24 -left-20 w-48 h-48 rounded-full bg-blue-600/10 blur-3xl"
+                    ></div>
 
-                          <p class="text-sm font-bold text-white mt-1">
+                    <!-- ================= HEADER ================= -->
+                    <div
+                      class="relative z-10 px-5 py-4 border-b border-white/[0.06] bg-white/[0.015]"
+                    >
+                      <div class="flex items-center justify-between gap-4">
+                        <div class="min-w-0">
+                          <p
+                            class="text-sm font-bold text-white mt-1 tracking-tight"
+                          >
                             Website Versions
                           </p>
                         </div>
 
                         <div
-                          class="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_12px_rgba(74,222,128,0.8)]"
-                        ></div>
+                          class="shrink-0 flex items-center gap-2 px-2.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20"
+                        >
+                          <span
+                            class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.8)] animate-pulse"
+                          ></span>
+
+                          <span
+                            class="text-[8px] uppercase tracking-wider font-bold text-emerald-400"
+                          >
+                            Online
+                          </span>
+                        </div>
                       </div>
                     </div>
 
-                    <!-- Versions -->
-                    <div class="p-3 space-y-2">
-
-                       <!-- 2027 -->
+                    <!-- ================= SCROLLABLE VERSION LIST ================= -->
+                    <div
+                      id="versionList"
+                      class="relative z-10 p-3 space-y-1.5 h-[250px] max-h-[250px] overflow-y-scroll overflow-x-hidden overscroll-contain version-scroll"
+                    >
+                      <!-- 2027 -->
                       <a
                         href="https://ykofficial.github.io/v2027lunchingsoon/"
-                        class="group flex items-center gap-4 p-3 rounded-xl hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all duration-300"
+                        class="version-item group animate-pulse"
                       >
-                        <div
-                          class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center"
-                        >
-                          <span
-                            class="text-slate-400 group-hover:text-indigo-400 font-black text-xs transition-colors"
-                          >
-                            27
-                          </span>
+                        <div class="version-number">
+                          <span>27</span>
                         </div>
 
-                        <div class="flex-1">
-                          <span class="text-sm font-bold text-slate-300">
-                            2027
-                          </span>
+                        <div class="min-w-0 flex-1">
+                          <div class="flex items-center gap-2">
+                            <span class="version-title">2027</span>
+                            <span class="version-badge upcoming">Upcoming</span>
+                          </div>
 
-                          <p class="text-[10px] text-slate-600 mt-1 animate-pulse">
-                            Coming Soon
+                          <p class="version-description text-slate-400">
+                            Next Version in development
                           </p>
                         </div>
 
-                        <span
-                          class="text-slate-700 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all"
-                        >
-                          →
-                        </span>
+                        <span class="version-arrow">→</span>
                       </a>
 
-                      
                       <!-- 2026 -->
                       <a
                         href="#"
-                        class="group flex items-center gap-4 p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20 hover:bg-indigo-500/15 hover:border-indigo-500/40 transition-all duration-300"
+                        class="version-item version-active group"
+                        aria-current="page"
                       >
-                        <div
-                          class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center"
-                        >
-                          <span class="text-indigo-400 font-black text-xs"
-                            >26</span
-                          >
+                        <div class="version-number active-number">
+                          <span>26</span>
                         </div>
 
-                        <div class="flex-1">
+                        <div class="min-w-0 flex-1">
                           <div class="flex items-center gap-2">
-                            <span class="text-sm font-bold text-white">
-                              2026
-                            </span>
+                            <span class="version-title active-title">2026</span>
 
-                            <span
-                              class="text-[8px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-400 border border-indigo-500/20"
-                            >
-                              Live
-                            </span>
+                            <span class="version-badge live"> Live </span>
                           </div>
 
-                          <p class="text-[10px] text-slate-500 mt-1">
-                            Current experience
+                          <p class="version-description active-description">
+                            Current website experience
                           </p>
                         </div>
 
-                        <span
-                          class="text-slate-600 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all"
-                        >
-                          →
-                        </span>
+                        <span class="version-arrow active-arrow">→</span>
                       </a>
 
                       <!-- 2025 -->
                       <a
                         href="https://ykofficial.github.io/v2025/"
-                        class="group flex items-center gap-4 p-3 rounded-xl hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all duration-300"
+                        class="version-item group"
                       >
-                        <div
-                          class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center"
-                        >
-                          <span
-                            class="text-slate-400 group-hover:text-indigo-400 font-black text-xs transition-colors"
-                          >
-                            25
-                          </span>
+                        <div class="version-number">
+                          <span>25</span>
                         </div>
 
-                        <div class="flex-1">
-                          <span class="text-sm font-bold text-slate-300">
-                            2025
-                          </span>
+                        <div class="min-w-0 flex-1">
+                          <span class="version-title">2025</span>
 
-                          <p class="text-[10px] text-slate-600 mt-1">
-                            Previous generation
-                          </p>
+                          <p class="version-description">Previous generation</p>
                         </div>
 
-                        <span
-                          class="text-slate-700 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all"
-                        >
-                          →
-                        </span>
+                        <span class="version-arrow">→</span>
                       </a>
 
                       <!-- 2024 -->
                       <a
                         href="https://ykofficial.github.io/v2024/"
-                        class="group flex items-center gap-4 p-3 rounded-xl hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all duration-300"
+                        class="version-item group"
                       >
-                        <div
-                          class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center"
-                        >
-                          <span
-                            class="text-slate-400 group-hover:text-indigo-400 font-black text-xs transition-colors"
-                          >
-                            24
-                          </span>
+                        <div class="version-number">
+                          <span>24</span>
                         </div>
 
-                        <div class="flex-1">
-                          <span class="text-sm font-bold text-slate-300">
-                            2024
-                          </span>
+                        <div class="min-w-0 flex-1">
+                          <span class="version-title">2024</span>
 
-                          <p class="text-[10px] text-slate-600 mt-1">
-                            Previous generation
-                          </p>
+                          <p class="version-description">Previous generation</p>
                         </div>
 
-                        <span
-                          class="text-slate-700 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all"
-                        >
-                          →
-                        </span>
+                        <span class="version-arrow">→</span>
                       </a>
 
                       <!-- 2023 -->
                       <a
                         href="https://ykofficial.github.io/v2023/"
-                        class="group flex items-center gap-4 p-3 rounded-xl hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all duration-300"
+                        class="version-item group"
                       >
-                        <div
-                          class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center"
-                        >
-                          <span
-                            class="text-slate-400 group-hover:text-indigo-400 font-black text-xs transition-colors"
-                          >
-                            23
-                          </span>
+                        <div class="version-number">
+                          <span>23</span>
                         </div>
 
-                        <div class="flex-1">
-                          <span class="text-sm font-bold text-slate-300">
-                            2023
-                          </span>
+                        <div class="min-w-0 flex-1">
+                          <span class="version-title">2023</span>
 
-                          <p class="text-[10px] text-slate-600 mt-1">
-                            Original edition
-                          </p>
+                          <p class="version-description">Original edition</p>
                         </div>
 
-                        <span
-                          class="text-slate-700 group-hover:text-indigo-400 group-hover:translate-x-1 transition-all"
-                        >
-                          →
-                        </span>
+                        <span class="version-arrow">→</span>
                       </a>
                     </div>
 
-                    <!-- Bottom -->
-                    <div class="px-5 py-3 border-t border-slate-800/80">
-                      <p
-                        class="text-[8px] uppercase tracking-[0.2em] text-slate-600"
-                      >
-                        Select an edition to explore
-                      </p>
+                    <!-- ================= FOOTER ================= -->
+                    <div
+                      class="relative z-10 px-5 py-3 border-t border-white/[0.06] bg-black/10"
+                    >
+                      <div class="flex items-center justify-between gap-3">
+                        <p
+                          class="text-[8px] uppercase tracking-[0.18em] text-slate-600"
+                        >
+                          Select an edition to explore
+                        </p>
+
+                        <span class="text-[8px] font-mono text-slate-700">
+                          YK / ARCHIVE
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
+              <!-- ================= VERSION SELECTOR STYLES ================= -->
+              <style>
+                .version-item {
+                  position: relative;
+                  display: flex;
+                  align-items: center;
+                  gap: 14px;
+                  min-height: 64px;
+                  padding: 11px;
+                  border-radius: 14px;
+                  border: 1px solid transparent;
+                  background: transparent;
+                  transition:
+                    background 0.25s ease,
+                    border-color 0.25s ease,
+                    transform 0.25s ease,
+                    box-shadow 0.25s ease;
+                }
+
+                .version-item:hover {
+                  background: rgba(255, 255, 255, 0.035);
+                  border-color: rgba(255, 255, 255, 0.07);
+                  transform: translateX(2px);
+                }
+
+                .version-active {
+                  background: linear-gradient(
+                    135deg,
+                    rgba(99, 102, 241, 0.14),
+                    rgba(59, 130, 246, 0.055)
+                  );
+                  border-color: rgba(99, 102, 241, 0.25);
+                  box-shadow:
+                    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+                    0 8px 25px rgba(79, 70, 229, 0.08);
+                }
+
+                .version-active:hover {
+                  background: linear-gradient(
+                    135deg,
+                    rgba(99, 102, 241, 0.18),
+                    rgba(59, 130, 246, 0.08)
+                  );
+                  border-color: rgba(99, 102, 241, 0.38);
+                }
+
+                .version-number {
+                  width: 42px;
+                  height: 42px;
+                  flex-shrink: 0;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border-radius: 12px;
+                  background: rgba(15, 23, 42, 0.8);
+                  border: 1px solid rgba(255, 255, 255, 0.06);
+                  transition:
+                    border-color 0.25s ease,
+                    background 0.25s ease,
+                    box-shadow 0.25s ease;
+                }
+
+                .version-number span {
+                  font-size: 11px;
+                  font-weight: 900;
+                  color: #64748b;
+                  transition: color 0.25s ease;
+                }
+
+                .version-item:hover .version-number {
+                  border-color: rgba(99, 102, 241, 0.25);
+                  background: rgba(99, 102, 241, 0.08);
+                }
+
+                .version-item:hover .version-number span {
+                  color: #818cf8;
+                }
+
+                .active-number {
+                  background: rgba(99, 102, 241, 0.12);
+                  border-color: rgba(99, 102, 241, 0.25);
+                  box-shadow: 0 0 20px rgba(99, 102, 241, 0.08);
+                }
+
+                .active-number span {
+                  color: #818cf8;
+                }
+
+                .version-title {
+                  display: inline-block;
+                  font-size: 13px;
+                  font-weight: 800;
+                  color: #cbd5e1;
+                  transition: color 0.25s ease;
+                }
+
+                .version-item:hover .version-title {
+                  color: #fff;
+                }
+
+                .active-title {
+                  color: #fff;
+                }
+
+                .version-description {
+                  margin-top: 3px;
+                  font-size: 9px;
+                  line-height: 1.3;
+                  color: #475569;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                }
+
+                .active-description {
+                  color: #64748b;
+                }
+
+                .version-badge {
+                  padding: 3px 7px;
+                  border-radius: 999px;
+                  font-size: 7px;
+                  line-height: 1;
+                  text-transform: uppercase;
+                  letter-spacing: 0.08em;
+                  font-weight: 800;
+                }
+
+                .version-badge.live {
+                  color: #818cf8;
+                  background: rgba(99, 102, 241, 0.1);
+                  border: 1px solid rgba(99, 102, 241, 0.2);
+                }
+
+                .version-badge.upcoming {
+                  color: #64748b;
+                  background: rgba(100, 116, 139, 0.08);
+                  border: 1px solid rgba(100, 116, 139, 0.12);
+                }
+
+                .version-arrow {
+                  flex-shrink: 0;
+                  color: #334155;
+                  font-size: 17px;
+                  transition:
+                    color 0.25s ease,
+                    transform 0.25s ease;
+                }
+
+                .version-item:hover .version-arrow {
+                  color: #818cf8;
+                  transform: translateX(4px);
+                }
+
+                .active-arrow {
+                  color: #6366f1;
+                }
+
+                /* Custom internal scrollbar */
+                .version-scroll {
+                  scrollbar-width: thin;
+                  scrollbar-color: rgba(99, 102, 241, 0.65)
+                    rgba(15, 23, 42, 0.35);
+                  scroll-behavior: smooth;
+                  -webkit-overflow-scrolling: touch;
+                }
+
+                .version-scroll::-webkit-scrollbar {
+                  width: 4px;
+                }
+
+                .version-scroll::-webkit-scrollbar-track {
+                  background: rgba(15, 23, 42, 0.35);
+                  border-radius: 999px;
+                  margin: 6px 2px;
+                }
+
+                .version-scroll::-webkit-scrollbar-thumb {
+                  background: linear-gradient(
+                    180deg,
+                    rgba(99, 102, 241, 0.6),
+                    rgba(59, 130, 246, 0.28)
+                  );
+                  border-radius: 999px;
+                }
+
+                .version-scroll::-webkit-scrollbar-thumb:hover {
+                  background: rgba(129, 140, 248, 0.85);
+                }
+
+                /* Always-visible scroll cue */
+                #versionList {
+                  position: relative;
+                  mask-image: linear-gradient(
+                    to bottom,
+                    black 0%,
+                    black 90%,
+                    transparent 100%
+                  );
+                  -webkit-mask-image: linear-gradient(
+                    to bottom,
+                    black 0%,
+                    black 90%,
+                    transparent 100%
+                  );
+                }
+
+                @media (max-width: 640px) {
+                  #versionDropdown {
+                    width: min(340px, calc(100vw - 20px));
+                    margin-bottom: 10px;
+                  }
+
+                  .version-scroll {
+                    height: 230px;
+                    max-height: 230px;
+                    overflow-y: scroll;
+                  }
+
+                  .version-item {
+                    min-height: 60px;
+                    padding: 10px;
+                    gap: 11px;
+                  }
+
+                  .version-number {
+                    width: 38px;
+                    height: 38px;
+                    border-radius: 10px;
+                  }
+
+                  .version-title {
+                    font-size: 12px;
+                  }
+
+                  .version-description {
+                    font-size: 8px;
+                  }
+                }
+
+                @media (prefers-reduced-motion: reduce) {
+                  .version-item,
+                  .version-arrow,
+                  .version-number,
+                  .version-number span {
+                    transition: none !important;
+                  }
+
+                  .version-scroll {
+                    scroll-behavior: auto;
+                  }
+                }
+              </style>
+
+              <!-- ================= VERSION SELECTOR SCRIPT ================= -->
               <script>
                 function toggleVersions() {
                   const dropdown = document.getElementById("versionDropdown");
                   const arrow = document.getElementById("versionArrow");
+                  const trigger = document.querySelector(
+                    "#versionSelector > button",
+                  );
 
-                  const isOpen = !dropdown.classList.contains("invisible");
+                  if (!dropdown || !arrow || !trigger) return;
+
+                  const isOpen = dropdown.classList.contains(
+                    "version-dropdown-open",
+                  );
 
                   if (isOpen) {
                     closeVersions();
@@ -4258,42 +4841,62 @@
                       "opacity-0",
                       "invisible",
                       "translate-y-3",
+                      "pointer-events-none",
                     );
 
                     dropdown.classList.add(
                       "opacity-100",
                       "visible",
                       "translate-y-0",
+                      "pointer-events-auto",
+                      "version-dropdown-open",
                     );
 
                     arrow.classList.add("rotate-180");
+                    trigger.setAttribute("aria-expanded", "true");
                   }
                 }
 
                 function closeVersions() {
                   const dropdown = document.getElementById("versionDropdown");
                   const arrow = document.getElementById("versionArrow");
+                  const trigger = document.querySelector(
+                    "#versionSelector > button",
+                  );
+
+                  if (!dropdown || !arrow || !trigger) return;
 
                   dropdown.classList.add(
                     "opacity-0",
                     "invisible",
                     "translate-y-3",
+                    "pointer-events-none",
                   );
 
                   dropdown.classList.remove(
                     "opacity-100",
                     "visible",
                     "translate-y-0",
+                    "pointer-events-auto",
+                    "version-dropdown-open",
                   );
 
                   arrow.classList.remove("rotate-180");
+                  trigger.setAttribute("aria-expanded", "false");
                 }
 
                 // Close when clicking outside
                 document.addEventListener("click", function (event) {
                   const selector = document.getElementById("versionSelector");
 
-                  if (!selector.contains(event.target)) {
+                  if (selector && !selector.contains(event.target)) {
+                    closeVersions();
+                  }
+                });
+
+                // Close with ESC
+                document.addEventListener("keydown", function (event) {
+                  if (event.key === "Escape") {
                     closeVersions();
                   }
                 });
@@ -4426,10 +5029,24 @@
             <div
               class="flex items-center gap-8 text-[10px] font-bold tracking-widest"
             >
-              <a href="privacy.html" class="hover:text-white transition-colors"
+              <a
+                type="button"
+                onclick="
+                  openModalIframe('privacy.html', 'Privacy Policy', 'fa-lock')
+                "
+                class="hover:text-white transition-colors"
                 >Privacy Protocol</a
               >
-              <a href="terms.html" class="hover:text-white transition-colors"
+              <a
+                type="button"
+                onclick="
+                  openModalIframe(
+                    'terms.html',
+                    'Terms of Service',
+                    'fa-file-alt',
+                  )
+                "
+                class="hover:text-white transition-colors"
                 >Terms of Service</a
               >
             </div>
@@ -5476,7 +6093,7 @@
             id="iframeLoading"
             class="absolute inset-0 z-10 bg-slate-950 flex flex-col items-center justify-center"
           >
-            <div class="yk-spinner"></div>
+            <div class="yk-spinner text-white"></div>
             <p class="mt-4 text-slate-400 text-sm">
               Opening Page... Please wait
             </p>
@@ -5600,237 +6217,4 @@
     <script src="script1.js"></script>
     <script src="smoothscroll.js"></script>
   </body>
-
-
-  <!-- Maintence Code -->
-
-  <script>
-  /*
-   * YK OFFICIAL — MAINTENANCE MODE
-   *
-   * Public:
-   * https://ykofficial.github.io/ykofficial/
-   *
-   * Private testing:
-   * https://ykofficial.github.io/ykofficial/?maintenance=off
-   */
-
-  const MAINTENANCE_MODE = false;
-
-  const MAINTENANCE_PAGE = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>YK OFFICIAL | Maintenance</title>
-      <style>
-        * {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-        }
-
-        body {
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 20px;
-          font-family: Arial, sans-serif;
-          background: #fff;
-          color: #0f172a;
-          overflow: hidden;
-        }
-
-        .bg {
-          position: fixed;
-          inset: 0;
-          background:
-            radial-gradient(circle at 15% 15%, #f1f5f9, transparent 32%),
-            radial-gradient(circle at 85% 85%, #e2e8f0, transparent 30%);
-          z-index: -1;
-        }
-
-        .card {
-          width: min(700px, 100%);
-          text-align: center;
-          padding: 55px 35px;
-          border: 1px solid rgba(15,23,42,.08);
-          border-radius: 36px;
-          background: rgba(255,255,255,.72);
-          backdrop-filter: blur(25px);
-          -webkit-backdrop-filter: blur(25px);
-          box-shadow:
-            0 30px 80px rgba(15,23,42,.10),
-            inset 0 1px 0 rgba(255,255,255,.9);
-          animation: enter .7s ease;
-        }
-
-        @keyframes enter {
-          from {
-            opacity: 0;
-            transform: translateY(25px) scale(.97);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-
-        .icon {
-          width: 82px;
-          height: 82px;
-          margin: 0 auto 25px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 27px;
-          background: #fff;
-          border: 1px solid rgba(15,23,42,.07);
-          box-shadow: 0 15px 35px rgba(15,23,42,.08);
-          font-size: 32px;
-        }
-
-        .brand {
-          font-size: 13px;
-          font-weight: 800;
-          letter-spacing: .25em;
-          margin-bottom: 20px;
-        }
-
-        .status {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 9px 15px;
-          border-radius: 999px;
-          background: #f8fafc;
-          border: 1px solid #e2e8f0;
-          color: #64748b;
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: .12em;
-          text-transform: uppercase;
-        }
-
-        .dot {
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background: #94a3b8;
-          animation: pulse 1.6s infinite;
-        }
-
-        @keyframes pulse {
-          50% {
-            opacity: .35;
-            transform: scale(.8);
-          }
-        }
-
-        h1 {
-          margin: 25px 0 18px;
-          font-size: clamp(40px, 7vw, 64px);
-          line-height: 1.05;
-          letter-spacing: -.05em;
-        }
-
-        h1 span {
-          color: #64748b;
-        }
-
-        p {
-          max-width: 520px;
-          margin: auto;
-          color: #64748b;
-          line-height: 1.8;
-          font-size: 15px;
-        }
-
-        .line {
-          width: 180px;
-          height: 4px;
-          margin: 32px auto 0;
-          border-radius: 99px;
-          background: #0f172a;
-          animation: loading 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes loading {
-          from { width: 80px; }
-          to { width: 180px; }
-        }
-
-        .footer {
-          margin-top: 30px;
-          padding-top: 20px;
-          border-top: 1px solid #e2e8f0;
-          color: #94a3b8;
-          font-size: 11px;
-        }
-
-        @media(max-width:600px) {
-          .card {
-            padding: 42px 22px;
-            border-radius: 30px;
-          }
-
-          h1 {
-            font-size: 42px;
-          }
-        }
-      </style>
-    </head>
-
-    <body>
-      <div class="bg"></div>
-
-      <div class="card">
-
-        <div class="icon">⚙</div>
-
-        <div class="brand">YK OFFICIAL</div>
-
-        <div class="status">
-          <span class="dot"></span>
-          System Maintenance
-        </div>
-
-        <h1>
-          We'll be back<br>
-          <span>shortly.</span>
-        </h1>
-
-        <p>
-          We're currently improving YK OFFICIAL.
-          The website is temporarily unavailable while
-          we work on updates and improvements.
-        </p>
-
-        <div class="line"></div>
-
-        <div class="footer">
-          YK OFFICIAL · Future Ready Digital Solutions
-        </div>
-
-      </div>
-    </body>
-    </html>
-  `;
-
-  /*
-   * SECRET BYPASS
-   * ?maintenance=off
-   */
-
-  const bypass =
-    new URLSearchParams(window.location.search).get("maintenance") === "off";
-
-  if (MAINTENANCE_MODE && !bypass) {
-    document.open();
-    document.write(MAINTENANCE_PAGE);
-    document.close();
-  }
-</script>
 </html>
